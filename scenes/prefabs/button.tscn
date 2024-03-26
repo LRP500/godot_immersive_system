@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://45av3t6tvv3n"]
+
+[ext_resource type="Script" path="res://scripts/components/interactables/button_interactable.gd" id="1_xu5sr"]
+[ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="2_u4ujq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj0nd"]
+albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qayw"]
+albedo_color = Color(0.580392, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.580392, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ty6is"]
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_8ndvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonAnimatable:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0500941, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6jk0e"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonAnimatable:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0500941, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0sj3f"]
+resource_name = "switch_off"
+length = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonAnimatable:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.000275792, 0, 0, 0.1, 0, 0.0500941, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+
+[sub_resource type="Animation" id="Animation_io2eu"]
+resource_name = "switch_on"
+length = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonAnimatable:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.0500941, 0, 0, 0, -0.055, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41k72"]
+_data = {
+"RESET": SubResource("Animation_8ndvo"),
+"idle": SubResource("Animation_6jk0e"),
+"switch_off": SubResource("Animation_0sj3f"),
+"switch_on": SubResource("Animation_io2eu")
+}
+
+[node name="Button" type="StaticBody3D"]
+script = ExtResource("1_xu5sr")
+
+[node name="ButtonBase" type="CSGCylinder3D" parent="."]
+material_override = SubResource("StandardMaterial3D_lj0nd")
+radius = 0.2
+height = 0.15
+sides = 16
+
+[node name="ButtonAnimatable" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0500941, 0)
+material_override = SubResource("StandardMaterial3D_8qayw")
+radius = 0.16
+radial_segments = 16
+rings = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0362409, 0)
+shape = SubResource("SphereShape3D_ty6is")
+
+[node name="SimpleInteraction" type="Node3D" parent="."]
+script = ExtResource("2_u4ujq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_41k72")
+}
+autoplay = "idle"

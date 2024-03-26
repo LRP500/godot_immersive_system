@@ -1,0 +1,431 @@
+[gd_scene load_steps=20 format=3 uid="uid://qhgslmcrqbo8"]
+
+[ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_DebugUI.gd" id="3_568rw"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Controls.gd" id="4_4epdy"]
+[ext_resource type="Resource" uid="uid://0ew2lp10bgo5" path="res://Resources/pawn_parameters.tres" id="5_jp1iy"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_View.gd" id="6_nqm7q"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Move.gd" id="7_2en5o"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Body.gd" id="8_b0jjw"]
+[ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Camera.gd" id="9_5mrsi"]
+[ext_resource type="Script" path="res://scripts/interactor_camera_proxy.gd" id="10_152eq"]
+[ext_resource type="Script" path="res://scripts/interactor.gd" id="11_aj3k7"]
+[ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://scenes/prefabs/button.tscn" id="12_3i20f"]
+[ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
+[ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_xp00u"]
+sky_material = SubResource("ProceduralSkyMaterial_8t5va")
+
+[sub_resource type="Environment" id="Environment_v1l8t"]
+background_mode = 2
+sky = SubResource("Sky_xp00u")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_temporal_reprojection_amount = 0.99
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j7pn1"]
+size = Vector3(0.813, 1.829, 0.813)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u4rs7"]
+custom_solver_bias = 1.0
+margin = 0.25
+radius = 0.15
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_v1l8t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Level" type="Node3D" parent="Environment"]
+
+[node name="Lights" type="Node3D" parent="Environment/Level"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Environment/Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5, 7, 5)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 14.0
+spot_angle = 72.14
+spot_angle_attenuation = 2.2974
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Environment/Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5, 7, -5)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 14.0
+spot_angle = 72.14
+spot_angle_attenuation = 2.2974
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Environment/Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5, 7, 5)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 14.0
+spot_angle = 72.14
+spot_angle_attenuation = 2.2974
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Environment/Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5, 7, -5)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 14.0
+spot_angle = 72.14
+spot_angle_attenuation = 2.2974
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Environment/Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 14.0
+spot_angle = 72.14
+spot_angle_attenuation = 2.2974
+
+[node name="Floor" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(31, 1, 25)
+
+[node name="Ceiling" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 8, 0)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(31, 1, 25)
+
+[node name="Wall" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, -12)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(31, 7, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 12)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(31, 7, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(1, 1, 23)
+
+[node name="Wall6" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 4, -6)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(6, 7, 1)
+
+[node name="Wall7" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 4, 0)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(6, 7, 1)
+
+[node name="Wall8" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 4, 6)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(6, 7, 1)
+
+[node name="Wall5" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 0)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(1, 7, 23)
+
+[node name="Wall4" type="CSGBox3D" parent="Environment/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4, 0)
+material_override = ExtResource("1_pw4l6")
+use_collision = true
+size = Vector3(1, 7, 23)
+
+[node name="Pawn" type="Node3D" parent="." node_paths=PackedStringArray("View", "Camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.545, 1, -9.012)
+script = ExtResource("2_0ikeh")
+View = NodePath("View Control")
+Camera = NodePath("Interpolated Camera")
+
+[node name="Debug UI" type="Control" parent="Pawn" node_paths=PackedStringArray("Controls", "View", "Body", "GameInfo", "ControlsInfo", "ViewInfo", "BodyInfo")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+script = ExtResource("3_568rw")
+Controls = NodePath("../User Input")
+View = NodePath("../View Control")
+Body = NodePath("../Body")
+GameInfo = NodePath("Game/Info")
+ControlsInfo = NodePath("Controls/Info")
+ViewInfo = NodePath("View Control/Info")
+BodyInfo = NodePath("Body/Info")
+
+[node name="Game" type="Control" parent="Pawn/Debug UI"]
+anchors_preset = 0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pawn/Debug UI/Game"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 20
+text = "Game"
+
+[node name="Info" type="Label" parent="Pawn/Debug UI/Game"]
+layout_mode = 2
+offset_top = 28.0
+offset_right = 129.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 12
+text = "Rendering FPS: #
+Physics Tick Rate: #
+Physics Frame Time: #"
+
+[node name="Controls" type="Control" parent="Pawn/Debug UI"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 95.0
+offset_right = 48.0
+offset_bottom = 135.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pawn/Debug UI/Controls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Controls"
+
+[node name="Info" type="Label" parent="Pawn/Debug UI/Controls"]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 135.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 12
+text = "Movement Input: (#, #)
+Wish Direction: (#, #, #)
+Wish Speed: #
+Jump Pressed: ?
+Duck Pressed: ?"
+
+[node name="View Control" type="Control" parent="Pawn/Debug UI"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 232.0
+offset_right = 48.0
+offset_bottom = 272.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pawn/Debug UI/View Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "View Control"
+
+[node name="Info" type="Label" parent="Pawn/Debug UI/View Control"]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 114.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 12
+text = "View Angles: (#, #, #)
+View Offset: #"
+
+[node name="Body" type="Control" parent="Pawn/Debug UI"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 309.0
+offset_right = 48.0
+offset_bottom = 349.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pawn/Debug UI/Body"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Body
+"
+
+[node name="Info" type="Label" parent="Pawn/Debug UI/Body"]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 59.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 12
+text = "Velocity: (#, #, #)
+Speed: # m/s (# u/s)
+Ducking: ?
+Ducked: ?"
+
+[node name="Attribution" type="RichTextLabel" parent="Pawn/Debug UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -28.0
+offset_right = 262.0
+offset_bottom = -5.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "GoldGdt Character Controller
+Copyright (c) 2024 ratmarrow
+"
+fit_content = true
+
+[node name="User Input" type="Node" parent="Pawn" node_paths=PackedStringArray("Body", "Move", "View")]
+script = ExtResource("4_4epdy")
+Parameters = ExtResource("5_jp1iy")
+Body = NodePath("../Body")
+Move = NodePath("../Move Functions")
+View = NodePath("../View Control")
+
+[node name="View Control" type="Node" parent="Pawn" node_paths=PackedStringArray("Body", "horizontal_view", "vertical_view", "camera_mount")]
+script = ExtResource("6_nqm7q")
+Parameters = ExtResource("5_jp1iy")
+Body = NodePath("../Body")
+horizontal_view = NodePath("../Body/Horizontal View")
+vertical_view = NodePath("../Body/Horizontal View/Vertical View")
+camera_mount = NodePath("../Body/Horizontal View/Vertical View/Camera Mount")
+
+[node name="Move Functions" type="Node" parent="Pawn" node_paths=PackedStringArray("Body")]
+script = ExtResource("7_2en5o")
+Parameters = ExtResource("5_jp1iy")
+Body = NodePath("../Body")
+
+[node name="Body" type="CharacterBody3D" parent="Pawn" node_paths=PackedStringArray("View", "collision_hull", "duck_timer")]
+collision_layer = 2
+floor_constant_speed = true
+script = ExtResource("8_b0jjw")
+Parameters = ExtResource("5_jp1iy")
+View = NodePath("../View Control")
+collision_hull = NodePath("Collision Hull")
+duck_timer = NodePath("Duck Timer")
+
+[node name="Collision Hull" type="CollisionShape3D" parent="Pawn/Body"]
+shape = SubResource("BoxShape3D_j7pn1")
+
+[node name="Duck Timer" type="Timer" parent="Pawn/Body"]
+
+[node name="Horizontal View" type="Node3D" parent="Pawn/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
+
+[node name="Vertical View" type="Node3D" parent="Pawn/Body/Horizontal View"]
+
+[node name="Camera Mount" type="Marker3D" parent="Pawn/Body/Horizontal View/Vertical View"]
+gizmo_extents = 0.5
+
+[node name="Interpolated Camera" type="Node3D" parent="Pawn" node_paths=PackedStringArray("target", "camera_arm", "camera_anchor", "camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
+script = ExtResource("9_5mrsi")
+Parameters = ExtResource("5_jp1iy")
+target = NodePath("../Body/Horizontal View/Vertical View/Camera Mount")
+camera_arm = NodePath("Arm")
+camera_anchor = NodePath("Arm/Arm Anchor")
+camera = NodePath("Arm/Arm Anchor/Camera")
+
+[node name="Arm" type="SpringArm3D" parent="Pawn/Interpolated Camera"]
+shape = SubResource("SphereShape3D_u4rs7")
+spring_length = 0.0
+margin = 0.1
+
+[node name="Arm Anchor" type="Node3D" parent="Pawn/Interpolated Camera/Arm"]
+editor_description = "
+"
+
+[node name="Camera" type="Camera3D" parent="Pawn/Interpolated Camera/Arm/Arm Anchor"]
+near = 0.001
+
+[node name="InteractorCameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.545, 1.711, -9.012)
+script = ExtResource("10_152eq")
+target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
+
+[node name="Interactor" type="Node3D" parent="InteractorCameraProxy"]
+script = ExtResource("11_aj3k7")
+
+[node name="RayCast3D" type="RayCast3D" parent="InteractorCameraProxy/Interactor"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -5)
+collision_mask = 2
+
+[node name="UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CenterContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][interact][center]"
+fit_content = true
+scroll_active = false
+
+[node name="Booth_01" type="Node3D" parent="."]
+
+[node name="Button" parent="Booth_01" node_paths=PackedStringArray("interact_targets") instance=ExtResource("12_3i20f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.55, -9)
+collision_layer = 2
+interact_targets = [NodePath("../CSGSphere3D")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Booth_01"]
+transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 7, -9)
+light_energy = 8.0
+light_volumetric_fog_energy = 10.0
+spot_range = 8.0
+spot_angle = 20.06
+spot_angle_attenuation = 1.36604
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Booth_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, -9)
+material_override = ExtResource("13_rrsfr")
+radius = 1.0
+script = ExtResource("14_5ajwv")
+duration = 0.5
+target_value = Vector3(1.5, 1.5, 1.5)
+
+[node name="Booth_02" type="Node3D" parent="."]
+
+[node name="Button" parent="Booth_02" instance=ExtResource("12_3i20f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.55, -3)
+collision_layer = 2
+
+[editable path="Booth_01/Button"]
+[editable path="Booth_02/Button"]
