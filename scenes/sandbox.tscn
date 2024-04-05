@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=21 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://scenes/prefabs/button.tscn" id="12_3i20f"]
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
+[ext_resource type="PackedScene" uid="uid://dhc2u74fc70cj" path="res://scenes/prefabs/toggle.tscn" id="15_spwl5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -160,7 +161,7 @@ use_collision = true
 size = Vector3(1, 7, 23)
 
 [node name="Pawn" type="Node3D" parent="." node_paths=PackedStringArray("View", "Camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.545, 1, -9.012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.045, 1, -3.012)
 script = ExtResource("2_0ikeh")
 View = NodePath("View Control")
 Camera = NodePath("Interpolated Camera")
@@ -361,7 +362,7 @@ editor_description = "
 near = 0.001
 
 [node name="InteractorCameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.545, 1.711, -9.012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.045, 1.711, -3.012)
 script = ExtResource("10_152eq")
 target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
 
@@ -423,9 +424,10 @@ target_value = Vector3(1.5, 1.5, 1.5)
 
 [node name="Booth_02" type="Node3D" parent="."]
 
-[node name="Button" parent="Booth_02" instance=ExtResource("12_3i20f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.55, -3)
+[node name="Toggle" parent="Booth_02" instance=ExtResource("15_spwl5")]
+transform = Transform3D(-4.37114e-08, 0, 0.8, 0, 1, 0, -1, 0, -3.49691e-08, 12, 1.55, -3)
 collision_layer = 2
+interaction_interval = 0.15
+initial_state = true
 
 [editable path="Booth_01/Button"]
-[editable path="Booth_02/Button"]

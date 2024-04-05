@@ -9,5 +9,8 @@ class_name Interaction
 
 @onready var parent: Interactable = get_parent() as Interactable
 
+func _enter_tree() -> void:
+    assert(parent, "Parent must be an Interactable!")
+
 func interact(_interactor: Interactor) -> void:
     pass

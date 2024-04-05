@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhc2u74fc70cj"]
+
+[ext_resource type="Script" path="res://scripts/components/interactables/toggle_interactable.gd" id="1_tls76"]
+[ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="2_8gxhy"]
+[ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="2_s4nbe"]
+[ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="3_a5ntm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ty6is"]
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_7p8ft"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToggleAnimatable:rotation:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.261799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_02m77"]
+resource_name = "switch_off"
+length = 0.02
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToggleAnimatable:rotation:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-0.261799, 0, 0, 0.00666667, 0, 0.261799, -0.00666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.02)
+}
+
+[sub_resource type="Animation" id="Animation_r2dmq"]
+resource_name = "switch_on"
+length = 0.02
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToggleAnimatable:rotation:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.261799, -0.25, 0, 0.25, 0, -0.261799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.02)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41k72"]
+_data = {
+"RESET": SubResource("Animation_7p8ft"),
+"switch_off": SubResource("Animation_02m77"),
+"switch_on": SubResource("Animation_r2dmq")
+}
+
+[node name="Toggle" type="StaticBody3D"]
+script = ExtResource("1_tls76")
+
+[node name="ToggleBase" type="CSGBox3D" parent="."]
+material_override = ExtResource("2_s4nbe")
+size = Vector3(0.495, 0.15, 0.3)
+
+[node name="ToggleAnimatable" type="CSGBox3D" parent="."]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("3_a5ntm")
+size = Vector3(0.4, 0.14, 0.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0362409, 0)
+shape = SubResource("SphereShape3D_ty6is")
+
+[node name="SimpleInteraction" type="Node3D" parent="."]
+script = ExtResource("2_8gxhy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_41k72")
+}
+autoplay = "idle"
