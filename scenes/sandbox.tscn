@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=32 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="PackedScene" uid="uid://dhc2u74fc70cj" path="res://scenes/prefabs/toggle.tscn" id="15_spwl5"]
+[ext_resource type="Script" path="res://scripts/utils/toggle_animation.gd" id="16_7fp7p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -39,6 +40,86 @@ size = Vector3(0.813, 1.829, 0.813)
 custom_solver_bias = 1.0
 margin = 0.25
 radius = 0.15
+
+[sub_resource type="Animation" id="Animation_e48b0"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpotLight3D:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_qhome"]
+resource_name = "toggle_off"
+length = 0.10001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpotLight3D:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_y0q2b"]
+resource_name = "toggle_on"
+length = 0.10001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpotLight3D:position:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_113ib"]
+_data = {
+"RESET": SubResource("Animation_e48b0"),
+"toggle_off": SubResource("Animation_qhome"),
+"toggle_on": SubResource("Animation_y0q2b")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kuaxj"]
+animation = &"toggle_off"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p2vu7"]
+animation = &"toggle_on"
+
+[sub_resource type="Curve" id="Curve_ojelt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505721, 0.511236), 4.60323, 4.60323, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3itr"]
+xfade_time = 0.2
+xfade_curve = SubResource("Curve_ojelt")
+advance_condition = &"is_on"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_82dcp"]
+xfade_time = 0.2
+xfade_curve = SubResource("Curve_ojelt")
+advance_condition = &"is_on"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_78uhb"]
+states/End/position = Vector2(658, 122)
+states/Start/position = Vector2(386, 122)
+states/toggle_off/node = SubResource("AnimationNodeAnimation_kuaxj")
+states/toggle_off/position = Vector2(527, 190)
+states/toggle_on/node = SubResource("AnimationNodeAnimation_p2vu7")
+states/toggle_on/position = Vector2(527, 56)
+transitions = ["toggle_on", "toggle_off", SubResource("AnimationNodeStateMachineTransition_n3itr"), "toggle_off", "toggle_on", SubResource("AnimationNodeStateMachineTransition_82dcp")]
 
 [node name="Sandbox" type="Node3D"]
 
@@ -407,7 +488,7 @@ collision_layer = 2
 interact_targets = [NodePath("../CSGSphere3D")]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Booth_01"]
-transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 7, -9)
+transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 6, -9)
 light_energy = 8.0
 light_volumetric_fog_energy = 10.0
 spot_range = 8.0
@@ -415,7 +496,7 @@ spot_angle = 20.06
 spot_angle_attenuation = 1.36604
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Booth_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.5, -9)
 material_override = ExtResource("13_rrsfr")
 radius = 1.0
 script = ExtResource("14_5ajwv")
@@ -423,11 +504,50 @@ duration = 0.5
 target_value = Vector3(1.5, 1.5, 1.5)
 
 [node name="Booth_02" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="Toggle" parent="Booth_02" instance=ExtResource("15_spwl5")]
-transform = Transform3D(-4.37114e-08, 0, 0.8, 0, 1, 0, -1, 0, -3.49691e-08, 12, 1.55, -3)
+[node name="Toggle" parent="Booth_02" node_paths=PackedStringArray("enable_targets_on", "disable_targets_on", "enable_targets_off", "disable_targets_off") instance=ExtResource("15_spwl5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 1.55, -1)
 collision_layer = 2
 interaction_interval = 0.15
-initial_state = true
+initial_state = 1
+enable_targets_on = [NodePath("../CSGBox3D")]
+disable_targets_on = [NodePath("../CSGBox3D2")]
+enable_targets_off = [NodePath("../CSGBox3D2")]
+disable_targets_off = [NodePath("../CSGBox3D")]
+targets = Array[NodePath]([NodePath("../AnimationTree")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Booth_02"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 2.55, -2)
+material_override = ExtResource("13_rrsfr")
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Booth_02"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 2.55, 9.53674e-07)
+material_override = ExtResource("13_rrsfr")
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Booth_02"]
+transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 6, -2)
+light_energy = 8.0
+light_volumetric_fog_energy = 10.0
+spot_range = 8.0
+spot_angle = 20.06
+spot_angle_attenuation = 1.36604
+
+[node name="AnimationTree" type="AnimationTree" parent="Booth_02"]
+libraries = {
+"": SubResource("AnimationLibrary_113ib")
+}
+tree_root = SubResource("AnimationNodeStateMachine_78uhb")
+anim_player = NodePath("AnimationPlayer")
+parameters/conditions/is_on = false
+script = ExtResource("16_7fp7p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Booth_02/AnimationTree"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_113ib")
+}
 
 [editable path="Booth_01/Button"]

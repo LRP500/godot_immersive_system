@@ -1,12 +1,23 @@
 extends Interactable
 
-@export var interaction_interval: float = 1
-@export var initial_state: bool = false
+enum ToggleState {
+	OFF = 0,
+	ON = 1
+}
 
-@export_group("Targets")
-@export var enable_targets: Array[Node3D]
-@export var disable_targets: Array[Node3D]
-@export var interact_targets: Array[Interactable]
+@export var interaction_interval: float = 1
+@export var initial_state: ToggleState
+
+@export_group("Targets On")
+@export var enable_targets_on: Array[Node3D]
+@export var disable_targets_on: Array[Node3D]
+@export var interact_targets_on: Array[Interactable]
+@export_group("Targets Off")
+@export var enable_targets_off: Array[Node3D]
+@export var disable_targets_off: Array[Node3D]
+@export var interact_targets_off: Array[Interactable]
+@export_group("Targets Toggle")
+@export var targets: Array[NodePath]
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -17,6 +28,7 @@ var timer: Timer
 func _ready() -> void:
 	animation_player.animation_finished.connect(_on_animation_finished)
 	is_on = initial_state
+	_process_targets(null)
 	_init_timer()
 	_animate()
 
@@ -36,14 +48,25 @@ func interact(_interactor: Interactor) -> void:
 	_animate()
 
 func _process_targets(_interactor: Interactor) -> void:
-	for target in enable_targets:
-		target.process_mode = Node.PROCESS_MODE_ALWAYS
-		target.show()
-	for target in disable_targets:
-		target.process_mode = Node.PROCESS_MODE_DISABLED
-		target.hide()
-	for target in interact_targets:
-		target.interact(_interactor)
+	if is_on:
+		for target in enable_targets_on:
+			Node3dHelpers.enable(target)
+		for target in disable_targets_on:
+			Node3dHelpers.disable(target)
+		for target in interact_targets_on:
+			target.interact(_interactor)
+	elif !is_on:
+		for target in enable_targets_off:
+			Node3dHelpers.enable(target)
+		for target in disable_targets_off:
+			Node3dHelpers.disable(target)
+		for target in interact_targets_off:
+			target.interact(_interactor)
+	for target in targets:
+		var node := get_node(target)
+		if node.has_method("toggle"):
+			@warning_ignore("unsafe_method_access")
+			node.toggle(is_on)
 
 func _animate() -> void:
 	if is_on:
