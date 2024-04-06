@@ -4,6 +4,7 @@ class_name InteractionListItemView
 @export var input_key: RichTextLabel
 @export var interaction_name: RichTextLabel
 @export var progress_bar: ProgressBar
+@export var progress_percentage: ProgressBar
 @export var input_key_format: String = "[%s]"
 
 var interaction: Interaction
@@ -17,12 +18,15 @@ func bind(_interaction: Interaction) -> void:
 
 func _process(_delta: float) -> void:
 	if interaction && interaction.timer:
+		progress_percentage.value = interaction.timer.get_progress_ratio()
 		progress_bar.value = interaction.timer.get_progress_ratio()
 
 func _on_interaction_started() -> void:
+	progress_percentage.visible = true
 	progress_bar.visible = true
 
 func _on_interaction_ended() -> void:
+	progress_percentage.visible = false
 	progress_bar.visible = false
 
 func _action_exists(action_name: String) -> bool:
