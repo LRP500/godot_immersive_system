@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=51 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://scripts/components/display_name.gd" id="23_ieyca"]
 [ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="24_jp6u1"]
 [ext_resource type="Script" path="res://scripts/components/display_description.gd" id="25_d8pei"]
+[ext_resource type="Script" path="res://scripts/components/interaction_timer.gd" id="27_semc6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -171,12 +172,12 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505721, 0.511236), 4.60323, 4.
 point_count = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3itr"]
-xfade_time = 0.1
+xfade_time = 0.5
 xfade_curve = SubResource("Curve_ojelt")
 advance_condition = &"is_on"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_82dcp"]
-xfade_time = 0.1
+xfade_time = 0.5
 xfade_curve = SubResource("Curve_ojelt")
 advance_condition = &"is_on"
 
@@ -313,7 +314,7 @@ use_collision = true
 size = Vector3(1, 7, 23)
 
 [node name="Pawn" type="Node3D" parent="." node_paths=PackedStringArray("View", "Camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.045, 1, -8.512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.295, 1, 2.738)
 script = ExtResource("2_0ikeh")
 View = NodePath("View Control")
 Camera = NodePath("Interpolated Camera")
@@ -514,7 +515,7 @@ editor_description = "
 near = 0.001
 
 [node name="InteractorCameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.045, 1.711, -8.512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.295, 1.711, 2.738)
 script = ExtResource("10_152eq")
 target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
 
@@ -612,7 +613,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="UI/HUD/CenterContainer"]
-self_modulate = Color(1, 1, 1, 0.5)
+self_modulate = Color(1, 1, 1, 0.2)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("14_ok50p")
@@ -621,8 +622,7 @@ expand_mode = 1
 [node name="Booth_01" type="Node3D" parent="."]
 
 [node name="Button" parent="Booth_01" node_paths=PackedStringArray("interact_targets") instance=ExtResource("12_3i20f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.55, -9)
-collision_layer = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, -9)
 interact_targets = [NodePath("../CSGSphere3D")]
 
 [node name="DisplayDescription" type="Node" parent="Booth_01/Button"]
@@ -649,7 +649,7 @@ target_value = Vector3(1.5, 1.5, 1.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="Toggle" type="StaticBody3D" parent="Booth_02" node_paths=PackedStringArray("enable_targets_on", "disable_targets_on", "enable_targets_off", "disable_targets_off")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 1.55, -1)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 1.5, -1)
 collision_layer = 2
 script = ExtResource("22_aeymx")
 interaction_interval = 0.15
@@ -719,6 +719,18 @@ libraries = {
 "": SubResource("AnimationLibrary_113ib")
 }
 
+[node name="Booth_03" type="Node3D" parent="."]
+
+[node name="Button" parent="Booth_03" instance=ExtResource("12_3i20f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 3)
+
+[node name="SimpleInteraction" parent="Booth_03/Button" index="4"]
+interaction_text = "Hold"
+
+[node name="InteractionTimer" type="Timer" parent="Booth_03/Button/SimpleInteraction" index="0"]
+wait_time = 2.0
+script = ExtResource("27_semc6")
+
 [node name="Bench_01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -11)
 
@@ -761,3 +773,4 @@ script = ExtResource("25_d8pei")
 value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut rutrum justo, nec ultricies urna. In elit dolor, fringilla sit."
 
 [editable path="Booth_01/Button"]
+[editable path="Booth_03/Button"]

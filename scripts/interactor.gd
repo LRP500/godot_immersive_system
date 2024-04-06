@@ -1,8 +1,11 @@
 extends Node3D
 class_name Interactor
 
-signal target_enter(target: Node3D, interactions: Array[Interaction])
-signal target_exit
+signal target_entered(target: Node3D, interactions: Array[Interaction])
+signal target_exited
+
+signal interact_started
+signal interact_stopped
 
 @onready var raycast: RayCast3D = $RayCast3D
 
@@ -25,7 +28,7 @@ func find_target() -> void:
             clear_target()
             target = collider
             target_interactions = get_child_interactions(target)
-            target_enter.emit(target, target_interactions)
+            target_entered.emit(target, target_interactions)
 
 func get_child_interactions(node: Node3D) -> Array[Interaction]:
     var interactions: Array[Interaction] = []
@@ -36,7 +39,7 @@ func get_child_interactions(node: Node3D) -> Array[Interaction]:
 
 func clear_target() -> void:
     if target:
-        target_exit.emit()
+        target_exited.emit()
     target = null
     target_interactions.clear()
 
@@ -47,4 +50,8 @@ func process_input() -> void:
         if !interaction.is_enabled:
             continue
         if Input.is_action_just_pressed(interaction.input_map_action):
-            interaction.interact(self)
+            interact_started.emit()
+            interaction.start_interact(self)
+        elif Input.is_action_just_released(interaction.input_map_action):
+            interact_stopped.emit()
+            interaction.stop_interact(self)

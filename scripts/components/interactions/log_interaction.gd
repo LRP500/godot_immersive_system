@@ -2,5 +2,5 @@ extends Interaction
 
 @export var text: String = "Lorem Ipsum"
 
-func interact(_interactor: Node3D) -> void:
+func start_interact(_interactor: Interactor) -> void:
     print(text)

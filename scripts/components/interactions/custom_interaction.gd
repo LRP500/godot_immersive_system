@@ -9,5 +9,5 @@ func _ready() -> void:
     if !interact_method.is_valid():
         printerr("[Interaction] No suitable interact method found in parent!")
 
-func interact(_interactor: Interactor) -> void:
+func start_interact(_interactor: Interactor) -> void:
     interact_method.call(_interactor)

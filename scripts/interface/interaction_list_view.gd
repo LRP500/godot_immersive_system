@@ -6,16 +6,16 @@ class_name InteractionListView
 var interaction_prompts: Array[InteractionListItemView] = []
 
 func _ready() -> void:
-	InteractionSystem.interactor.target_enter.connect(_on_target_enter)
-	InteractionSystem.interactor.target_exit.connect(_on_target_exit)
+	InteractionSystem.interactor.target_entered.connect(_on_target_entered)
+	InteractionSystem.interactor.target_exited.connect(_on_target_exited)
 	clear_prompts()
 
-func _on_target_enter(_target: Node3D, interactions: Array[Interaction]) -> void:
+func _on_target_entered(_target: Node3D, interactions: Array[Interaction]) -> void:
 	clear_prompts()
 	for interaction in interactions:
 		add_prompt(interaction)
 
-func _on_target_exit() -> void:
+func _on_target_exited() -> void:
 	clear_prompts()
 
 func add_prompt(interaction: Interaction) -> void:

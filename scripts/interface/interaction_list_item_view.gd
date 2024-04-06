@@ -3,11 +3,27 @@ class_name InteractionListItemView
 
 @export var input_key: RichTextLabel
 @export var interaction_name: RichTextLabel
+@export var progress_bar: ProgressBar
 @export var input_key_format: String = "[%s]"
 
-func bind(interaction: Interaction) -> void:
+var interaction: Interaction
+
+func bind(_interaction: Interaction) -> void:
+	self.interaction = _interaction
 	input_key.text = input_key_format % _get_keycode_string(interaction.input_map_action)
 	interaction_name.text = interaction.interaction_text
+	interaction.started.connect(_on_interaction_started)
+	interaction.ended.connect(_on_interaction_ended)
+
+func _process(_delta: float) -> void:
+	if interaction && interaction.timer:
+		progress_bar.value = interaction.timer.get_progress_ratio()
+
+func _on_interaction_started() -> void:
+	progress_bar.visible = true
+
+func _on_interaction_ended() -> void:
+	progress_bar.visible = false
 
 func _action_exists(action_name: String) -> bool:
 	return InputMap.has_action(action_name)
