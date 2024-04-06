@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg5qiodeah552"]
+[gd_scene load_steps=7 format=3 uid="uid://cg5qiodeah552"]
 
 [ext_resource type="Script" path="res://scripts/interface/interaction_list_item_view.gd" id="1_wtu1a"]
+[ext_resource type="Script" path="res://scripts/interface/interaction_progress_bar_view.gd" id="2_r26yv"]
+[ext_resource type="Script" path="res://scripts/utils/data_holder.gd" id="4_rs0s1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h63dt"]
 
@@ -13,17 +15,16 @@ corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tr6vp"]
 
-[node name="InteractionPrompt" type="Control" node_paths=PackedStringArray("input_key", "interaction_name", "progress_bar", "progress_percentage")]
+[node name="InteractionPrompt" type="Control" node_paths=PackedStringArray("data_holder", "input_key", "interaction_name")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 192.0
 offset_bottom = 24.0
 script = ExtResource("1_wtu1a")
+data_holder = NodePath("DataHolder")
 input_key = NodePath("HBoxContainer/InputKey")
 interaction_name = NodePath("HBoxContainer/InteractionName")
-progress_bar = NodePath("ProgressBar")
-progress_percentage = NodePath("ProgressPercentage")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 24)
@@ -63,6 +64,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5ubry")
 max_value = 1.0
 value = 1.0
 show_percentage = false
+script = ExtResource("2_r26yv")
 
 [node name="ProgressPercentage" type="ProgressBar" parent="."]
 visible = false
@@ -78,3 +80,7 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_h63dt")
 theme_override_styles/fill = SubResource("StyleBoxEmpty_tr6vp")
 max_value = 1.0
 value = 1.0
+script = ExtResource("2_r26yv")
+
+[node name="DataHolder" type="Node" parent="."]
+script = ExtResource("4_rs0s1")

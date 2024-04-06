@@ -593,6 +593,7 @@ interaction_prompt_view = ExtResource("13_le138")
 metadata/_edit_use_anchors_ = true
 
 [node name="InteractionListItemView (Example)" parent="UI/InteractionInterface/InteractableView/InteractionListView" instance=ExtResource("13_le138")]
+process_mode = 4
 layout_mode = 2
 
 [node name="HUD" type="Control" parent="UI"]
