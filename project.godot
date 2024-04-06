@@ -15,6 +15,10 @@ run/main_scene="res://scenes/sandbox.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+InteractionSystem="*res://scripts/interaction_system.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=34 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://scripts/interactor_camera_proxy.gd" id="10_152eq"]
 [ext_resource type="Script" path="res://scripts/interactor.gd" id="11_aj3k7"]
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://scenes/prefabs/button.tscn" id="12_3i20f"]
+[ext_resource type="Script" path="res://scripts/interface/interaction_interface.gd" id="12_aurvb"]
+[ext_resource type="PackedScene" uid="uid://cg5qiodeah552" path="res://scenes/interface/interaction_prompt_view.tscn" id="13_le138"]
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="PackedScene" uid="uid://dhc2u74fc70cj" path="res://scenes/prefabs/toggle.tscn" id="15_spwl5"]
@@ -242,7 +244,7 @@ use_collision = true
 size = Vector3(1, 7, 23)
 
 [node name="Pawn" type="Node3D" parent="." node_paths=PackedStringArray("View", "Camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.045, 1, -3.012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.045, 1, -8.512)
 script = ExtResource("2_0ikeh")
 View = NodePath("View Control")
 Camera = NodePath("Interpolated Camera")
@@ -443,7 +445,7 @@ editor_description = "
 near = 0.001
 
 [node name="InteractorCameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.045, 1.711, -3.012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.045, 1.711, -8.512)
 script = ExtResource("10_152eq")
 target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
 
@@ -456,7 +458,6 @@ target_position = Vector3(0, 0, -5)
 collision_mask = 2
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -464,21 +465,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="UI"]
+[node name="InteractionInterface" type="CenterContainer" parent="UI" node_paths=PackedStringArray("interaction_prompt_container")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("12_aurvb")
+interaction_prompt_view = ExtResource("13_le138")
+interaction_prompt_container = NodePath("VBoxContainer")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/CenterContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InteractionInterface"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[center][interact][center]"
-fit_content = true
-scroll_active = false
+alignment = 1
 
 [node name="Booth_01" type="Node3D" parent="."]
 
@@ -549,5 +549,13 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_113ib")
 }
+
+[node name="MultiInteractions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -11)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MultiInteractions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0)
+material_override = ExtResource("1_pw4l6")
+size = Vector3(8, 1, 1)
 
 [editable path="Booth_01/Button"]
