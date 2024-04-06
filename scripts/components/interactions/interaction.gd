@@ -7,11 +7,11 @@ class_name Interaction
 @export var interaction_text: String = "Interact"
 @export var input_map_action: String = "interact"
 
-var parent: Interactable
+var parent: Node3D
 
 func _enter_tree() -> void:
-    parent = get_parent() as Interactable
-    assert(parent, "Parent must be an Interactable! (%s)" % get_path())
+    parent = get_parent()
+    assert(parent, "Parent must be a Node3D")
 
 func interact(_interactor: Interactor) -> void:
     pass

@@ -8,6 +8,7 @@ var interaction_prompts: Array[InteractionPromptView] = []
 func _ready() -> void:
 	InteractionSystem.interactor.target_enter.connect(_on_target_enter)
 	InteractionSystem.interactor.target_exit.connect(_on_target_exit)
+	clear_prompts()
 
 func _on_target_enter(_target: Node3D, interactions: Array[Interaction]) -> void:
 	clear_prompts()
@@ -28,4 +29,6 @@ func add_prompt(interaction: Interaction) -> void:
 func clear_prompts() -> void:
 	for prompt in interaction_prompts:
 		prompt.queue_free()
+	for child in interaction_prompt_container.get_children():
+		interaction_prompt_container.remove_child(child)
 	interaction_prompts.clear()

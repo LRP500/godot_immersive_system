@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=38 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -16,8 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://cg5qiodeah552" path="res://scenes/interface/interaction_prompt_view.tscn" id="13_le138"]
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
+[ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
 [ext_resource type="PackedScene" uid="uid://dhc2u74fc70cj" path="res://scenes/prefabs/toggle.tscn" id="15_spwl5"]
 [ext_resource type="Script" path="res://scripts/utils/toggle_animation.gd" id="16_7fp7p"]
+[ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/textures/prototype/prototype_purple.material" id="19_o6653"]
+[ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="20_rqy6m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -122,6 +125,9 @@ states/toggle_off/position = Vector2(527, 190)
 states/toggle_on/node = SubResource("AnimationNodeAnimation_p2vu7")
 states/toggle_on/position = Vector2(527, 56)
 transitions = ["toggle_on", "toggle_off", SubResource("AnimationNodeStateMachineTransition_n3itr"), "toggle_off", "toggle_on", SubResource("AnimationNodeStateMachineTransition_82dcp")]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b2fgc"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Sandbox" type="Node3D"]
 
@@ -465,7 +471,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InteractionInterface" type="CenterContainer" parent="UI" node_paths=PackedStringArray("interaction_prompt_container")]
+[node name="InteractionInterface" type="Control" parent="UI" node_paths=PackedStringArray("interaction_prompt_container")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -474,11 +480,67 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_aurvb")
 interaction_prompt_view = ExtResource("13_le138")
-interaction_prompt_container = NodePath("VBoxContainer")
+interaction_prompt_container = NodePath("InteractableView/InteractionPrompts")
+metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/InteractionInterface"]
+[node name="InteractableView" type="Control" parent="UI/InteractionInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 24.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractableName" type="RichTextLabel" parent="UI/InteractionInterface/InteractableView"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 24.0
+bbcode_enabled = true
+text = "[b][interactable_name][/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="InteractionPrompts" type="VBoxContainer" parent="UI/InteractionInterface/InteractableView"]
 layout_mode = 2
-alignment = 1
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 56.0
+metadata/_edit_use_anchors_ = true
+
+[node name="InteractionPrompt" parent="UI/InteractionInterface/InteractableView/InteractionPrompts" instance=ExtResource("13_le138")]
+layout_mode = 2
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/CenterContainer"]
+self_modulate = Color(1, 1, 1, 0.4)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("14_ok50p")
+expand_mode = 1
 
 [node name="Booth_01" type="Node3D" parent="."]
 
@@ -550,12 +612,37 @@ libraries = {
 "": SubResource("AnimationLibrary_113ib")
 }
 
-[node name="MultiInteractions" type="Node3D" parent="."]
+[node name="Bench_01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -11)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="MultiInteractions"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0)
 material_override = ExtResource("1_pw4l6")
+use_collision = true
 size = Vector3(8, 1, 1)
+
+[node name="MultiInteractions" type="RigidBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.25, 0)
+collision_layer = 2
+custom_integrator = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/MultiInteractions"]
+shape = SubResource("BoxShape3D_b2fgc")
+
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/MultiInteractions"]
+material_override = ExtResource("19_o6653")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="SimpleInteraction" type="Node3D" parent="Bench_01/MultiInteractions"]
+script = ExtResource("20_rqy6m")
+interaction_text = "Option 1"
+
+[node name="SimpleInteraction2" type="Node3D" parent="Bench_01/MultiInteractions"]
+script = ExtResource("20_rqy6m")
+interaction_text = "Option 2"
+
+[node name="SimpleInteraction3" type="Node3D" parent="Bench_01/MultiInteractions"]
+script = ExtResource("20_rqy6m")
+interaction_text = "Option 3"
 
 [editable path="Booth_01/Button"]
