@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=50 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -20,11 +20,13 @@
 [ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="Script" path="res://scripts/interface/interactable_description_view.gd" id="14_jx3dc"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
-[ext_resource type="PackedScene" uid="uid://dhc2u74fc70cj" path="res://scenes/prefabs/toggle.tscn" id="15_spwl5"]
 [ext_resource type="Script" path="res://scripts/utils/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/textures/prototype/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="20_rqy6m"]
+[ext_resource type="Script" path="res://scripts/components/interactables/toggle_interactable.gd" id="22_aeymx"]
+[ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="23_02s6c"]
 [ext_resource type="Script" path="res://scripts/components/display_name.gd" id="23_ieyca"]
+[ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="24_jp6u1"]
 [ext_resource type="Script" path="res://scripts/components/display_description.gd" id="25_d8pei"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
@@ -50,6 +52,62 @@ size = Vector3(0.813, 1.829, 0.813)
 custom_solver_bias = 1.0
 margin = 0.25
 radius = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ty6is"]
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_7p8ft"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToggleAnimatable:rotation:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.261799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_02m77"]
+resource_name = "switch_off"
+length = 0.02
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToggleAnimatable:rotation:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-0.261799, 0, 0, 0.00666667, 0, 0.261799, -0.00666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.02)
+}
+
+[sub_resource type="Animation" id="Animation_r2dmq"]
+resource_name = "switch_on"
+length = 0.02
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToggleAnimatable:rotation:z")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.261799, -0.25, 0, 0.25, 0, -0.261799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.02)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41k72"]
+_data = {
+"RESET": SubResource("Animation_7p8ft"),
+"switch_off": SubResource("Animation_02m77"),
+"switch_on": SubResource("Animation_r2dmq")
+}
 
 [sub_resource type="Animation" id="Animation_e48b0"]
 length = 0.001
@@ -113,12 +171,12 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505721, 0.511236), 4.60323, 4.
 point_count = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3itr"]
-xfade_time = 0.2
+xfade_time = 0.1
 xfade_curve = SubResource("Curve_ojelt")
 advance_condition = &"is_on"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_82dcp"]
-xfade_time = 0.2
+xfade_time = 0.1
 xfade_curve = SubResource("Curve_ojelt")
 advance_condition = &"is_on"
 
@@ -567,6 +625,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.55, -9)
 collision_layer = 2
 interact_targets = [NodePath("../CSGSphere3D")]
 
+[node name="DisplayDescription" type="Node" parent="Booth_01/Button"]
+script = ExtResource("25_d8pei")
+value = "A simple interactable push button triggering a custom effect."
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Booth_01"]
 transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 6, -9)
 light_energy = 8.0
@@ -586,9 +648,10 @@ target_value = Vector3(1.5, 1.5, 1.5)
 [node name="Booth_02" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="Toggle" parent="Booth_02" node_paths=PackedStringArray("enable_targets_on", "disable_targets_on", "enable_targets_off", "disable_targets_off") instance=ExtResource("15_spwl5")]
+[node name="Toggle" type="StaticBody3D" parent="Booth_02" node_paths=PackedStringArray("enable_targets_on", "disable_targets_on", "enable_targets_off", "disable_targets_off")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 1.55, -1)
 collision_layer = 2
+script = ExtResource("22_aeymx")
 interaction_interval = 0.15
 initial_state = 1
 enable_targets_on = [NodePath("../CSGBox3D")]
@@ -596,6 +659,32 @@ disable_targets_on = [NodePath("../CSGBox3D2")]
 enable_targets_off = [NodePath("../CSGBox3D2")]
 disable_targets_off = [NodePath("../CSGBox3D")]
 targets = Array[NodePath]([NodePath("../AnimationTree")])
+
+[node name="ToggleBase" type="CSGBox3D" parent="Booth_02/Toggle"]
+material_override = ExtResource("23_02s6c")
+size = Vector3(0.495, 0.15, 0.3)
+
+[node name="ToggleAnimatable" type="CSGBox3D" parent="Booth_02/Toggle"]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("24_jp6u1")
+size = Vector3(0.4, 0.14, 0.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Booth_02/Toggle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0362409, 0)
+shape = SubResource("SphereShape3D_ty6is")
+
+[node name="SimpleInteraction" type="Node3D" parent="Booth_02/Toggle"]
+script = ExtResource("20_rqy6m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Booth_02/Toggle"]
+libraries = {
+"": SubResource("AnimationLibrary_41k72")
+}
+autoplay = "idle"
+
+[node name="DisplayDescription" type="Node" parent="Booth_02/Toggle"]
+script = ExtResource("25_d8pei")
+value = "A simple switch toggle enabling and disabling objects in the world and triggering custom effects."
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Booth_02"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 2.55, -2)
