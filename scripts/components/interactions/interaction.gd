@@ -3,6 +3,7 @@ class_name Interaction
 
 signal started
 signal ended
+signal interrupted
 
 @export var is_enabled: bool = true
 @export var interaction_text: String = "Interact"
@@ -22,7 +23,7 @@ func _ready() -> void:
 func start_interact(_interactor: Interactor) -> void:
     self.interactor = _interactor
     if timer:
-       timer.start()
+       timer.resume()
        started.emit()
     else:
        interact(interactor)
@@ -30,8 +31,13 @@ func start_interact(_interactor: Interactor) -> void:
 func stop_interact(_interactor: Interactor) -> void:
     if !timer:
        return
-    timer.stop()
-    ended.emit()
+    # Interaction has been interrupted halfway
+    elif !timer.is_stopped():
+        timer.paused = true
+        interrupted.emit()
+    # Interaction was executed successfully
+    else:
+        ended.emit()
     interactor = null
 
 func interact(_interactor: Interactor) -> void:
@@ -46,4 +52,6 @@ func _init_timer() -> void:
 
 func _on_timer_finished() -> void:
     interact(interactor)
-    stop_interact(interactor)
+    ended.emit()
+    timer.stop()
+    interactor = null

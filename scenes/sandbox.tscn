@@ -731,6 +731,7 @@ interaction_text = "Hold"
 [node name="InteractionTimer" type="Timer" parent="Booth_03/Button/SimpleInteraction" index="0"]
 wait_time = 2.0
 script = ExtResource("27_semc6")
+reset_on_release = false
 
 [node name="Bench_01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -11)
@@ -772,6 +773,8 @@ value = "Multiple Interactions"
 [node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractions"]
 script = ExtResource("25_d8pei")
 value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut rutrum justo, nec ultricies urna. In elit dolor, fringilla sit."
+
+[connection signal="timeout" from="Booth_03/Button/SimpleInteraction/InteractionTimer" to="Booth_03/Button/SimpleInteraction/InteractionTimer" method="_on_timeout"]
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/Button"]

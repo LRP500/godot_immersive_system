@@ -40,6 +40,7 @@ func clear_target() -> void:
         target_exited.emit()
     if active_interaction:
         active_interaction.stop_interact(self)
+        active_interaction = null
     target = null
     target_interactions.clear()
 
@@ -52,5 +53,6 @@ func process_input() -> void:
         if Input.is_action_just_pressed(interaction.input_map_action):
             interaction.start_interact(self)
             active_interaction = interaction
-        elif Input.is_action_just_released(interaction.input_map_action):
+        if Input.is_action_just_released(interaction.input_map_action):
             interaction.stop_interact(self)
+            active_interaction = null
