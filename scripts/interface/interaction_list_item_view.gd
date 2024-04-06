@@ -1,5 +1,5 @@
 extends Control
-class_name InteractionPromptView
+class_name InteractionListItemView
 
 @export var input_key: RichTextLabel
 @export var interaction_name: RichTextLabel

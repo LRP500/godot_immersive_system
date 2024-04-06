@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=42 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -18,14 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://cg5qiodeah552" path="res://scenes/interface/interaction_list_item_view.tscn" id="13_le138"]
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://scripts/components/interactables/bounce_interactable.gd" id="14_5ajwv"]
-[ext_resource type="Script" path="res://scripts/interface/interactable_description_view.gd" id="14_jx3dc"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
 [ext_resource type="PackedScene" uid="uid://dhc2u74fc70cj" path="res://scenes/prefabs/toggle.tscn" id="15_spwl5"]
 [ext_resource type="Script" path="res://scripts/utils/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/textures/prototype/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="20_rqy6m"]
 [ext_resource type="Script" path="res://scripts/components/display_name.gd" id="23_ieyca"]
-[ext_resource type="Script" path="res://scripts/components/display_description.gd" id="25_d8pei"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,6 +48,33 @@ size = Vector3(0.813, 1.829, 0.813)
 custom_solver_bias = 1.0
 margin = 0.25
 radius = 0.15
+
+[sub_resource type="GDScript" id="GDScript_ld7ar"]
+script/source = "extends Control
+
+@export var interaction_name_view: RichTextLabel
+
+var interaction_prompts: Array[InteractionListItemView] = []
+
+func bind(interactable: Interactable) -> void:
+	clear_prompts()
+	for interaction in interactions:
+		add_prompt(interaction)
+
+func add_prompt(interaction: Interaction) -> void:
+	var instance := interaction_prompt_view.instantiate()
+	var prompt := instance as InteractionListItemView
+	assert(prompt, \"[InteractionInterface] Prompt view must be an InteractionPromptView!\")
+	prompt.bind(interaction)
+	interaction_prompts.append(prompt)
+	interaction_prompt_container.add_child(prompt)
+
+func clear_prompts() -> void:
+	for prompt in interaction_prompts:
+		prompt.queue_free()
+	for child in interaction_prompt_container.get_children():
+		interaction_prompt_container.remove_child(child)
+	interaction_prompts.clear()"
 
 [sub_resource type="Animation" id="Animation_e48b0"]
 length = 0.001
@@ -493,14 +518,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 28.0
-offset_top = 35.0
-offset_right = 28.0
-offset_bottom = 35.0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 24.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_ld7ar")
 
-[node name="InteractableNameView" type="RichTextLabel" parent="UI/InteractionInterface/InteractableView"]
+[node name="InteractableName" type="RichTextLabel" parent="UI/InteractionInterface/InteractableView"]
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 24.0
@@ -512,25 +538,14 @@ autowrap_mode = 0
 shortcut_keys_enabled = false
 script = ExtResource("12_llu0b")
 
-[node name="InteractableDescriptionView" type="RichTextLabel" parent="UI/InteractionInterface/InteractableView"]
-layout_mode = 0
-offset_left = 180.0
-offset_top = 171.0
-offset_right = 500.0
-offset_bottom = 251.0
-bbcode_enabled = true
-text = "[i][interactable_description][/i]"
-fit_content = true
-scroll_active = false
-script = ExtResource("14_jx3dc")
-
-[node name="InteractionListView" type="VBoxContainer" parent="UI/InteractionInterface/InteractableView"]
+[node name="InteractionListView" type="VBoxContainer" parent="UI/InteractionInterface/InteractableView" node_paths=PackedStringArray("interaction_prompt_container")]
 layout_mode = 2
 offset_top = 32.0
 offset_right = 128.0
 offset_bottom = 56.0
 script = ExtResource("12_gyecr")
 interaction_prompt_view = ExtResource("13_le138")
+interaction_prompt_container = NodePath("InteractionListItemView (Example)")
 metadata/_edit_use_anchors_ = true
 
 [node name="InteractionListItemView (Example)" parent="UI/InteractionInterface/InteractableView/InteractionListView" instance=ExtResource("13_le138")]
@@ -554,7 +569,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="UI/HUD/CenterContainer"]
-self_modulate = Color(1, 1, 1, 0.5)
+self_modulate = Color(1, 1, 1, 0.4)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("14_ok50p")
@@ -666,9 +681,5 @@ interaction_text = "Option 3"
 [node name="DisplayName" type="Node" parent="Bench_01/MultiInteractions"]
 script = ExtResource("23_ieyca")
 value = "Multiple Interactions"
-
-[node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractions"]
-script = ExtResource("25_d8pei")
-value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut rutrum justo, nec ultricies urna. In elit dolor, fringilla sit."
 
 [editable path="Booth_01/Button"]

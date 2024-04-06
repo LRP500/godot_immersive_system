@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cg5qiodeah552"]
 
-[ext_resource type="Script" path="res://scripts/interface/interaction_prompt_view.gd" id="1_wtu1a"]
+[ext_resource type="Script" path="res://scripts/interface/interaction_list_item_view.gd" id="1_wtu1a"]
 
 [node name="InteractionPrompt" type="HBoxContainer" node_paths=PackedStringArray("input_key", "interaction_name")]
 custom_minimum_size = Vector2(0, 24)
