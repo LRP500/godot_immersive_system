@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://45av3t6tvv3n"]
 
 [ext_resource type="Script" path="res://scripts/components/interactables/button_interactable.gd" id="1_xu5sr"]
-[ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="2_u4ujq"]
+[ext_resource type="Script" path="res://scripts/components/interactions/interaction.gd" id="2_btj5p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj0nd"]
 albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -111,4 +111,4 @@ libraries = {
 autoplay = "idle"
 
 [node name="SimpleInteraction" type="Node3D" parent="."]
-script = ExtResource("2_u4ujq")
+script = ExtResource("2_btj5p")
