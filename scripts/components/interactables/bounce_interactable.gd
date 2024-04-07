@@ -6,7 +6,7 @@ signal interaction_finished
 @export var duration: float = 1.0
 @export var target_value: Vector3 = Vector3(2, 2, 2)
 
-func interact(_interactor: Interactor) -> void:
+func interact(_interactor: Interactor, _interaction: Interaction) -> void:
 	var initial_value := scale
 	var tween := get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)

@@ -25,7 +25,7 @@ func _init_timer() -> void:
 	timer.one_shot = true
 	add_child(timer)
 
-func interact(_interactor: Interactor) -> void:
+func interact(_interactor: Interactor, _interaction: Interaction) -> void:
 	if is_interactable == false:
 		return
 	if _has_reached_max_use_count():
@@ -34,7 +34,7 @@ func interact(_interactor: Interactor) -> void:
 	timer.start()
 	use_count += 1
 	is_interactable = false
-	_process_targets(_interactor)
+	_process_targets(_interactor, _interaction)
 	_animate()
 
 func _has_reached_max_use_count() -> bool:
@@ -42,7 +42,7 @@ func _has_reached_max_use_count() -> bool:
 		return false
 	return use_count >= max_use_count
 
-func _process_targets(_interactor: Interactor) -> void:
+func _process_targets(_interactor: Interactor, _interaction: Interaction) -> void:
 	for target in enable_targets:
 		target.process_mode = Node.PROCESS_MODE_ALWAYS
 		target.show()
@@ -50,7 +50,7 @@ func _process_targets(_interactor: Interactor) -> void:
 		target.process_mode = Node.PROCESS_MODE_DISABLED
 		target.hide()
 	for target in interact_targets:
-		target.interact(_interactor)
+		target.interact(_interactor, _interaction)
 
 func _animate() -> void:
 	animation_player.play("switch_on")

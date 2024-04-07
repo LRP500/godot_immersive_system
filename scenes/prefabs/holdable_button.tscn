@@ -115,6 +115,4 @@ autoplay = "idle"
 script = ExtResource("1_emqif")
 
 [node name="InteractionHoldTimer" type="Timer" parent="SimpleInteraction"]
-wait_time = 6.0
 script = ExtResource("3_eu5og")
-reset_on_release = false

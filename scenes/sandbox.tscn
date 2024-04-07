@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=61 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -30,6 +30,8 @@
 [ext_resource type="Script" path="res://scripts/components/display_description.gd" id="25_d8pei"]
 [ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://scenes/prefabs/holdable_button.tscn" id="27_alees"]
 [ext_resource type="Script" path="res://scripts/examples/booth_03_cube.gd" id="28_2h4l3"]
+[ext_resource type="Script" path="res://scripts/examples/booth_03_light.gd" id="28_231x4"]
+[ext_resource type="Script" path="res://scripts/components/interactables/interactable.gd" id="29_uek3g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -227,8 +229,8 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_kg142"]
-resource_name = "up"
+[sub_resource type="Animation" id="Animation_b7xe6"]
+resource_name = "down"
 length = 0.10001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -238,7 +240,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
@@ -249,7 +251,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(5.55, -0.25, 0, 3, 0),
+"points": PackedFloat32Array(1.5, -0.25, 0, 3, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "bezier"
@@ -264,8 +266,8 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_b7xe6"]
-resource_name = "down"
+[sub_resource type="Animation" id="Animation_kg142"]
+resource_name = "up"
 length = 0.10001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -275,7 +277,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
@@ -286,7 +288,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(2.55, -0.25, 0, 3, 0),
+"points": PackedFloat32Array(4, -0.25, 0, 3, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "bezier"
@@ -854,16 +856,40 @@ libraries = {
 
 [node name="HoldableButton" parent="Booth_03" node_paths=PackedStringArray("interact_targets") instance=ExtResource("27_alees")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 3)
-interact_targets = [NodePath("../CSGBox3D")]
+interaction_interval = 1.7
+interact_targets = [NodePath("../CSGBox3D"), NodePath("../SpotLight3D (Top)"), NodePath("../SpotLight3D (Top) 2"), NodePath("../SpotLight3D (Bottom)")]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Booth_03"]
-transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 6, 3)
+[node name="InteractionHoldTimer" parent="Booth_03/HoldableButton/SimpleInteraction" index="0"]
+wait_time = 5.0
+reset_on_release = false
+
+[node name="SpotLight3D (Top)" type="SpotLight3D" parent="Booth_03"]
+transform = Transform3D(0.431932, -0.862089, -0.265024, 0.396413, -0.0824783, 0.91436, -0.810118, -0.5, 0.306118, 14.6387, 7.081, 4.5)
+light_energy = 6.0
+light_volumetric_fog_energy = 10.0
+spot_range = 8.0
+spot_angle = 22.0
+spot_angle_attenuation = 1.36604
+script = ExtResource("28_231x4")
+
+[node name="SpotLight3D (Top) 2" type="SpotLight3D" parent="Booth_03"]
+transform = Transform3D(0.431932, 0.862089, -0.265024, 0.396413, 0.0824783, 0.91436, 0.810118, -0.5, -0.306118, 14.6387, 7.081, 1.5)
+light_energy = 6.0
+light_volumetric_fog_energy = 10.0
+spot_range = 8.0
+spot_angle = 22.0
+spot_angle_attenuation = 1.36604
+script = ExtResource("28_231x4")
+
+[node name="SpotLight3D (Bottom)" type="SpotLight3D" parent="Booth_03"]
+transform = Transform3D(0.9092, 3.969e-09, -0.41636, 0.41636, -1.81997e-08, 0.9092, -3.969e-09, -1, -1.81997e-08, 12.1958, 5.21009, 3)
+visible = false
 light_energy = 8.0
 light_volumetric_fog_energy = 10.0
 spot_range = 8.0
-spot_angle = 20.06
-spot_angle_attenuation = 1.36604
-script = ExtResource("28_2h4l3")
+spot_angle = 24.0
+spot_angle_attenuation = 1.7411
+script = ExtResource("28_231x4")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Booth_03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.55, 3)
@@ -898,6 +924,7 @@ size = Vector3(8, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.25, 0)
 collision_layer = 2
 custom_integrator = true
+script = ExtResource("29_uek3g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/MultiInteractions"]
 shape = SubResource("BoxShape3D_b2fgc")
@@ -927,3 +954,4 @@ script = ExtResource("25_d8pei")
 value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut rutrum justo, nec ultricies urna. In elit dolor, fringilla sit."
 
 [editable path="Booth_01/Button"]
+[editable path="Booth_03/HoldableButton"]
