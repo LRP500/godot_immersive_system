@@ -29,7 +29,7 @@ func _bind(data: Object) -> void:
         CanvasHelpers.enable(self)
         _update()
     interaction.started.connect(_on_interaction_started)
-    interaction.ended.connect(_on_interaction_ended)
+    interaction.completed.connect(_on_interaction_ended)
     interaction.interrupted.connect(_on_interaction_interrupted)
 
 func _on_interaction_started() -> void:

@@ -2,7 +2,7 @@ extends Node3D
 class_name Interaction
 
 signal started
-signal ended
+signal completed
 signal interrupted
 
 @export var is_enabled: bool = true
@@ -10,7 +10,7 @@ signal interrupted
 @export var input_map_action: String = "interact"
 
 var parent: Node3D
-var timer: InteractionTimer
+var timer: InteractionHoldTimer
 var interactor: Interactor
 
 func _enter_tree() -> void:
@@ -23,7 +23,6 @@ func _ready() -> void:
 func interact_start(_interactor: Interactor) -> void:
     self.interactor = _interactor
     if timer:
-       timer.resume()
        started.emit()
     else:
        interact(interactor)
@@ -33,11 +32,10 @@ func interact_stop(_interactor: Interactor) -> void:
        return
     # Interaction has been interrupted halfway
     elif !timer.is_stopped():
-        timer.paused = true
         interrupted.emit()
     # Interaction was executed successfully
     else:
-        ended.emit()
+        completed.emit()
     interactor = null
 
 func interact(_interactor: Interactor) -> void:
@@ -46,12 +44,11 @@ func interact(_interactor: Interactor) -> void:
        callable.call(interactor)
 
 func _init_timer() -> void:
-    timer = find_child("InteractionTimer", false, false)
+    timer = find_child("InteractionHoldTimer", false, false)
     if timer:
        timer.timeout.connect(_on_timer_finished)
 
 func _on_timer_finished() -> void:
     interact(interactor)
-    ended.emit()
-    timer.stop()
+    completed.emit()
     interactor = null
