@@ -22,14 +22,16 @@ func _ready() -> void:
 
 func interact_start(_interactor: Interactor) -> void:
     self.interactor = _interactor
+    parent.interact_start(_interactor)
     if timer:
-       started.emit()
+        started.emit()
     else:
-       interact(interactor)
+        interact(interactor)
 
 func interact_stop(_interactor: Interactor) -> void:
+    parent.interact_stop(_interactor)
     if !timer:
-       return
+        return
     # Interaction has been interrupted halfway
     elif !timer.is_stopped():
         interrupted.emit()
@@ -41,12 +43,12 @@ func interact_stop(_interactor: Interactor) -> void:
 func interact(_interactor: Interactor) -> void:
     var callable := Callable(parent, "interact")
     if callable.is_valid():
-       callable.call(interactor)
+        callable.call(interactor)
 
 func _init_timer() -> void:
     timer = find_child("InteractionHoldTimer", false, false)
     if timer:
-       timer.timeout.connect(_on_timer_finished)
+        timer.timeout.connect(_on_timer_finished)
 
 func _on_timer_finished() -> void:
     interact(interactor)

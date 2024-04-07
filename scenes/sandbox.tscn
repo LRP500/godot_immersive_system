@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=59 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -28,7 +28,8 @@
 [ext_resource type="Script" path="res://scripts/components/display_name.gd" id="23_ieyca"]
 [ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="24_jp6u1"]
 [ext_resource type="Script" path="res://scripts/components/display_description.gd" id="25_d8pei"]
-[ext_resource type="Script" path="res://scripts/components/interaction_timer.gd" id="27_semc6"]
+[ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://scenes/prefabs/holdable_button.tscn" id="27_alees"]
+[ext_resource type="Script" path="res://scripts/examples/booth_03_cube.gd" id="28_2h4l3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -189,6 +190,135 @@ states/toggle_off/position = Vector2(527, 190)
 states/toggle_on/node = SubResource("AnimationNodeAnimation_p2vu7")
 states/toggle_on/position = Vector2(527, 56)
 transitions = ["toggle_on", "toggle_off", SubResource("AnimationNodeStateMachineTransition_n3itr"), "toggle_off", "toggle_on", SubResource("AnimationNodeStateMachineTransition_82dcp")]
+
+[sub_resource type="Animation" id="Animation_qgbth"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2.55, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_kg142"]
+resource_name = "up"
+length = 0.10001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(5.55, -0.25, 0, 3, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_b7xe6"]
+resource_name = "down"
+length = 0.10001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2.55, -0.25, 0, 3, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utqfw"]
+_data = {
+"RESET": SubResource("Animation_qgbth"),
+"down": SubResource("Animation_b7xe6"),
+"up": SubResource("Animation_kg142")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gly1d"]
+animation = &"up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a37cc"]
+animation = &"down"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_rt8tf"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_gly1d")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_a37cc")
+blend_point_1/pos = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b2fgc"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -722,15 +852,38 @@ libraries = {
 
 [node name="Booth_03" type="Node3D" parent="."]
 
-[node name="Button" parent="Booth_03" instance=ExtResource("12_3i20f")]
+[node name="HoldableButton" parent="Booth_03" node_paths=PackedStringArray("interact_targets") instance=ExtResource("27_alees")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 3)
+interact_targets = [NodePath("../CSGBox3D")]
 
-[node name="SimpleInteraction" parent="Booth_03/Button" index="4"]
-interaction_text = "Hold"
+[node name="SpotLight3D" type="SpotLight3D" parent="Booth_03"]
+transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 6, 3)
+light_energy = 8.0
+light_volumetric_fog_energy = 10.0
+spot_range = 8.0
+spot_angle = 20.06
+spot_angle_attenuation = 1.36604
+script = ExtResource("28_2h4l3")
 
-[node name="InteractionHoldTimer" type="Timer" parent="Booth_03/Button/SimpleInteraction" index="0"]
-wait_time = 2.0
-script = ExtResource("27_semc6")
+[node name="CSGBox3D" type="CSGBox3D" parent="Booth_03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.55, 3)
+material_override = ExtResource("13_rrsfr")
+size = Vector3(1.5, 1.5, 1.5)
+script = ExtResource("28_2h4l3")
+
+[node name="AnimationTree" type="AnimationTree" parent="Booth_03/CSGBox3D"]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_utqfw")
+}
+tree_root = SubResource("AnimationNodeBlendSpace1D_rt8tf")
+anim_player = NodePath("AnimationPlayer")
+parameters/blend_position = 0.00273967
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Booth_03/CSGBox3D/AnimationTree"]
+libraries = {
+"": SubResource("AnimationLibrary_utqfw")
+}
 
 [node name="Bench_01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -11)
@@ -773,7 +926,4 @@ value = "Multiple Interactions"
 script = ExtResource("25_d8pei")
 value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut rutrum justo, nec ultricies urna. In elit dolor, fringilla sit."
 
-[connection signal="timeout" from="Booth_03/Button/SimpleInteraction/InteractionHoldTimer" to="Booth_03/Button/SimpleInteraction/InteractionHoldTimer" method="_on_timeout"]
-
 [editable path="Booth_01/Button"]
-[editable path="Booth_03/Button"]

@@ -16,10 +16,10 @@ corner_radius_bottom_left = 1
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tr6vp"]
 
 [node name="InteractionPrompt" type="Control" node_paths=PackedStringArray("data_holder", "input_key", "interaction_name")]
-custom_minimum_size = Vector2(0, 24)
+custom_minimum_size = Vector2(150, 24)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 192.0
+offset_right = 150.0
 offset_bottom = 24.0
 script = ExtResource("1_wtu1a")
 data_holder = NodePath("DataHolder")
@@ -27,11 +27,12 @@ input_key = NodePath("HBoxContainer/InputKey")
 interaction_name = NodePath("HBoxContainer/InteractionName")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 24)
+custom_minimum_size = Vector2(120, 24)
 layout_mode = 0
+offset_right = 148.0
+offset_bottom = 24.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-alignment = 1
 
 [node name="InputKey" type="RichTextLabel" parent="HBoxContainer"]
 custom_minimum_size = Vector2(24, 0)
@@ -42,7 +43,7 @@ fit_content = true
 scroll_active = false
 
 [node name="InteractionName" type="RichTextLabel" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "Interact"
@@ -50,7 +51,6 @@ fit_content = true
 scroll_active = false
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -68,7 +68,6 @@ show_percentage = false
 script = ExtResource("2_r26yv")
 
 [node name="ProgressPercentage" type="ProgressBar" parent="."]
-visible = false
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 1
 anchors_preset = 11
