@@ -955,7 +955,7 @@ value = "Multiple Interactions"
 
 [node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractions"]
 script = ExtResource("25_d8pei")
-value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut rutrum justo, nec ultricies urna. In elit dolor, fringilla sit."
+value = "A interactable world object with multiple choices of actions."
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
