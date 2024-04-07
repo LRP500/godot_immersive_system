@@ -10,7 +10,7 @@ signal interrupted
 @export var input_map_action: String = "interact"
 
 var parent: Node3D
-var timer: InteractionHoldTimer
+var timer: InteractionTimer
 var interactor: Interactor
 
 func _enter_tree() -> void:
@@ -46,7 +46,7 @@ func interact(_interactor: Interactor) -> void:
        callable.call(interactor)
 
 func _init_timer() -> void:
-    timer = find_child("InteractionHoldTimer", false, false)
+    timer = find_child("InteractionTimer", false, false)
     if timer:
        timer.timeout.connect(_on_timer_finished)
 

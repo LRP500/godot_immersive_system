@@ -1,5 +1,5 @@
 extends Timer
-class_name InteractionHoldTimer
+class_name InteractionTimer
 
 @export var reset_on_release: bool = true
 
