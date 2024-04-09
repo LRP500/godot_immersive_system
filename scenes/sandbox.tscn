@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_DebugUI.gd" id="3_568rw"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Controls.gd" id="4_4epdy"]
-[ext_resource type="Resource" uid="uid://0ew2lp10bgo5" path="res://Resources/pawn_parameters.tres" id="5_jp1iy"]
+[ext_resource type="Resource" uid="uid://0ew2lp10bgo5" path="res://resources/pawn_parameters.tres" id="5_jp1iy"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_View.gd" id="6_nqm7q"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Move.gd" id="7_2en5o"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Body.gd" id="8_b0jjw"]
