@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=62 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Move.gd" id="7_2en5o"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Body.gd" id="8_b0jjw"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Camera.gd" id="9_5mrsi"]
-[ext_resource type="Script" path="res://scripts/interactor_camera_proxy.gd" id="10_152eq"]
+[ext_resource type="Script" path="res://scripts/camera_proxy.gd" id="10_152eq"]
 [ext_resource type="Script" path="res://scripts/interactor.gd" id="11_aj3k7"]
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://scenes/prefabs/button.tscn" id="12_3i20f"]
 [ext_resource type="Script" path="res://scripts/interface/interaction_interface.gd" id="12_aurvb"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" path="res://scripts/examples/booth_03_cube.gd" id="28_2h4l3"]
 [ext_resource type="Script" path="res://scripts/examples/booth_03_light.gd" id="28_231x4"]
 [ext_resource type="Script" path="res://scripts/components/interactables/interactable.gd" id="29_uek3g"]
+[ext_resource type="Script" path="res://scripts/components/interactions/equip_interaction.gd" id="33_bh1q8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -646,18 +647,20 @@ editor_description = "
 [node name="Camera" type="Camera3D" parent="Pawn/Interpolated Camera/Arm/Arm Anchor"]
 near = 0.001
 
-[node name="InteractorCameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+[node name="CameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 1.711, -8.262)
 script = ExtResource("10_152eq")
 target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
 
-[node name="Interactor" type="Node3D" parent="InteractorCameraProxy"]
+[node name="Interactor" type="Node3D" parent="CameraProxy"]
 script = ExtResource("11_aj3k7")
 
-[node name="RayCast3D" type="RayCast3D" parent="InteractorCameraProxy/Interactor"]
+[node name="RayCast3D" type="RayCast3D" parent="CameraProxy/Interactor"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -5)
 collision_mask = 2
+
+[node name="ItemHolder" type="Node3D" parent="CameraProxy"]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -861,6 +864,7 @@ interact_targets = [NodePath("../CSGBox3D"), NodePath("../SpotLight3D (Top)"), N
 
 [node name="InteractionHoldTimer" parent="Booth_03/HoldableButton/Interaction" index="0"]
 wait_time = 3.0
+reset_on_release = false
 
 [node name="DisplayDescription" type="Node" parent="Booth_03/HoldableButton"]
 script = ExtResource("25_d8pei")
@@ -923,61 +927,63 @@ material_override = ExtResource("1_pw4l6")
 use_collision = true
 size = Vector3(8, 1, 1)
 
-[node name="MultiInteractions" type="RigidBody3D" parent="Bench_01"]
+[node name="MultiInteractionItem" type="RigidBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.25, 0)
 collision_layer = 2
 custom_integrator = true
 script = ExtResource("29_uek3g")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/MultiInteractions"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/MultiInteractionItem"]
 shape = SubResource("BoxShape3D_b2fgc")
 
-[node name="CSGBox" type="CSGBox3D" parent="Bench_01/MultiInteractions"]
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/MultiInteractionItem"]
 material_override = ExtResource("19_o6653")
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Interaction" type="Node3D" parent="Bench_01/MultiInteractions"]
+[node name="Interaction" type="Node3D" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_1uj6u")
+interaction_text = "Option 1"
 
-[node name="Interaction2" type="Node3D" parent="Bench_01/MultiInteractions"]
+[node name="Interaction2" type="Node3D" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_1uj6u")
 interaction_text = "Option 2"
 
-[node name="Interaction3" type="Node3D" parent="Bench_01/MultiInteractions"]
+[node name="Interaction3" type="Node3D" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_1uj6u")
 interaction_text = "Option 3"
 
-[node name="DisplayName" type="Node" parent="Bench_01/MultiInteractions"]
+[node name="DisplayName" type="Node" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("23_ieyca")
-value = "Multiple Interactions"
+value = "Multiple Interaction Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractions"]
+[node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_d8pei")
 value = "A interactable world object with multiple choices of actions."
 
-[node name="Equippable" type="RigidBody3D" parent="Bench_01"]
+[node name="EquippableItem" type="RigidBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, 0)
 collision_layer = 2
 custom_integrator = true
 script = ExtResource("29_uek3g")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/Equippable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/EquippableItem"]
 shape = SubResource("BoxShape3D_b2fgc")
 
-[node name="CSGBox" type="CSGBox3D" parent="Bench_01/Equippable"]
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/EquippableItem"]
 material_override = ExtResource("19_o6653")
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Interaction" type="Node3D" parent="Bench_01/Equippable"]
-script = ExtResource("25_1uj6u")
-interaction_text = "Equip"
+[node name="EquipInteraction" type="Node3D" parent="Bench_01/EquippableItem"]
+script = ExtResource("33_bh1q8")
+interaction_text = "Grab"
 
-[node name="DisplayName" type="Node" parent="Bench_01/Equippable"]
+[node name="DisplayName" type="Node" parent="Bench_01/EquippableItem"]
 script = ExtResource("23_ieyca")
-value = "Equippable Item"
+value = "Equipable Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/Equippable"]
+[node name="DisplayDescription" type="Node" parent="Bench_01/EquippableItem"]
 script = ExtResource("25_d8pei")
+value = "An item that can be picked up and carried around."
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
