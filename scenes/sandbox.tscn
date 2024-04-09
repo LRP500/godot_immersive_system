@@ -1,7 +1,8 @@
-[gd_scene load_steps=57 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=60 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="2_mus01"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_DebugUI.gd" id="3_568rw"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Controls.gd" id="4_4epdy"]
 [ext_resource type="Resource" uid="uid://0ew2lp10bgo5" path="res://resources/pawn_parameters.tres" id="5_jp1iy"]
@@ -13,8 +14,10 @@
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactor.gd" id="11_aj3k7"]
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://modules/interaction/extras/interactables/button.tscn" id="12_3i20f"]
 [ext_resource type="PackedScene" uid="uid://bkhw1ioaujkxq" path="res://modules/interaction/extras/interface/interaction_interface.tscn" id="12_one47"]
+[ext_resource type="Script" path="res://modules/inventory/scripts/inventory.gd" id="13_hbsb7"]
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/bounce_interactable.gd" id="14_5ajwv"]
+[ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://modules/inventory/extras/door_key.tres" id="14_63ecf"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
 [ext_resource type="Script" path="res://scripts/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/textures/prototype/prototype_purple.material" id="19_o6653"]
@@ -441,13 +444,16 @@ material_override = ExtResource("1_pw4l6")
 use_collision = true
 size = Vector3(1, 7, 23)
 
-[node name="Pawn" type="Node3D" parent="." node_paths=PackedStringArray("View", "Camera")]
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_mus01")
+
+[node name="Pawn" type="Node3D" parent="Player" node_paths=PackedStringArray("View", "Camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 1, -8.262)
 script = ExtResource("2_0ikeh")
 View = NodePath("View Control")
 Camera = NodePath("Interpolated Camera")
 
-[node name="Debug UI" type="Control" parent="Pawn" node_paths=PackedStringArray("Controls", "View", "Body", "GameInfo", "ControlsInfo", "ViewInfo", "BodyInfo")]
+[node name="Debug UI" type="Control" parent="Player/Pawn" node_paths=PackedStringArray("Controls", "View", "Body", "GameInfo", "ControlsInfo", "ViewInfo", "BodyInfo")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -466,21 +472,21 @@ ControlsInfo = NodePath("Controls/Info")
 ViewInfo = NodePath("View Control/Info")
 BodyInfo = NodePath("Body/Info")
 
-[node name="Game" type="Control" parent="Pawn/Debug UI"]
+[node name="Game" type="Control" parent="Player/Pawn/Debug UI"]
 anchors_preset = 0
 offset_left = 8.0
 offset_right = 48.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Pawn/Debug UI/Game"]
+[node name="Title" type="Label" parent="Player/Pawn/Debug UI/Game"]
 layout_mode = 2
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 20
 text = "Game"
 
-[node name="Info" type="Label" parent="Pawn/Debug UI/Game"]
+[node name="Info" type="Label" parent="Player/Pawn/Debug UI/Game"]
 layout_mode = 2
 offset_top = 28.0
 offset_right = 129.0
@@ -490,7 +496,7 @@ text = "Rendering FPS: #
 Physics Tick Rate: #
 Physics Frame Time: #"
 
-[node name="Controls" type="Control" parent="Pawn/Debug UI"]
+[node name="Controls" type="Control" parent="Player/Pawn/Debug UI"]
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 95.0
@@ -498,12 +504,12 @@ offset_right = 48.0
 offset_bottom = 135.0
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Pawn/Debug UI/Controls"]
+[node name="Title" type="Label" parent="Player/Pawn/Debug UI/Controls"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Controls"
 
-[node name="Info" type="Label" parent="Pawn/Debug UI/Controls"]
+[node name="Info" type="Label" parent="Player/Pawn/Debug UI/Controls"]
 layout_mode = 0
 offset_top = 28.0
 offset_right = 135.0
@@ -515,7 +521,7 @@ Wish Speed: #
 Jump Pressed: ?
 Duck Pressed: ?"
 
-[node name="View Control" type="Control" parent="Pawn/Debug UI"]
+[node name="View Control" type="Control" parent="Player/Pawn/Debug UI"]
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 232.0
@@ -523,12 +529,12 @@ offset_right = 48.0
 offset_bottom = 272.0
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Pawn/Debug UI/View Control"]
+[node name="Title" type="Label" parent="Player/Pawn/Debug UI/View Control"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "View Control"
 
-[node name="Info" type="Label" parent="Pawn/Debug UI/View Control"]
+[node name="Info" type="Label" parent="Player/Pawn/Debug UI/View Control"]
 layout_mode = 0
 offset_top = 28.0
 offset_right = 114.0
@@ -537,7 +543,7 @@ theme_override_font_sizes/font_size = 12
 text = "View Angles: (#, #, #)
 View Offset: #"
 
-[node name="Body" type="Control" parent="Pawn/Debug UI"]
+[node name="Body" type="Control" parent="Player/Pawn/Debug UI"]
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 309.0
@@ -545,13 +551,13 @@ offset_right = 48.0
 offset_bottom = 349.0
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Pawn/Debug UI/Body"]
+[node name="Title" type="Label" parent="Player/Pawn/Debug UI/Body"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Body
 "
 
-[node name="Info" type="Label" parent="Pawn/Debug UI/Body"]
+[node name="Info" type="Label" parent="Player/Pawn/Debug UI/Body"]
 layout_mode = 0
 offset_top = 28.0
 offset_right = 59.0
@@ -562,7 +568,7 @@ Speed: # m/s (# u/s)
 Ducking: ?
 Ducked: ?"
 
-[node name="Attribution" type="RichTextLabel" parent="Pawn/Debug UI"]
+[node name="Attribution" type="RichTextLabel" parent="Player/Pawn/Debug UI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -579,14 +585,14 @@ Copyright (c) 2024 ratmarrow
 "
 fit_content = true
 
-[node name="User Input" type="Node" parent="Pawn" node_paths=PackedStringArray("Body", "Move", "View")]
+[node name="User Input" type="Node" parent="Player/Pawn" node_paths=PackedStringArray("Body", "Move", "View")]
 script = ExtResource("4_4epdy")
 Parameters = ExtResource("5_jp1iy")
 Body = NodePath("../Body")
 Move = NodePath("../Move Functions")
 View = NodePath("../View Control")
 
-[node name="View Control" type="Node" parent="Pawn" node_paths=PackedStringArray("Body", "horizontal_view", "vertical_view", "camera_mount")]
+[node name="View Control" type="Node" parent="Player/Pawn" node_paths=PackedStringArray("Body", "horizontal_view", "vertical_view", "camera_mount")]
 script = ExtResource("6_nqm7q")
 Parameters = ExtResource("5_jp1iy")
 Body = NodePath("../Body")
@@ -594,12 +600,12 @@ horizontal_view = NodePath("../Body/Horizontal View")
 vertical_view = NodePath("../Body/Horizontal View/Vertical View")
 camera_mount = NodePath("../Body/Horizontal View/Vertical View/Camera Mount")
 
-[node name="Move Functions" type="Node" parent="Pawn" node_paths=PackedStringArray("Body")]
+[node name="Move Functions" type="Node" parent="Player/Pawn" node_paths=PackedStringArray("Body")]
 script = ExtResource("7_2en5o")
 Parameters = ExtResource("5_jp1iy")
 Body = NodePath("../Body")
 
-[node name="Body" type="CharacterBody3D" parent="Pawn" node_paths=PackedStringArray("View", "collision_hull", "duck_timer")]
+[node name="Body" type="CharacterBody3D" parent="Player/Pawn" node_paths=PackedStringArray("View", "collision_hull", "duck_timer")]
 collision_layer = 2
 floor_constant_speed = true
 script = ExtResource("8_b0jjw")
@@ -608,20 +614,20 @@ View = NodePath("../View Control")
 collision_hull = NodePath("Collision Hull")
 duck_timer = NodePath("Duck Timer")
 
-[node name="Collision Hull" type="CollisionShape3D" parent="Pawn/Body"]
+[node name="Collision Hull" type="CollisionShape3D" parent="Player/Pawn/Body"]
 shape = SubResource("BoxShape3D_j7pn1")
 
-[node name="Duck Timer" type="Timer" parent="Pawn/Body"]
+[node name="Duck Timer" type="Timer" parent="Player/Pawn/Body"]
 
-[node name="Horizontal View" type="Node3D" parent="Pawn/Body"]
+[node name="Horizontal View" type="Node3D" parent="Player/Pawn/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
 
-[node name="Vertical View" type="Node3D" parent="Pawn/Body/Horizontal View"]
+[node name="Vertical View" type="Node3D" parent="Player/Pawn/Body/Horizontal View"]
 
-[node name="Camera Mount" type="Marker3D" parent="Pawn/Body/Horizontal View/Vertical View"]
+[node name="Camera Mount" type="Marker3D" parent="Player/Pawn/Body/Horizontal View/Vertical View"]
 gizmo_extents = 0.5
 
-[node name="Interpolated Camera" type="Node3D" parent="Pawn" node_paths=PackedStringArray("target", "camera_arm", "camera_anchor", "camera")]
+[node name="Interpolated Camera" type="Node3D" parent="Player/Pawn" node_paths=PackedStringArray("target", "camera_arm", "camera_anchor", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
 script = ExtResource("9_5mrsi")
 Parameters = ExtResource("5_jp1iy")
@@ -630,32 +636,36 @@ camera_arm = NodePath("Arm")
 camera_anchor = NodePath("Arm/Arm Anchor")
 camera = NodePath("Arm/Arm Anchor/Camera")
 
-[node name="Arm" type="SpringArm3D" parent="Pawn/Interpolated Camera"]
+[node name="Arm" type="SpringArm3D" parent="Player/Pawn/Interpolated Camera"]
 shape = SubResource("SphereShape3D_u4rs7")
 spring_length = 0.0
 margin = 0.1
 
-[node name="Arm Anchor" type="Node3D" parent="Pawn/Interpolated Camera/Arm"]
+[node name="Arm Anchor" type="Node3D" parent="Player/Pawn/Interpolated Camera/Arm"]
 editor_description = "
 "
 
-[node name="Camera" type="Camera3D" parent="Pawn/Interpolated Camera/Arm/Arm Anchor"]
+[node name="Camera" type="Camera3D" parent="Player/Pawn/Interpolated Camera/Arm/Arm Anchor"]
 near = 0.001
 
-[node name="CameraProxy" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+[node name="CameraProxy" type="Node3D" parent="Player" node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 1.711, -8.262)
 script = ExtResource("10_152eq")
 target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
 
-[node name="Interactor" type="Node3D" parent="CameraProxy"]
+[node name="Interactor" type="Node3D" parent="Player/CameraProxy"]
 script = ExtResource("11_aj3k7")
 
-[node name="RayCast3D" type="RayCast3D" parent="CameraProxy/Interactor"]
+[node name="RayCast3D" type="RayCast3D" parent="Player/CameraProxy/Interactor"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -5)
 collision_mask = 2
 
-[node name="ItemHolder" type="Node3D" parent="CameraProxy"]
+[node name="ItemHolder" type="Node3D" parent="Player/CameraProxy"]
+
+[node name="Inventory" type="Node" parent="Player"]
+script = ExtResource("13_hbsb7")
+initial_items = Array[Resource("res://modules/inventory/scripts/inventory_item_model.gd")]([ExtResource("14_63ecf")])
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
