@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-InteractionSystem="*res://scripts/interaction_system.gd"
+InteractionModule="*res://modules/interaction/scripts/interaction_module.gd"
 
 [debug]
 
@@ -40,8 +40,9 @@ enabled=PackedStringArray("res://addons/GoldGdt/plugin.cfg")
 folder_colors={
 "res://Resources/": "purple",
 "res://assets/": "teal",
-"res://scenes/": "orange",
-"res://scripts/": "blue"
+"res://modules/": "orange",
+"res://resources/": "purple",
+"res://scenes/": "blue"
 }
 
 [input]

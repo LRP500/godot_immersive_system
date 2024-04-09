@@ -4,8 +4,8 @@ class_name InteractableDescriptionView
 @export var format: String = "[i]%s[/i]"
 
 func _ready() -> void:
-	InteractionSystem.interactor.target_entered.connect(_on_target_entered)
-	InteractionSystem.interactor.target_exited.connect(_on_target_exited)
+	InteractionModule.interactor.target_entered.connect(_on_target_entered)
+	InteractionModule.interactor.target_exited.connect(_on_target_exited)
 	_clear()
 
 func _on_target_entered(target: Node3D, _interactions: Array[Interaction]) -> void:

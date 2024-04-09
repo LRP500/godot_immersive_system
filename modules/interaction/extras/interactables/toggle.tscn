@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dhc2u74fc70cj"]
 
-[ext_resource type="Script" path="res://scripts/components/interactables/toggle_interactable.gd" id="1_tls76"]
+[ext_resource type="Script" path="res://modules/interaction/extras/interactables/toggle_interactable.gd" id="1_tls76"]
 [ext_resource type="Script" path="res://scripts/components/interactions/simple_interaction.gd" id="2_8gxhy"]
 [ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="2_s4nbe"]
 [ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="3_a5ntm"]

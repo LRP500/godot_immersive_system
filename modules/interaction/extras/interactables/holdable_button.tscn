@@ -1,18 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://45av3t6tvv3n"]
+[gd_scene load_steps=12 format=3 uid="uid://cxksiy8i2qrfq"]
 
-[ext_resource type="Script" path="res://scripts/components/interactables/button_interactable.gd" id="1_xu5sr"]
-[ext_resource type="Script" path="res://scripts/components/interactions/interaction.gd" id="2_btj5p"]
+[ext_resource type="Script" path="res://modules/interaction/extras/interactables/holdable_button_interactable.gd" id="1_div3i"]
+[ext_resource type="Script" path="res://modules/interaction/scripts/interactions/interaction.gd" id="2_xb2hi"]
+[ext_resource type="Script" path="res://modules/interaction/scripts/interaction_hold_timer.gd" id="3_eu5og"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj0nd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orti0"]
 albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qayw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nka7"]
 albedo_color = Color(0.580392, 0, 0, 1)
 emission_enabled = true
 emission = Color(0.580392, 0, 0, 1)
 emission_energy_multiplier = 0.5
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ty6is"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_bksxp"]
 radius = 0.2
 
 [sub_resource type="Animation" id="Animation_8ndvo"]
@@ -83,26 +84,26 @@ _data = {
 "switch_on": SubResource("Animation_io2eu")
 }
 
-[node name="Button" type="StaticBody3D"]
+[node name="HoldableButton" type="StaticBody3D"]
 collision_layer = 2
-script = ExtResource("1_xu5sr")
+script = ExtResource("1_div3i")
 
 [node name="ButtonBase" type="CSGCylinder3D" parent="."]
-material_override = SubResource("StandardMaterial3D_lj0nd")
+material_override = SubResource("StandardMaterial3D_orti0")
 radius = 0.2
 height = 0.15
 sides = 16
 
 [node name="ButtonAnimatable" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0500941, 0)
-material_override = SubResource("StandardMaterial3D_8qayw")
+material_override = SubResource("StandardMaterial3D_2nka7")
 radius = 0.16
 radial_segments = 16
 rings = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0362409, 0)
-shape = SubResource("SphereShape3D_ty6is")
+shape = SubResource("SphereShape3D_bksxp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -110,5 +111,9 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="SimpleInteraction" type="Node3D" parent="."]
-script = ExtResource("2_btj5p")
+[node name="Interaction" type="Node3D" parent="."]
+script = ExtResource("2_xb2hi")
+interaction_text = "Hold"
+
+[node name="InteractionHoldTimer" type="Timer" parent="Interaction"]
+script = ExtResource("3_eu5og")

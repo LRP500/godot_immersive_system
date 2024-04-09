@@ -11,7 +11,7 @@ var target_interactions: Array[Interaction]
 var active_interaction: Interaction
 
 func _ready() -> void:
-    InteractionSystem.register(self)
+    InteractionModule.register(self)
 
 func _process(_delta: float) -> void:
     find_target()

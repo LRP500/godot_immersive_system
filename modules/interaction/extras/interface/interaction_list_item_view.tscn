@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cg5qiodeah552"]
 
-[ext_resource type="Script" path="res://scripts/interface/interaction_list_item_view.gd" id="1_wtu1a"]
-[ext_resource type="Script" path="res://scripts/interface/interaction_progress_bar_view.gd" id="2_r26yv"]
-[ext_resource type="Script" path="res://scripts/utils/data_holder.gd" id="4_rs0s1"]
+[ext_resource type="Script" path="res://modules/interaction/extras/interface/interaction_list_item_view.gd" id="1_wtu1a"]
+[ext_resource type="Script" path="res://modules/interaction/extras/interface/interaction_progress_bar_view.gd" id="2_r26yv"]
+[ext_resource type="Script" path="res://modules/common/data_holder.gd" id="4_rs0s1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h63dt"]
 
