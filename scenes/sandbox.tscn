@@ -1,6 +1,6 @@
 [gd_scene load_steps=60 format=3 uid="uid://qhgslmcrqbo8"]
 
-[ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/textures/prototype/prototype_grey.material" id="1_pw4l6"]
+[ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="2_mus01"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_DebugUI.gd" id="3_568rw"]
@@ -11,16 +11,16 @@
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Body.gd" id="8_b0jjw"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Camera.gd" id="9_5mrsi"]
 [ext_resource type="Script" path="res://modules/common/camera_proxy.gd" id="10_152eq"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactor.gd" id="11_aj3k7"]
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://modules/interaction/extras/interactables/button.tscn" id="12_3i20f"]
+[ext_resource type="PackedScene" uid="uid://gjnc46e66ldo" path="res://modules/interaction/extras/interactor.tscn" id="12_g1f5j"]
 [ext_resource type="PackedScene" uid="uid://bkhw1ioaujkxq" path="res://modules/interaction/extras/interface/interaction_interface.tscn" id="12_one47"]
 [ext_resource type="Script" path="res://modules/inventory/scripts/inventory.gd" id="13_hbsb7"]
-[ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/textures/prototype/prototype_orange.material" id="13_rrsfr"]
+[ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/materials/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://modules/inventory/extras/door_key.tres" id="14_63ecf"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
 [ext_resource type="Script" path="res://scripts/toggle_animation.gd" id="16_7fp7p"]
-[ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/textures/prototype/prototype_purple.material" id="19_o6653"]
+[ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/materials/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/toggle_interactable.gd" id="22_aeymx"]
 [ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="23_02s6c"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/components/display_name.gd" id="23_ieyca"]
@@ -653,15 +653,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 1.711, -8.262)
 script = ExtResource("10_152eq")
 target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
 
-[node name="Interactor" type="Node3D" parent="Player/CameraProxy"]
-script = ExtResource("11_aj3k7")
-
-[node name="RayCast3D" type="RayCast3D" parent="Player/CameraProxy/Interactor"]
-unique_name_in_owner = true
-target_position = Vector3(0, 0, -5)
-collision_mask = 2
-
-[node name="ItemHolder" type="Node3D" parent="Player/CameraProxy"]
+[node name="Interactor" parent="Player/CameraProxy" instance=ExtResource("12_g1f5j")]
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("13_hbsb7")
