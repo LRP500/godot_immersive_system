@@ -5,19 +5,7 @@ class_name InteractorItemHolder
 @export var can_drop: bool = true
 @export var drop_delay: float = 0.1
 
-var item: Node3D: set = _set_item
-
-func _ready() -> void:
-    # drop_interaction.process_mode = Node.PROCESS_MODE_DISABLED
-    pass
-
-func _set_item(new_item: Node3D) -> void:
-    item = new_item
-    if !item:
-       return
-    # if can_drop:
-    #    drop_interaction.process_mode = Node.PROCESS_MODE_ALWAYS
-    # item.on_pick_up()
+var item: Node3D
 
 func _process(_delta: float) -> void:
     if !item:
@@ -26,19 +14,19 @@ func _process(_delta: float) -> void:
     item.rotation = global_rotation
 
 func drop(interactor: Interactor) -> void:
-    # drop_interaction.process_mode = Node.PROCESS_MODE_DISABLED
-    # item.on_drop()
     interactor.pop(drop_interaction)
+    var drop_method := Callable(item, "on_drop")
+    if drop_method.is_valid():
+        drop_method.call()
     item.top_level = false
-    if item is RigidBody3D:
-        item.custom_integrator = false
     item = null
 
 func attach(interactor: Interactor, _item: Node3D) -> void:
     item = _item
     item.top_level = true
-    if item is RigidBody3D:
-        item.custom_integrator = true
+    var grab_method := Callable(item, "on_grab")
+    if grab_method.is_valid():
+        grab_method.call()
     if can_drop:
         await get_tree().create_timer(drop_delay).timeout
         interactor.push(drop_interaction)

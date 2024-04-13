@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://modules/interaction/extras/interactables/holdable_button.tscn" id="27_alees"]
 [ext_resource type="Script" path="res://scripts/booth_03_cube.gd" id="28_2h4l3"]
 [ext_resource type="Script" path="res://scripts/booth_03_light.gd" id="28_231x4"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactable.gd" id="29_uek3g"]
+[ext_resource type="Script" path="res://modules/interaction/scripts/rigidbody_item.gd" id="31_ev36k"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactions/carry_interaction.gd" id="32_ldk1h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
@@ -874,7 +874,6 @@ size = Vector3(8, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.25, 0)
 collision_layer = 2
 custom_integrator = true
-script = ExtResource("29_uek3g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/MultiInteractionItem"]
 shape = SubResource("BoxShape3D_b2fgc")
@@ -906,7 +905,7 @@ value = "A interactable world object with multiple choices of actions."
 [node name="CarryableItem" type="RigidBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, 0)
 collision_layer = 2
-script = ExtResource("29_uek3g")
+script = ExtResource("31_ev36k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/CarryableItem"]
 shape = SubResource("BoxShape3D_jpsgv")
