@@ -17,7 +17,8 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.5, -0.5)
 script = ExtResource("2_ftbiq")
 drop_interaction = NodePath("DropInteraction")
-drop_delay = 0.0
+rotate_speed = 1.5
+move_speed = 3.0
 
 [node name="DropInteraction" type="Node3D" parent="ItemHolder"]
 script = ExtResource("3_yj6q1")
