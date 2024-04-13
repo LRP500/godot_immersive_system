@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=62 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://scripts/booth_03_cube.gd" id="28_2h4l3"]
 [ext_resource type="Script" path="res://scripts/booth_03_light.gd" id="28_231x4"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactable.gd" id="29_uek3g"]
+[ext_resource type="Script" path="res://modules/interaction/scripts/interactions/carry_interaction.gd" id="32_ldk1h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -322,6 +323,9 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_a37cc")
 blend_point_1/pos = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b2fgc"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpsgv"]
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Sandbox" type="Node3D"]
@@ -651,9 +655,12 @@ near = 0.001
 [node name="CameraProxy" type="Node3D" parent="Player" node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 1.711, -8.262)
 script = ExtResource("10_152eq")
-target = NodePath("../Pawn/Body/Horizontal View/Vertical View/Camera Mount")
+target = NodePath("../Pawn/Interpolated Camera/Arm/Arm Anchor/Camera")
 
 [node name="Interactor" parent="Player/CameraProxy" instance=ExtResource("12_g1f5j")]
+
+[node name="ItemHolder" parent="Player/CameraProxy/Interactor" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.5, -0.75)
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("13_hbsb7")
@@ -899,5 +906,28 @@ value = "Multiple Interaction Item"
 script = ExtResource("25_d8pei")
 value = "A interactable world object with multiple choices of actions."
 
+[node name="CarryableItem" type="RigidBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, 0)
+collision_layer = 2
+script = ExtResource("29_uek3g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/CarryableItem"]
+shape = SubResource("BoxShape3D_jpsgv")
+
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/CarryableItem"]
+material_override = ExtResource("19_o6653")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Carryable" type="Node3D" parent="Bench_01/CarryableItem"]
+script = ExtResource("32_ldk1h")
+interaction_text = "Carry"
+
+[node name="DisplayName" type="Node" parent="Bench_01/CarryableItem"]
+script = ExtResource("23_ieyca")
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/CarryableItem"]
+script = ExtResource("25_d8pei")
+
+[editable path="Player/CameraProxy/Interactor"]
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]

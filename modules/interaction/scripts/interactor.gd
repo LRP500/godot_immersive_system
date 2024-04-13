@@ -5,6 +5,7 @@ signal target_entered(target: Node3D, interactions: Array[Interaction])
 signal target_exited
 
 @onready var raycast: RayCast3D = $RayCast3D
+@onready var item_holder: InteractorItemHolder = %ItemHolder
 
 var target: Node3D
 var target_interactions: Array[Interaction]

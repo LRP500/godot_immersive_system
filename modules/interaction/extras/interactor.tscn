@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://gjnc46e66ldo"]
+
+[ext_resource type="Script" path="res://modules/interaction/scripts/interactor.gd" id="1_pkawo"]
+[ext_resource type="Script" path="res://modules/interaction/scripts/interactor_item_holder.gd" id="2_ftbiq"]
+
+[node name="Interactor" type="Node3D"]
+script = ExtResource("1_pkawo")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -5)
+collision_mask = 2
+
+[node name="ItemHolder" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ftbiq")
