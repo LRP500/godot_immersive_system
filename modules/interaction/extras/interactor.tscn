@@ -9,7 +9,7 @@ script = ExtResource("1_pkawo")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -5)
+target_position = Vector3(0, 0, -3)
 collision_mask = 2
 
 [node name="ItemHolder" type="Node3D" parent="." node_paths=PackedStringArray("drop_interaction")]
@@ -17,7 +17,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.5, -0.5)
 script = ExtResource("2_ftbiq")
 drop_interaction = NodePath("DropInteraction")
-rotate_speed = 1.5
+drop_delay = 0.01
 move_speed = 3.0
 
 [node name="DropInteraction" type="Node3D" parent="ItemHolder"]

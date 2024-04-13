@@ -346,7 +346,7 @@ shadow_enabled = true
 [node name="SpotLight3D" type="SpotLight3D" parent="Environment/Level/Lights"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5, 7, 5)
 light_energy = 10.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.2
 shadow_enabled = true
 spot_range = 14.0
 spot_angle = 72.14
@@ -355,7 +355,7 @@ spot_angle_attenuation = 2.2974
 [node name="SpotLight3D2" type="SpotLight3D" parent="Environment/Level/Lights"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5, 7, -5)
 light_energy = 10.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.2
 shadow_enabled = true
 spot_range = 14.0
 spot_angle = 72.14
@@ -364,7 +364,7 @@ spot_angle_attenuation = 2.2974
 [node name="SpotLight3D3" type="SpotLight3D" parent="Environment/Level/Lights"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5, 7, 5)
 light_energy = 10.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.2
 shadow_enabled = true
 spot_range = 14.0
 spot_angle = 72.14
@@ -373,7 +373,7 @@ spot_angle_attenuation = 2.2974
 [node name="SpotLight3D4" type="SpotLight3D" parent="Environment/Level/Lights"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5, 7, -5)
 light_energy = 10.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.2
 shadow_enabled = true
 spot_range = 14.0
 spot_angle = 72.14
@@ -382,7 +382,7 @@ spot_angle_attenuation = 2.2974
 [node name="SpotLight3D5" type="SpotLight3D" parent="Environment/Level/Lights"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
 light_energy = 10.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.2
 shadow_enabled = true
 spot_range = 14.0
 spot_angle = 72.14
