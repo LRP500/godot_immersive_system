@@ -15,42 +15,49 @@ signal updated(progress: float)
 var timer: InteractionHoldTimer
 var interactor: Interactor
 
-# func _enter_tree() -> void:
-#     parent = get_parent() as Interactable
-#     assert(parent, "Parent must be an Interactable")
+var interact_method: Callable
+var interact_start_method: Callable
+var interact_stop_method: Callable
+var interact_update_method: Callable
 
 func _ready() -> void:
     _init_timer()
+    interact_method = Callable(parent, "interact")
+    interact_start_method = Callable(parent, "interact_start")
+    interact_stop_method = Callable(parent, "interact_stop")
+    interact_update_method = Callable(parent, "interact_update")
 
 func _process(_delta: float) -> void:
     if !is_enabled || !interactor:
         return
     if timer:
         updated.emit(timer.get_progress_ratio())
-    parent.interact_update(interactor, self)
+    if interact_update_method.is_valid():
+        interact_update_method.call(interactor, self)
 
 func interact_start(_interactor: Interactor) -> void:
     self.interactor = _interactor
-    parent.interact_start(_interactor, self)
+    if interact_start_method.is_valid():
+        interact_start_method.call(_interactor, self)
     if timer:
         started.emit()
     else:
         interact(interactor)
 
 func interact_stop(_interactor: Interactor) -> void:
-    parent.interact_stop(_interactor, self)
+    if interact_stop_method.is_valid():
+        interact_stop_method.call(_interactor, self)
+    interactor = null
     if !timer:
         return
     elif !timer.is_stopped():
         interrupted.emit()
     else:
         completed.emit()
-    interactor = null
 
 func interact(_interactor: Interactor) -> void:
-    var callable := Callable(parent, "interact")
-    if callable.is_valid():
-        callable.call(interactor, self)
+    if interact_method.is_valid():
+        interact_method.call(interactor, self)
 
 func _init_timer() -> void:
     timer = find_child("InteractionHoldTimer", false, false)
