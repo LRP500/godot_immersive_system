@@ -22,12 +22,14 @@ func drop(interactor: Interactor) -> void:
     var drop_method := Callable(item, "on_drop")
     if drop_method.is_valid():
         drop_method.call()
+    interactor.is_raycasting = true
     item.top_level = false
     item = null
 
 func attach(interactor: Interactor, _item: Node3D) -> void:
     item = _item
     item.top_level = true
+    interactor.is_raycasting = false
     var grab_method := Callable(item, "on_grab")
     if grab_method.is_valid():
         grab_method.call()
