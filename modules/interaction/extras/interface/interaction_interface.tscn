@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkhw1ioaujkxq"]
+[gd_scene load_steps=7 format=3 uid="uid://bkhw1ioaujkxq"]
 
 [ext_resource type="Script" path="res://modules/interaction/extras/interface/interaction_interface.gd" id="1_c0qir"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interface/interactable_name_view.gd" id="2_t5h5v"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interface/interactable_description_view.gd" id="3_dd7jy"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interface/interaction_list_view.gd" id="4_7da3b"]
 [ext_resource type="PackedScene" uid="uid://cg5qiodeah552" path="res://modules/interaction/extras/interface/interaction_list_item_view.tscn" id="5_tvkg7"]
+[ext_resource type="Script" path="res://modules/interaction/extras/interface/interaction_override_list_view.gd" id="6_04gkx"]
 
 [node name="InteractionInterface" type="Control"]
 layout_mode = 3
@@ -63,9 +64,16 @@ script = ExtResource("4_7da3b")
 interaction_prompt_view = ExtResource("5_tvkg7")
 metadata/_edit_use_anchors_ = true
 
-[node name="InteractionListItemView (Example)" parent="InteractableView/InteractionListView" node_paths=PackedStringArray("data_holder", "input_key", "interaction_name") instance=ExtResource("5_tvkg7")]
+[node name="InteractionListItemView (Example)" parent="InteractableView/InteractionListView" instance=ExtResource("5_tvkg7")]
 process_mode = 4
 layout_mode = 2
-data_holder = NodePath("")
-input_key = NodePath("")
-interaction_name = NodePath("")
+
+[node name="InteractionOverrideListView" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 604.0
+offset_top = 391.0
+offset_right = 754.0
+offset_bottom = 415.0
+script = ExtResource("6_04gkx")
+interaction_prompt_view = ExtResource("5_tvkg7")
+metadata/_edit_use_anchors_ = true

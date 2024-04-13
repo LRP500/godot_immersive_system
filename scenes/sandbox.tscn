@@ -659,9 +659,6 @@ target = NodePath("../Pawn/Interpolated Camera/Arm/Arm Anchor/Camera")
 
 [node name="Interactor" parent="Player/CameraProxy" instance=ExtResource("12_g1f5j")]
 
-[node name="ItemHolder" parent="Player/CameraProxy/Interactor" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.5, -0.75)
-
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("13_hbsb7")
 initial_items = Array[Resource("res://modules/inventory/scripts/inventory_item_model.gd")]([ExtResource("14_63ecf")])
@@ -928,6 +925,5 @@ script = ExtResource("23_ieyca")
 [node name="DisplayDescription" type="Node" parent="Bench_01/CarryableItem"]
 script = ExtResource("25_d8pei")
 
-[editable path="Player/CameraProxy/Interactor"]
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]

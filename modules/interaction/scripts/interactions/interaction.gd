@@ -10,13 +10,14 @@ signal updated(progress: float)
 @export var interaction_text: String = "Interact"
 @export var input_map_action: String = "interact"
 
-var parent: Interactable
+@onready var parent: Node3D = get_parent()
+
 var timer: InteractionHoldTimer
 var interactor: Interactor
 
-func _enter_tree() -> void:
-    parent = get_parent() as Interactable
-    assert(parent, "Parent must be an Interactable")
+# func _enter_tree() -> void:
+#     parent = get_parent() as Interactable
+#     assert(parent, "Parent must be an Interactable")
 
 func _ready() -> void:
     _init_timer()
