@@ -1,6 +1,9 @@
 extends Node3D
 class_name InteractorItemHolder
 
+signal item_attached(item: Node3D)
+signal item_dropped
+
 @export var can_drop: bool = true
 @export var drop_interaction: Interaction
 @export var drop_delay: float = 0.1
@@ -21,7 +24,8 @@ func drop(interactor: Interactor) -> void:
     interactor.pop(drop_interaction)
     var drop_method := Callable(item, "on_drop")
     if drop_method.is_valid():
-        drop_method.call()
+        drop_method.call(interactor)
+    item_dropped.emit()
     interactor.is_raycasting = true
     item.top_level = false
     item = null
@@ -30,9 +34,10 @@ func attach(interactor: Interactor, _item: Node3D) -> void:
     item = _item
     item.top_level = true
     interactor.is_raycasting = false
+    item_attached.emit(item)
     var grab_method := Callable(item, "on_grab")
     if grab_method.is_valid():
-        grab_method.call()
+        grab_method.call(interactor)
     if can_drop:
         await get_tree().create_timer(drop_delay).timeout
         interactor.push(drop_interaction)

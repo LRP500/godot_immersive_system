@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=64 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -30,8 +30,9 @@
 [ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://modules/interaction/extras/interactables/holdable_button.tscn" id="27_alees"]
 [ext_resource type="Script" path="res://scripts/booth_03_cube.gd" id="28_2h4l3"]
 [ext_resource type="Script" path="res://scripts/booth_03_light.gd" id="28_231x4"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/rigidbody_item.gd" id="31_ev36k"]
+[ext_resource type="Script" path="res://modules/interaction/extras/items/rigidbody_item.gd" id="31_ev36k"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactions/carry_interaction.gd" id="32_ldk1h"]
+[ext_resource type="Script" path="res://modules/interaction/extras/items/static_item.gd" id="33_0dy1e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -325,7 +326,10 @@ blend_point_1/pos = 1.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_b2fgc"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jpsgv"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ylx47"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwndb"]
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Sandbox" type="Node3D"]
@@ -868,6 +872,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -11)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0)
 material_override = ExtResource("1_pw4l6")
 use_collision = true
+collision_layer = 5
 size = Vector3(8, 1, 1)
 
 [node name="MultiInteractionItem" type="RigidBody3D" parent="Bench_01"]
@@ -902,27 +907,57 @@ value = "Multiple Interaction Item"
 script = ExtResource("25_d8pei")
 value = "A interactable world object with multiple choices of actions."
 
-[node name="CarryableItem" type="RigidBody3D" parent="Bench_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, 0)
+[node name="RigidbodyItem" type="RigidBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
 collision_layer = 2
 script = ExtResource("31_ev36k")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/CarryableItem"]
-shape = SubResource("BoxShape3D_jpsgv")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/RigidbodyItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_ylx47")
 
-[node name="CSGBox" type="CSGBox3D" parent="Bench_01/CarryableItem"]
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/RigidbodyItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = ExtResource("19_o6653")
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Carryable" type="Node3D" parent="Bench_01/CarryableItem"]
+[node name="Carryable" type="Node3D" parent="Bench_01/RigidbodyItem"]
 script = ExtResource("32_ldk1h")
 interaction_text = "Carry"
 
-[node name="DisplayName" type="Node" parent="Bench_01/CarryableItem"]
+[node name="DisplayName" type="Node" parent="Bench_01/RigidbodyItem"]
 script = ExtResource("23_ieyca")
+value = "RigidBody Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/CarryableItem"]
+[node name="DisplayDescription" type="Node" parent="Bench_01/RigidbodyItem"]
 script = ExtResource("25_d8pei")
+value = "A physics-based interactable objet that can be carried and dropped."
+
+[node name="StaticItem" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/StaticItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_gwndb")
+
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/StaticItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = ExtResource("19_o6653")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Carryable" type="Node3D" parent="Bench_01/StaticItem"]
+script = ExtResource("32_ldk1h")
+interaction_text = "Carry"
+
+[node name="DisplayName" type="Node" parent="Bench_01/StaticItem"]
+script = ExtResource("23_ieyca")
+value = "Static Item"
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/StaticItem"]
+script = ExtResource("25_d8pei")
+value = "A non-physics interactable objet that can be carried and put back on flat surface."
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]

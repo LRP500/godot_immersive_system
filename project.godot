@@ -94,3 +94,4 @@ quit_game={
 
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Interactable"
+3d_physics/layer_10="Placeable Surface"
