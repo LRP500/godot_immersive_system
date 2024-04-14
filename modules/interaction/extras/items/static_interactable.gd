@@ -1,5 +1,5 @@
 extends StaticBody3D
-class_name StaticItem
+class_name StaticInteractable
 
 func on_grab(interactor: Interactor) -> void:
     var item_placer: InteractorItemPlacer = interactor.get_node_or_null("%ItemPlacer")

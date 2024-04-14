@@ -1,5 +1,5 @@
 extends RigidBody3D
-class_name RigidbodyItem
+class_name RigidbodyInteractable
 
 func on_grab(_interactor: Interactor) -> void:
     linear_velocity = Vector3.ZERO

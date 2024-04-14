@@ -3,6 +3,7 @@ class_name LootInteraction
 
 @export var item_model: InventoryItemModel
 @export var count: int = 1
+@export var destroy_on_loot: bool = true
 @export var update_display_name: bool = true
 
 var item: InventoryItem
@@ -20,7 +21,8 @@ func _update_display_name() -> void:
 
 func interact(_interactor: Interactor) -> void:
     PlayerModule.player.inventory.add_item(item)
-    parent.queue_free()
+    if destroy_on_loot:
+        parent.queue_free()
 
 func interact_start(_interactor: Interactor) -> void:
     interact(_interactor)

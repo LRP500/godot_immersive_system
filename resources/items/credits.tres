@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItemModel" load_steps=2 format=3 uid="uid://dnhiojpyxl7ph"]
+
+[ext_resource type="Script" path="res://modules/inventory/scripts/inventory_item_model.gd" id="1_ooelu"]
+
+[resource]
+script = ExtResource("1_ooelu")
+id = "credits"
+display_name = "Credits"
+description = ""
+properties = "{ }"
