@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=68 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://modules/inventory/extras/door_key.tres" id="14_63ecf"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
+[ext_resource type="Script" path="res://modules/inventory/scripts/intenvory_logger.gd" id="15_w3qlt"]
 [ext_resource type="Script" path="res://scripts/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/materials/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/toggle_interactable.gd" id="22_aeymx"]
@@ -34,6 +35,7 @@
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactions/carry_interaction.gd" id="32_ldk1h"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_item.gd" id="33_0dy1e"]
 [ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="34_wqfu7"]
+[ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="35_lr4pm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -669,7 +671,9 @@ target = NodePath("../Pawn/Interpolated Camera/Arm/Arm Anchor/Camera")
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("13_hbsb7")
-initial_items = Array[Resource("res://modules/inventory/scripts/inventory_item_model.gd")]([ExtResource("14_63ecf")])
+
+[node name="InventoryLogger" type="Node" parent="Player/Inventory"]
+script = ExtResource("15_w3qlt")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -1004,6 +1008,11 @@ value = "Lootable Item"
 [node name="DisplayDescription" type="Node" parent="Bench_01/LootableItem"]
 script = ExtResource("25_d8pei")
 value = "An interactable item that can be added to player's inventory."
+
+[node name="LootInteraction" type="Node3D" parent="Bench_01/LootableItem"]
+script = ExtResource("35_lr4pm")
+item_model = ExtResource("14_63ecf")
+interaction_text = "Take"
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
