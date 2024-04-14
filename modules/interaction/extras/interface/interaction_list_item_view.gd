@@ -6,10 +6,17 @@ class_name InteractionListItemView
 @export var interaction_name: RichTextLabel
 @export var input_key_format: String = "[%s]"
 
+func get_interaction() -> Interaction:
+	return data_holder.data
+
 func bind(interaction: Interaction) -> void:
 	data_holder.data = interaction
 	input_key.text = input_key_format % _get_keycode_string(interaction.input_map_action)
 	interaction_name.text = interaction.interaction_text
+	interaction.enabled_state_changed.connect(_on_enabled_state_changed)
+
+func _on_enabled_state_changed(enabled: bool) -> void:
+	visible = enabled
 
 func _get_keycode_string(action_name: String) -> String:
 	if !InputMap.has_action(action_name):

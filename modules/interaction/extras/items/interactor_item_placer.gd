@@ -9,24 +9,28 @@ class_name InteractorItemPlacer
 
 var item_ghost: Node3D
 
-func _init() -> void:
-    process_mode = Node.PROCESS_MODE_DISABLED
+func is_position_valid() -> bool:
+    return item_ghost.visible
 
 func _ready() -> void:
+    process_mode = Node.PROCESS_MODE_DISABLED
     item_holder.item_attached.connect(_on_item_attached)
     item_holder.item_dropped.connect(_on_item_dropped)
 
 func _process(_delta: float) -> void:
     if !raycaster.is_colliding():
         item_ghost.visible = false
+        item_holder.drop_interaction.is_enabled = false
         return
     var is_surface := raycaster.get_collision_normal() == Vector3.UP
     if is_surface:
         item_ghost.visible = true
         item_ghost.rotation = Vector3.ZERO
         item_ghost.position = raycaster.get_collision_point()
+        item_holder.drop_interaction.is_enabled = true
     else:
-        item_ghost.visible = is_surface
+        item_ghost.visible = false
+        item_holder.drop_interaction.is_enabled = false
 
 func _set_is_enabled(_is_enabled: bool) -> void:
     is_enabled = _is_enabled

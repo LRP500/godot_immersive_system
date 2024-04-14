@@ -5,8 +5,9 @@ signal started
 signal completed
 signal interrupted
 signal updated(progress: float)
+signal enabled_state_changed(enabled: bool)
 
-@export var is_enabled: bool = true
+@export var is_enabled: bool = true: set = _set_is_enabled
 @export var interaction_text: String = "Interact"
 @export var input_map_action: String = "interact"
 
@@ -19,6 +20,10 @@ var interact_method: Callable
 var interact_start_method: Callable
 var interact_stop_method: Callable
 var interact_update_method: Callable
+
+func _set_is_enabled(_is_enabled: bool) -> void:
+    is_enabled = _is_enabled
+    enabled_state_changed.emit(is_enabled)
 
 func _ready() -> void:
     _init_timer()
