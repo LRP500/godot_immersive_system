@@ -15,9 +15,11 @@ func _input(event: InputEvent) -> void:
 			open()
 
 func open() -> void:
+	PlayerModule.player.freeze()
 	is_opened = true
 	visible = true
 
 func close() -> void:
+	PlayerModule.player.unfreeze()
 	is_opened = false
 	visible = false
