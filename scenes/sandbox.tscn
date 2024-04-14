@@ -957,7 +957,7 @@ value = "Static Item"
 
 [node name="DisplayDescription" type="Node" parent="Bench_01/StaticItem"]
 script = ExtResource("25_d8pei")
-value = "A non-physics interactable objet that can be carried and put back on flat surfaces."
+value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]

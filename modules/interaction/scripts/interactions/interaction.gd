@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
         interact_update_method.call(interactor, self)
 
 func interact_start(_interactor: Interactor) -> void:
-    self.interactor = _interactor
+    interactor = _interactor
     if interact_start_method.is_valid():
         interact_start_method.call(_interactor, self)
     if timer:
