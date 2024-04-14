@@ -83,8 +83,8 @@ func _process_interactions(_interactions: Array[Interaction]) -> void:
             active_interaction = null
 
 func _on_interaction_freed() -> void:
-    if active_interaction.parent == target:
-        _clear_target() 
+    if active_interaction && active_interaction.parent == target:
+        _clear_target()
     active_interaction = null
 
 func push(interaction: Interaction) -> void:
