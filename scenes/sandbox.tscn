@@ -1018,5 +1018,86 @@ script = ExtResource("35_lr4pm")
 item_model = ExtResource("14_63ecf")
 interaction_text = "Take"
 
+[node name="LootableItem2" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 1, 0)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/LootableItem2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_1i621")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/LootableItem2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("34_wqfu7")
+size = Vector3(0.4, 0.1, 0.1)
+
+[node name="DisplayName" type="Node" parent="Bench_01/LootableItem2"]
+script = ExtResource("23_ieyca")
+value = "Lootable Item"
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItem2"]
+script = ExtResource("25_d8pei")
+value = "An interactable item that can be added to player's inventory."
+
+[node name="LootInteraction" type="Node3D" parent="Bench_01/LootableItem2"]
+script = ExtResource("35_lr4pm")
+item_model = ExtResource("14_63ecf")
+interaction_text = "Take"
+
+[node name="LootableItem3" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, 1, 0)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/LootableItem3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_1i621")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/LootableItem3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("34_wqfu7")
+size = Vector3(0.4, 0.1, 0.1)
+
+[node name="DisplayName" type="Node" parent="Bench_01/LootableItem3"]
+script = ExtResource("23_ieyca")
+value = "Lootable Item"
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItem3"]
+script = ExtResource("25_d8pei")
+value = "An interactable item that can be added to player's inventory."
+
+[node name="LootInteraction" type="Node3D" parent="Bench_01/LootableItem3"]
+script = ExtResource("35_lr4pm")
+item_model = ExtResource("14_63ecf")
+interaction_text = "Take"
+
+[node name="LootableItem4" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75, 1, 0)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/LootableItem4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_1i621")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/LootableItem4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("34_wqfu7")
+size = Vector3(0.4, 0.1, 0.1)
+
+[node name="DisplayName" type="Node" parent="Bench_01/LootableItem4"]
+script = ExtResource("23_ieyca")
+value = "Lootable Item"
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItem4"]
+script = ExtResource("25_d8pei")
+value = "An interactable item that can be added to player's inventory."
+
+[node name="LootInteraction" type="Node3D" parent="Bench_01/LootableItem4"]
+script = ExtResource("35_lr4pm")
+item_model = ExtResource("14_63ecf")
+interaction_text = "Take"
+
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
