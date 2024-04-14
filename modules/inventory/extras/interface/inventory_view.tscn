@@ -44,8 +44,5 @@ bbcode_enabled = true
 text = "[Empty]"
 fit_content = true
 
-[node name="InventoryItemView" parent="VBoxContainer/ItemListView" instance=ExtResource("3_vv2lk")]
-layout_mode = 2
-
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="VBoxContainer/ItemListView/EmptyLabel" to="VBoxContainer/ItemListView/EmptyLabel" method="_on_visibility_changed"]

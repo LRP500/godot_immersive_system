@@ -16,8 +16,6 @@ func bind(items: Array[InventoryItem]) -> void:
 		add_child(view)
 
 func clear() -> void:
-	for child in get_children():
-		if not child is InventoryItemView:
-			continue
-		child.queue_free()
+	for view in item_views:
+		view.queue_free()
 	item_views.clear()
