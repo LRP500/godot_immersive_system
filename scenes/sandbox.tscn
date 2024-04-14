@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=66 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://modules/interaction/extras/items/rigidbody_item.gd" id="31_ev36k"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactions/carry_interaction.gd" id="32_ldk1h"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_item.gd" id="33_0dy1e"]
+[ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="34_wqfu7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -331,6 +332,9 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gwndb"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1i621"]
+size = Vector3(0.4, 0.1, 0.1)
 
 [node name="Sandbox" type="Node3D"]
 
@@ -875,8 +879,28 @@ use_collision = true
 collision_layer = 5
 size = Vector3(8, 1, 1)
 
+[node name="SimpleItem" type="RigidBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 1.25, 0)
+collision_layer = 2
+custom_integrator = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/SimpleItem"]
+shape = SubResource("BoxShape3D_b2fgc")
+
+[node name="CSGBox" type="CSGBox3D" parent="Bench_01/SimpleItem"]
+material_override = ExtResource("19_o6653")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="DisplayName" type="Node" parent="Bench_01/SimpleItem"]
+script = ExtResource("23_ieyca")
+value = "Simple Item"
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/SimpleItem"]
+script = ExtResource("25_d8pei")
+value = "The simplest form of interactable item with name and description."
+
 [node name="MultiInteractionItem" type="RigidBody3D" parent="Bench_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.25, 0)
 collision_layer = 2
 custom_integrator = true
 
@@ -908,7 +932,7 @@ script = ExtResource("25_d8pei")
 value = "A interactable world object with multiple choices of actions."
 
 [node name="RigidbodyItem" type="RigidBody3D" parent="Bench_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0)
 collision_layer = 2
 script = ExtResource("31_ev36k")
 
@@ -934,7 +958,7 @@ script = ExtResource("25_d8pei")
 value = "A physics-based interactable objet that can be carried and dropped."
 
 [node name="StaticItem" type="StaticBody3D" parent="Bench_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1, 0)
 collision_layer = 2
 script = ExtResource("33_0dy1e")
 
@@ -958,6 +982,28 @@ value = "Static Item"
 [node name="DisplayDescription" type="Node" parent="Bench_01/StaticItem"]
 script = ExtResource("25_d8pei")
 value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
+
+[node name="LootableItem" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 1, 0)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/LootableItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_1i621")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/LootableItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("34_wqfu7")
+size = Vector3(0.4, 0.1, 0.1)
+
+[node name="DisplayName" type="Node" parent="Bench_01/LootableItem"]
+script = ExtResource("23_ieyca")
+value = "Lootable Item"
+
+[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItem"]
+script = ExtResource("25_d8pei")
+value = "An interactable item that can be added to player's inventory."
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
