@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItemModel" load_steps=2 format=3 uid="uid://dji533rr6rirm"]
+
+[ext_resource type="Script" path="res://modules/inventory/scripts/inventory_item_model.gd" id="1_sx75y"]
+
+[resource]
+script = ExtResource("1_sx75y")
+id = "handgun_ammo"
+display_name = "Handgun Ammo"
+description = ""
+properties = "{ }"
