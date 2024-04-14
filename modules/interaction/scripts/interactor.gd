@@ -77,9 +77,13 @@ func _process_interactions(_interactions: Array[Interaction]) -> void:
         if Input.is_action_just_pressed(interaction.input_map_action):
             interaction.interact_start(self)
             active_interaction = interaction
+            active_interaction.tree_exiting.connect(_on_interaction_freed)
         if Input.is_action_just_released(interaction.input_map_action):
             interaction.interact_stop(self)
             active_interaction = null
+
+func _on_interaction_freed() -> void:
+    active_interaction = null
 
 func push(interaction: Interaction) -> void:
     interactions.append(interaction)

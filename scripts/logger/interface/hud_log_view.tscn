@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://ofqmae1gtstn"]
+
+[ext_resource type="Script" path="res://scripts/logger/interface/hud_log_view.gd" id="1_xyq75"]
+[ext_resource type="PackedScene" uid="uid://dkgtjvv47jonq" path="res://scripts/logger/interface/hud_log_message_view.tscn" id="2_q8mdl"]
+
+[node name="HUDLogView" type="Control" node_paths=PackedStringArray("container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xyq75")
+log_message_view = ExtResource("2_q8mdl")
+container = NodePath("MarginContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HUDLogMessageView" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_q8mdl")]
+process_mode = 4
+layout_mode = 2
