@@ -83,7 +83,8 @@ func _process_interactions(_interactions: Array[Interaction]) -> void:
             active_interaction = null
 
 func _on_interaction_freed() -> void:
-    active_interaction.tree_exiting.disconnect(_on_interaction_freed)
+    if active_interaction:
+        active_interaction.tree_exiting.disconnect(_on_interaction_freed)
     if active_interaction && active_interaction.parent == target:
         _clear_target()
     active_interaction = null
