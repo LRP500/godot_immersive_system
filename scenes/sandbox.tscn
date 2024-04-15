@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=84 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -19,11 +19,13 @@
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://resources/items/door_key.tres" id="14_63ecf"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
+[ext_resource type="Script" path="res://modules/inventory/scripts/hotbar/inventory_hotbar.gd" id="15_4mlw5"]
 [ext_resource type="Script" path="res://modules/inventory/scripts/intenvory_logger.gd" id="15_w3qlt"]
 [ext_resource type="PackedScene" uid="uid://buxtyevpn2qvp" path="res://modules/inventory/extras/interface/inventory_view.tscn" id="16_1j64m"]
 [ext_resource type="Script" path="res://scripts/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="PackedScene" uid="uid://ofqmae1gtstn" path="res://scripts/logger/interface/hud_log_view.tscn" id="17_7iqax"]
 [ext_resource type="Script" path="res://scripts/interface/tab_menu_view.gd" id="18_5a80n"]
+[ext_resource type="PackedScene" uid="uid://c2h28oouk5qbx" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_view.tscn" id="18_awiui"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/materials/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/toggle_interactable.gd" id="22_aeymx"]
 [ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="23_02s6c"]
@@ -709,6 +711,10 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 script = ExtResource("13_hbsb7")
 
+[node name="InventoryHotbar" type="Node" parent="Player/Inventory"]
+unique_name_in_owner = true
+script = ExtResource("15_4mlw5")
+
 [node name="InventoryLogger" type="Node" parent="Player/Inventory"]
 script = ExtResource("15_w3qlt")
 
@@ -748,6 +754,9 @@ expand_mode = 1
 layout_mode = 1
 
 [node name="HUDLogView" parent="UI/HUD" instance=ExtResource("17_7iqax")]
+layout_mode = 1
+
+[node name="InventoryHotbarView" parent="UI/HUD" instance=ExtResource("18_awiui")]
 layout_mode = 1
 
 [node name="TabMenu" type="Control" parent="UI"]

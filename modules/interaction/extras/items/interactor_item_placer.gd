@@ -53,7 +53,7 @@ func _create_ghost(item: Node3D) -> void:
     item_ghost = item.duplicate()
     item_ghost.visible = false
     item_ghost.process_mode = Node.PROCESS_MODE_DISABLED
-    var meshes := Node3dHelpers.get_children_of_type(item_ghost, "GeometryInstance3D")
+    var meshes := NodeHelpers.get_children_of_base_type(item_ghost, "GeometryInstance3D")
     for mesh in meshes:
         var geometry_instance := mesh as GeometryInstance3D
         geometry_instance.material_override = ghost_material

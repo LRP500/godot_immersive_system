@@ -29,3 +29,5 @@ func _update_display_name() -> void:
         display_name.value = display_name.value + " [Empty]"
     else:
         display_name.value = display_name.value.replace(" [Empty]", "")
+
+# TODO: Add option to allow/disallow unlimited looting (i.e. infinite ammo refill container)

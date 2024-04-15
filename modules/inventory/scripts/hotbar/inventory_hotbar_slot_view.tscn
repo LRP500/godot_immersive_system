@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvph6w6w4on2a"]
+
+[ext_resource type="Script" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_slot_view.gd" id="1_sb82o"]
+
+[node name="InventoryHotbarSlotView" type="Control" node_paths=PackedStringArray("count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_sb82o")
+count_label = NodePath("CountLabel")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2)
+
+[node name="CountLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -20.0
+offset_right = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "999
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+text_direction = 2

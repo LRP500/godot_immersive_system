@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2h28oouk5qbx"]
+
+[ext_resource type="Script" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_view.gd" id="1_3nhmo"]
+[ext_resource type="PackedScene" uid="uid://cvph6w6w4on2a" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_slot_view.tscn" id="2_rvcso"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hisl2"]
+bg_color = Color(0, 0, 0, 0.101961)
+
+[node name="InventoryHotbarView" type="Control" node_paths=PackedStringArray("slot_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3nhmo")
+slot_view = ExtResource("2_rvcso")
+slot_container = NodePath("Panel/HBoxContainer")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(296, 64)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 296.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hisl2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="InventoryHotbarSlotView" parent="Panel/HBoxContainer" instance=ExtResource("2_rvcso")]
+process_mode = 4
+layout_mode = 2
+
+[node name="InventoryHotbarSlotView2" parent="Panel/HBoxContainer" node_paths=PackedStringArray("count_label") instance=ExtResource("2_rvcso")]
+process_mode = 4
+layout_mode = 2
+count_label = NodePath("../InventoryHotbarSlotView/CountLabel")
+
+[node name="InventoryHotbarSlotView3" parent="Panel/HBoxContainer" node_paths=PackedStringArray("count_label") instance=ExtResource("2_rvcso")]
+process_mode = 4
+layout_mode = 2
+count_label = NodePath("../InventoryHotbarSlotView/CountLabel")
+
+[node name="InventoryHotbarSlotView4" parent="Panel/HBoxContainer" node_paths=PackedStringArray("count_label") instance=ExtResource("2_rvcso")]
+process_mode = 4
+layout_mode = 2
+count_label = NodePath("../InventoryHotbarSlotView/CountLabel")
