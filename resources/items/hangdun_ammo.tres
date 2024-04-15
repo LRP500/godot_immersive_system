@@ -6,5 +6,5 @@
 script = ExtResource("1_sx75y")
 id = "handgun_ammo"
 display_name = "Handgun Ammo"
-description = ""
+description = "Ammunition for your trusted handgun."
 properties = "{ }"

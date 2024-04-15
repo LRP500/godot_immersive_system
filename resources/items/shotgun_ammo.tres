@@ -6,5 +6,5 @@
 script = ExtResource("1_1j6a2")
 id = "shotgun_ammo"
 display_name = "Shotgun Ammo"
-description = ""
+description = "Ammunition for a shotgun that might or might not exist."
 properties = "{ }"

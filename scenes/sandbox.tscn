@@ -32,7 +32,7 @@
 [ext_resource type="Script" path="res://modules/interaction/scripts/components/display_name.gd" id="23_ieyca"]
 [ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="24_jp6u1"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactions/interaction.gd" id="25_1uj6u"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/components/display_description.gd" id="25_d8pei"]
+[ext_resource type="Script" path="res://modules/interaction/scripts/components/description.gd" id="25_d8pei"]
 [ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://modules/interaction/extras/interactables/holdable_button.tscn" id="27_alees"]
 [ext_resource type="Script" path="res://scripts/booth_03_cube.gd" id="28_2h4l3"]
 [ext_resource type="Script" path="res://scripts/booth_03_light.gd" id="28_231x4"]
@@ -755,6 +755,7 @@ layout_mode = 1
 
 [node name="HUDLogView" parent="UI/HUD" instance=ExtResource("17_7iqax")]
 layout_mode = 1
+fade_delay = 3.0
 
 [node name="InventoryHotbarView" parent="UI/HUD" instance=ExtResource("18_awiui")]
 layout_mode = 1
@@ -792,7 +793,7 @@ offset_bottom = -222.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, -9)
 interact_targets = [NodePath("../CSGSphere3D")]
 
-[node name="DisplayDescription" type="Node" parent="Booth_01/Button"]
+[node name="Description" type="Node" parent="Booth_01/Button"]
 script = ExtResource("25_d8pei")
 value = "A simple interactable push button triggering a custom effect."
 
@@ -849,7 +850,7 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="DisplayDescription" type="Node" parent="Booth_02/Toggle"]
+[node name="Description" type="Node" parent="Booth_02/Toggle"]
 script = ExtResource("25_d8pei")
 value = "A simple switch toggle enabling/disabling world objects and triggering custom effects."
 
@@ -897,7 +898,7 @@ interact_targets = [NodePath("../CSGBox3D"), NodePath("../SpotLight3D (Top)"), N
 wait_time = 3.0
 reset_on_release = false
 
-[node name="DisplayDescription" type="Node" parent="Booth_03/HoldableButton"]
+[node name="Description" type="Node" parent="Booth_03/HoldableButton"]
 script = ExtResource("25_d8pei")
 value = "A holdable button with persistant progress blending between animation states and enabling/disabling world objects."
 
@@ -975,7 +976,7 @@ size = Vector3(0.5, 0.5, 0.5)
 script = ExtResource("23_ieyca")
 value = "Simple Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/SimpleItem"]
+[node name="Description" type="Node" parent="Bench_01/SimpleItem"]
 script = ExtResource("25_d8pei")
 value = "The simplest form of interactable item with name and description."
 
@@ -1007,7 +1008,7 @@ interaction_text = "Option 3"
 script = ExtResource("23_ieyca")
 value = "Multiple Interaction Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractionItem"]
+[node name="Description" type="Node" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_d8pei")
 value = "A interactable world object with multiple choices of actions."
 
@@ -1033,7 +1034,7 @@ interaction_text = "Carry"
 script = ExtResource("23_ieyca")
 value = "RigidBody Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/RigidbodyItem"]
+[node name="Description" type="Node" parent="Bench_01/RigidbodyItem"]
 script = ExtResource("25_d8pei")
 value = "A physics-based interactable objet that can be carried and dropped."
 
@@ -1059,7 +1060,7 @@ interaction_text = "Carry"
 script = ExtResource("23_ieyca")
 value = "Static Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/StaticItem"]
+[node name="Description" type="Node" parent="Bench_01/StaticItem"]
 script = ExtResource("25_d8pei")
 value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
 
@@ -1081,13 +1082,14 @@ size = Vector3(0.2, 0.2, 0.2)
 script = ExtResource("23_ieyca")
 value = "Lootable Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItem"]
+[node name="Description" type="Node" parent="Bench_01/LootableItem"]
 script = ExtResource("25_d8pei")
 value = "An interactable item that can be added to the player's inventory."
 
 [node name="LootInteraction" type="Node3D" parent="Bench_01/LootableItem"]
 script = ExtResource("35_lr4pm")
 item_model = ExtResource("14_63ecf")
+update_description = false
 interaction_text = "Take"
 
 [node name="LootableItemStack" type="StaticBody3D" parent="Bench_01"]
@@ -1108,7 +1110,7 @@ size = Vector3(0.4, 0.2, 0.25)
 script = ExtResource("23_ieyca")
 value = "Lootable Item Stack (%s)"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItemStack"]
+[node name="Description" type="Node" parent="Bench_01/LootableItemStack"]
 script = ExtResource("25_d8pei")
 value = "An interactable stack of items that can be added to the player's inventory."
 
@@ -1135,7 +1137,7 @@ size = Vector3(0.5, 0.25, 0.5)
 script = ExtResource("23_ieyca")
 value = "Item Container"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/LootableItemContainer"]
+[node name="Description" type="Node" parent="Bench_01/LootableItemContainer"]
 script = ExtResource("25_d8pei")
 value = "An interactable stack of items that can be added to the player's inventory."
 

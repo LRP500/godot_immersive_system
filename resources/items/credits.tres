@@ -6,5 +6,5 @@
 script = ExtResource("1_ooelu")
 id = "credits"
 display_name = "Credits"
-description = ""
-properties = "{ }"
+description = "The never-heard-of currency of the futur."
+properties = ""

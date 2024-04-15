@@ -698,7 +698,7 @@ expand_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, -9)
 interact_targets = [NodePath("../CSGSphere3D")]
 
-[node name="DisplayDescription" type="Node" parent="Booth_01/Button"]
+[node name="Description" type="Node" parent="Booth_01/Button"]
 script = ExtResource("25_d8pei")
 value = "A simple interactable push button triggering a custom effect."
 
@@ -755,7 +755,7 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="DisplayDescription" type="Node" parent="Booth_02/Toggle"]
+[node name="Description" type="Node" parent="Booth_02/Toggle"]
 script = ExtResource("25_d8pei")
 value = "A simple switch toggle enabling/disabling world objects and triggering custom effects."
 
@@ -803,7 +803,7 @@ interact_targets = [NodePath("../CSGBox3D"), NodePath("../SpotLight3D (Top)"), N
 wait_time = 3.0
 reset_on_release = false
 
-[node name="DisplayDescription" type="Node" parent="Booth_03/HoldableButton"]
+[node name="Description" type="Node" parent="Booth_03/HoldableButton"]
 script = ExtResource("25_d8pei")
 value = "A holdable button with persistant progress blending between animation states and enabling/disabling world objects."
 
@@ -893,7 +893,7 @@ interaction_text = "Option 3"
 script = ExtResource("23_ieyca")
 value = "Multiple Interaction Item"
 
-[node name="DisplayDescription" type="Node" parent="Bench_01/MultiInteractionItem"]
+[node name="Description" type="Node" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_d8pei")
 value = "A interactable world object with multiple choices of actions."
 
