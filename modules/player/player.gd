@@ -22,3 +22,5 @@ func unfreeze() -> void:
 	interactor.is_enabled = true
 
 #endregion
+
+# TODO: FIX calling freeze() on player freezes its position (e.g. mid-jump) but the game keeps playing
