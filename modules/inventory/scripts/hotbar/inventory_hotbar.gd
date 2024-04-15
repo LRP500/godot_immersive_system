@@ -23,6 +23,8 @@ func _create_slots() -> void:
         slots.append(InventoryHotbarSlot.new())
 
 func _on_item_added(item: InventoryItem) -> void:
+    if !_is_wieldable(item):
+        return
     for slot in slots:
         if slot.is_empty():
             slot.item = item
@@ -34,6 +36,9 @@ func _on_item_removed(item: InventoryItem) -> void:
         if slot.item == item:
             slot.item = null
             item_unbinded.emit(slot)
+
+func _is_wieldable(item: InventoryItem) -> bool:
+    return item.model.get_meta("wieldable", false)
 
 func is_empty() -> bool:
     for slot in slots:

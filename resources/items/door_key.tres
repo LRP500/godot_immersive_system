@@ -7,5 +7,5 @@ script = ExtResource("1_pn8ko")
 id = "door_key"
 display_name = "Door Key"
 description = "A simple door key"
-stack_size = 1
-properties = "{ }"
+properties = ""
+metadata/wieldable = true
