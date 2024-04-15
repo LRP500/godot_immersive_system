@@ -43,7 +43,7 @@ func _create_message_view(message: LogMessage) -> HudLogMessageView:
 	var view := log_message_view.instantiate() as HudLogMessageView
 	view.bind(message)
 	container.add_child(view)
-	log_message_views.append(view)
+	log_message_views.insert(0, view)
 	_fade_view(view)
 	return view
 
