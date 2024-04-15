@@ -48,9 +48,9 @@ func _clear_target() -> void:
     target_exited.emit()
     if active_interaction:
         active_interaction.interact_stop(self)
-        active_interaction = null
-    target = null
+        _clear_active_interaction()
     target_interactions.clear()
+    target = null
 
 func _set_enabled(enabled: bool) -> void:
     is_enabled = enabled
@@ -77,17 +77,22 @@ func _process_interactions(_interactions: Array[Interaction]) -> void:
         if Input.is_action_just_pressed(interaction.input_map_action):
             interaction.interact_start(self)
             active_interaction = interaction
-            active_interaction.tree_exiting.connect(_on_interaction_freed)
+            interaction.tree_exiting.connect(_on_interaction_freed)
+            return # Only one interaction can be active at a time
         if Input.is_action_just_released(interaction.input_map_action):
             interaction.interact_stop(self)
-            active_interaction = null
+            _clear_active_interaction()
+
+func _clear_active_interaction() -> void:
+    if !active_interaction:
+        return
+    active_interaction.tree_exiting.disconnect(_on_interaction_freed)
+    active_interaction = null
 
 func _on_interaction_freed() -> void:
-    if active_interaction:
-        active_interaction.tree_exiting.disconnect(_on_interaction_freed)
     if active_interaction && active_interaction.parent == target:
         _clear_target()
-    active_interaction = null
+    _clear_active_interaction()
 
 func push(interaction: Interaction) -> void:
     interactions.append(interaction)
