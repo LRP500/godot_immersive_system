@@ -3,7 +3,7 @@ extends Interaction
 func interact(_interactor: Interactor) -> void:
     super(_interactor)
     var item_holder: CarryableItemHolder = _interactor.get_node("%CarryableItemHolder")
-    assert(item_holder, "[Interaction] CarryableItemHolder not found")
+    assert(item_holder, "[Interaction] Unable to find CarryableItemHolder")
     item_holder.drop(_interactor)
 
 func interact_start(_interactor: Interactor) -> void:

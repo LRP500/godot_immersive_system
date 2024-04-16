@@ -1,4 +1,5 @@
 extends Node3D
+class_name WieldableItemHolder
 
 signal item_wielded(item: Node3D)
 signal item_unwielded(item: Node3D)
@@ -16,10 +17,11 @@ func _process(delta: float) -> void:
     item.rotation.z = lerp_angle(item.rotation.z, global_rotation.z, delta * 10 * rotate_speed)
     item.position = item.position.slerp(global_position, delta * 10 * move_speed)
 
-func wield(interactor: Interactor, _item: Node3D) -> void:
-    item = _item
-    item.top_level = true
-    interactor.is_raycasting = false
+func wield(interactor: Interactor, inventory_item: InventoryItem) -> void:
+    if inventory_item.model.scene == null:
+        printerr("[WieldableItemHolder] Item %s does not have a scene" % inventory_item.model.id)
+        return
+    item = _create_item(inventory_item)
     item_wielded.emit(item)
     var equip_method := Callable(item, "on_equip")
     if equip_method.is_valid():
@@ -30,6 +32,8 @@ func unwield(interactor: Interactor) -> void:
     if drop_method.is_valid():
         drop_method.call(interactor)
     item_unwielded.emit()
-    interactor.is_raycasting = true
-    item.top_level = false
     item = null
+
+func _create_item(inventory_item: InventoryItem) -> Node3D:
+    var instance := inventory_item.model.scene.instantiate()
+    return instance

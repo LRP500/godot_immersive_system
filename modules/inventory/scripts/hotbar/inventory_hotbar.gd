@@ -45,3 +45,8 @@ func is_empty() -> bool:
         if !slot.is_empty():
             return false
     return true
+
+func get_item_at(index: int) -> InventoryItem:
+    if index < 0 || index >= slot_count:
+        return null
+    return slots[index].item
