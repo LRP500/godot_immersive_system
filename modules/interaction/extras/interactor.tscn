@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://gjnc46e66ldo"]
+[gd_scene load_steps=7 format=3 uid="uid://gjnc46e66ldo"]
 
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactor.gd" id="1_pkawo"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactor_item_holder.gd" id="2_ftbiq"]
+[ext_resource type="Script" path="res://modules/interaction/extras/items/carryable_item_holder.gd" id="2_ftbiq"]
 [ext_resource type="Script" path="res://modules/interaction/scripts/interactions/drop_interaction.gd" id="3_yj6q1"]
-[ext_resource type="Script" path="res://modules/interaction/extras/items/interactor_item_placer.gd" id="4_fm03r"]
+[ext_resource type="Script" path="res://modules/interaction/extras/items/carryable_item_placer.gd" id="4_fm03r"]
 [ext_resource type="Material" uid="uid://cd0jtf44u8hk6" path="res://modules/interaction/extras/items/item_ghost.tres" id="5_ldgy2"]
+[ext_resource type="Script" path="res://modules/interaction/extras/items/wieldable_item_holder.gd" id="6_n8a7x"]
 
 [node name="Interactor" type="Node3D"]
 script = ExtResource("1_pkawo")
@@ -13,24 +14,28 @@ script = ExtResource("1_pkawo")
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 
-[node name="ItemHolder" type="Node3D" parent="." node_paths=PackedStringArray("drop_interaction")]
+[node name="CarryableItemHolder" type="Node3D" parent="." node_paths=PackedStringArray("drop_interaction")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.75, -0.5)
 script = ExtResource("2_ftbiq")
 drop_interaction = NodePath("DropInteraction")
 drop_delay = 0.01
 
-[node name="DropInteraction" type="Node3D" parent="ItemHolder"]
+[node name="DropInteraction" type="Node3D" parent="CarryableItemHolder"]
 script = ExtResource("3_yj6q1")
 interaction_text = "Drop"
 
-[node name="ItemPlacer" type="Node3D" parent="." node_paths=PackedStringArray("item_holder")]
+[node name="CarryableItemPlacer" type="Node3D" parent="." node_paths=PackedStringArray("item_holder")]
 unique_name_in_owner = true
 script = ExtResource("4_fm03r")
 is_enabled = false
-item_holder = NodePath("../ItemHolder")
+item_holder = NodePath("../CarryableItemHolder")
 ghost_material = ExtResource("5_ldgy2")
 
-[node name="RayCast3D" type="RayCast3D" parent="ItemPlacer"]
+[node name="RayCast3D" type="RayCast3D" parent="CarryableItemPlacer"]
 target_position = Vector3(0, 0, -3)
 collision_mask = 4
+
+[node name="WieldableItemHolder" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_n8a7x")

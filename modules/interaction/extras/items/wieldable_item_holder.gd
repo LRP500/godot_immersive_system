@@ -1,12 +1,8 @@
 extends Node3D
-class_name InteractorItemHolder
 
-signal item_attached(item: Node3D)
-signal item_dropped
+signal item_wielded(item: Node3D)
+signal item_unwielded(item: Node3D)
 
-@export var can_drop: bool = true
-@export var drop_interaction: Interaction
-@export var drop_delay: float = 0.1
 @export var rotate_speed: float = 2.0
 @export var move_speed: float = 2.0
 
@@ -20,24 +16,20 @@ func _process(delta: float) -> void:
     item.rotation.z = lerp_angle(item.rotation.z, global_rotation.z, delta * 10 * rotate_speed)
     item.position = item.position.slerp(global_position, delta * 10 * move_speed)
 
-func drop(interactor: Interactor) -> void:
-    interactor.pop(drop_interaction)
-    var drop_method := Callable(item, "on_drop")
-    if drop_method.is_valid():
-        drop_method.call(interactor)
-    item_dropped.emit()
-    interactor.is_raycasting = true
-    item.top_level = false
-    item = null
-
-func attach(interactor: Interactor, _item: Node3D) -> void:
+func wield(interactor: Interactor, _item: Node3D) -> void:
     item = _item
     item.top_level = true
     interactor.is_raycasting = false
-    item_attached.emit(item)
-    var grab_method := Callable(item, "on_grab")
-    if grab_method.is_valid():
-        grab_method.call(interactor)
-    if can_drop:
-        await get_tree().create_timer(drop_delay).timeout
-        interactor.push(drop_interaction)
+    item_wielded.emit(item)
+    var equip_method := Callable(item, "on_equip")
+    if equip_method.is_valid():
+        equip_method.call(interactor)
+
+func unwield(interactor: Interactor) -> void:
+    var drop_method := Callable(item, "on_drop")
+    if drop_method.is_valid():
+        drop_method.call(interactor)
+    item_unwielded.emit()
+    interactor.is_raycasting = true
+    item.top_level = false
+    item = null

@@ -9,7 +9,6 @@ signal interaction_pushed(interactions: Interaction)
 @export var is_raycasting: bool = true: set = _set_is_raycasting
 
 @onready var raycast: RayCast3D = $RayCast3D
-@onready var item_holder: InteractorItemHolder = %ItemHolder
 
 var target: Node3D
 var target_interactions: Array[Interaction]

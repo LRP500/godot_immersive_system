@@ -1,8 +1,8 @@
 extends Node3D
-class_name InteractorItemPlacer
+class_name CarryableItemPlacer
 
 @export var is_enabled: bool = true: set = _set_is_enabled
-@export var item_holder: InteractorItemHolder
+@export var item_holder: CarryableItemHolder
 @export var ghost_material: Material
 
 @onready var raycaster: RayCast3D = $RayCast3D
@@ -14,7 +14,7 @@ func is_position_valid() -> bool:
 
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_DISABLED
-    item_holder.item_attached.connect(_on_item_attached)
+    item_holder.item_carried.connect(_on_item_carried)
     item_holder.item_dropped.connect(_on_item_dropped)
 
 func _process(_delta: float) -> void:
@@ -35,9 +35,9 @@ func _process(_delta: float) -> void:
 func _set_is_enabled(_is_enabled: bool) -> void:
     is_enabled = _is_enabled
     if item_holder && item_holder.item:
-        _on_item_attached(item_holder.item)
+        _on_item_carried(item_holder.item)
 
-func _on_item_attached(item: Node3D) -> void:
+func _on_item_carried(item: Node3D) -> void:
     if !is_enabled:
         return
     _create_ghost(item)
