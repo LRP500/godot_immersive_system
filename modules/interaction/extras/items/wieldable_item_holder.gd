@@ -18,19 +18,22 @@ func _process(delta: float) -> void:
     item.position = item.position.slerp(global_position, delta * 10 * move_speed)
 
 func wield(interactor: Interactor, inventory_item: InventoryItem) -> void:
+    if item:
+        unwield(interactor)
     item = _create_item(inventory_item)
     assert(item, "[Inventory] Item %s not found in item atlas" % inventory_item.model.id)
+    add_child(item)
     item.top_level = true
-    self.add_child(item)
     item_wielded.emit(item)
-    var equip_method := Callable(item, "on_equip")
-    if equip_method.is_valid():
-        equip_method.call(interactor)
+    var wield_method := Callable(item, "on_wield")
+    if wield_method.is_valid():
+        wield_method.call(interactor)
 
 func unwield(interactor: Interactor) -> void:
-    var drop_method := Callable(item, "on_drop")
-    if drop_method.is_valid():
-        drop_method.call(interactor)
+    var unwield_method := Callable(item, "on_unwield")
+    if unwield_method.is_valid():
+        unwield_method.call(interactor)
+    item.queue_free()
     item_unwielded.emit()
     item = null
 
