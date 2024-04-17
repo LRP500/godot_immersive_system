@@ -18,10 +18,10 @@ func _process(delta: float) -> void:
     item.position = item.position.slerp(global_position, delta * 10 * move_speed)
 
 func wield(interactor: Interactor, inventory_item: InventoryItem) -> void:
-    if inventory_item.model.scene == null:
-        printerr("[WieldableItemHolder] Item %s does not have a scene" % inventory_item.model.id)
-        return
     item = _create_item(inventory_item)
+    assert(item, "[Inventory] Item %s not found in item atlas" % inventory_item.model.id)
+    item.top_level = true
+    self.add_child(item)
     item_wielded.emit(item)
     var equip_method := Callable(item, "on_equip")
     if equip_method.is_valid():
@@ -35,5 +35,5 @@ func unwield(interactor: Interactor) -> void:
     item = null
 
 func _create_item(inventory_item: InventoryItem) -> Node3D:
-    var instance := inventory_item.model.scene.instantiate()
-    return instance
+    var scene: PackedScene = InventoryModule.atlas.get_packed_scene(inventory_item.model)
+    return scene.instantiate() if scene else null

@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp8enkmuc747v"]
+[gd_scene load_steps=9 format=3 uid="uid://dp8enkmuc747v"]
 
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_interactable.gd" id="1_4fcxy"]
 [ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="2_pn2ao"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/components/display_name.gd" id="3_mcmlm"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/components/description.gd" id="4_1uskf"]
+[ext_resource type="Script" path="res://modules/interaction/core/components/display_name.gd" id="3_mcmlm"]
+[ext_resource type="Script" path="res://modules/interaction/core/components/description.gd" id="4_1uskf"]
 [ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="5_erq5o"]
 [ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://resources/items/door_key.tres" id="6_65bdr"]
+[ext_resource type="Script" path="res://modules/inventory/extras/item.gd" id="6_g0ycs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1i621"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -24,9 +25,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 material_override = ExtResource("2_pn2ao")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="LootInteraction" type="Node3D" parent="."]
+[node name="Lootable" type="Node3D" parent="."]
 script = ExtResource("5_erq5o")
-item_model = ExtResource("6_65bdr")
 interaction_text = "Take"
 
 [node name="DisplayName" type="Node" parent="."]
@@ -34,3 +34,7 @@ script = ExtResource("3_mcmlm")
 
 [node name="Description" type="Node" parent="."]
 script = ExtResource("4_1uskf")
+
+[node name="Item" type="Node" parent="."]
+script = ExtResource("6_g0ycs")
+model = ExtResource("6_65bdr")

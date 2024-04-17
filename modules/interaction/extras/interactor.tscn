@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://gjnc46e66ldo"]
 
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactor.gd" id="1_pkawo"]
+[ext_resource type="Script" path="res://modules/interaction/core/interactor.gd" id="1_pkawo"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/carryable_item_holder.gd" id="2_ftbiq"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactions/drop_interaction.gd" id="3_yj6q1"]
+[ext_resource type="Script" path="res://modules/interaction/core/interactions/drop_interaction.gd" id="3_yj6q1"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/carryable_item_placer.gd" id="4_fm03r"]
 [ext_resource type="Material" uid="uid://cd0jtf44u8hk6" path="res://modules/interaction/extras/items/item_ghost.tres" id="5_ldgy2"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/wieldable_item_holder.gd" id="6_n8a7x"]
@@ -38,4 +38,7 @@ collision_mask = 4
 
 [node name="WieldableItemHolder" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198641, -0.27051, -0.25)
 script = ExtResource("6_n8a7x")
+rotate_speed = 5.0
+move_speed = 5.0

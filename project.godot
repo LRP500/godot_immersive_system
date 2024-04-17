@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 QuitOnInput="*res://modules/common/quit_on_input.gd"
-InteractionModule="*res://modules/interaction/scripts/interaction_module.gd"
+InteractionModule="*res://modules/interaction/core/interaction_module.gd"
+InventoryModule="*res://modules/inventory/core/inventory_module.tscn"
 PlayerModule="*res://modules/player/interactions/player_module.gd"
 
 [debug]

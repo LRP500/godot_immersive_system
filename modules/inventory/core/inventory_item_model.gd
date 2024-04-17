@@ -5,7 +5,6 @@ class_name InventoryItemModel
 @export var display_name: String
 @export_multiline var description: String
 @export var icon: Texture2D
-@export var scene: PackedScene
 
 @export_multiline var properties: String = "{ }"
 

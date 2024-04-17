@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhtq8xr417mvy"]
+
+[ext_resource type="Script" path="res://modules/inventory/core/inventory_module.gd" id="1_fmwbp"]
+[ext_resource type="Resource" uid="uid://dmuavs13ucfwf" path="res://resources/inventory_atlas.tres" id="2_50pls"]
+
+[node name="InventoryModule" type="Node"]
+script = ExtResource("1_fmwbp")
+atlas = ExtResource("2_50pls")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvph6w6w4on2a"]
 
-[ext_resource type="Script" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_slot_view.gd" id="1_sb82o"]
+[ext_resource type="Script" path="res://modules/inventory/core/hotbar/inventory_hotbar_slot_view.gd" id="1_sb82o"]
 
 [node name="InventoryHotbarSlotView" type="Control" node_paths=PackedStringArray("count_label")]
 custom_minimum_size = Vector2(64, 64)

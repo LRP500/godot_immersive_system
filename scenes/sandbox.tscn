@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=85 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -14,38 +14,39 @@
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://modules/interaction/extras/interactables/button.tscn" id="12_3i20f"]
 [ext_resource type="PackedScene" uid="uid://gjnc46e66ldo" path="res://modules/interaction/extras/interactor.tscn" id="12_g1f5j"]
 [ext_resource type="PackedScene" uid="uid://bkhw1ioaujkxq" path="res://modules/interaction/extras/interface/interaction_view.tscn" id="12_one47"]
-[ext_resource type="Script" path="res://modules/inventory/scripts/inventory.gd" id="13_hbsb7"]
+[ext_resource type="Script" path="res://modules/inventory/core/inventory.gd" id="13_hbsb7"]
 [ext_resource type="Material" uid="uid://c1p7vwq2hbgom" path="res://assets/materials/prototype_orange.material" id="13_rrsfr"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/bounce_interactable.gd" id="14_5ajwv"]
 [ext_resource type="Texture2D" uid="uid://b18oejowrra2a" path="res://assets/textures/SVG/cursor.svg" id="14_ok50p"]
-[ext_resource type="Script" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_input.gd" id="15_0ydjg"]
-[ext_resource type="Script" path="res://modules/inventory/scripts/hotbar/inventory_hotbar.gd" id="15_4mlw5"]
-[ext_resource type="Script" path="res://modules/inventory/scripts/intenvory_logger.gd" id="15_w3qlt"]
+[ext_resource type="Script" path="res://modules/inventory/core/hotbar/inventory_hotbar_input.gd" id="15_0ydjg"]
+[ext_resource type="Script" path="res://modules/inventory/core/hotbar/inventory_hotbar.gd" id="15_4mlw5"]
+[ext_resource type="Script" path="res://modules/inventory/core/intenvory_logger.gd" id="15_w3qlt"]
 [ext_resource type="PackedScene" uid="uid://buxtyevpn2qvp" path="res://modules/inventory/extras/interface/inventory_view.tscn" id="16_1j64m"]
 [ext_resource type="Script" path="res://scripts/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="PackedScene" uid="uid://ofqmae1gtstn" path="res://scripts/logger/interface/hud_log_view.tscn" id="17_7iqax"]
 [ext_resource type="Script" path="res://scripts/interface/tab_menu_view.gd" id="18_5a80n"]
-[ext_resource type="PackedScene" uid="uid://c2h28oouk5qbx" path="res://modules/inventory/scripts/hotbar/inventory_hotbar_view.tscn" id="18_awiui"]
+[ext_resource type="PackedScene" uid="uid://c2h28oouk5qbx" path="res://modules/inventory/core/hotbar/inventory_hotbar_view.tscn" id="18_awiui"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/materials/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/toggle_interactable.gd" id="22_aeymx"]
 [ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="23_02s6c"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/components/display_name.gd" id="23_ieyca"]
+[ext_resource type="Script" path="res://modules/interaction/core/components/display_name.gd" id="23_ieyca"]
 [ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="24_jp6u1"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactions/interaction.gd" id="25_1uj6u"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/components/description.gd" id="25_d8pei"]
+[ext_resource type="Script" path="res://modules/interaction/core/interactions/interaction.gd" id="25_1uj6u"]
+[ext_resource type="Script" path="res://modules/interaction/core/components/description.gd" id="25_d8pei"]
 [ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://modules/interaction/extras/interactables/holdable_button.tscn" id="27_alees"]
 [ext_resource type="Script" path="res://scripts/booth_03_cube.gd" id="28_2h4l3"]
 [ext_resource type="Script" path="res://scripts/booth_03_light.gd" id="28_231x4"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/rigidbody_interactable.gd" id="31_ev36k"]
-[ext_resource type="Script" path="res://modules/interaction/scripts/interactions/carry_interaction.gd" id="32_ldk1h"]
+[ext_resource type="Script" path="res://modules/interaction/core/interactions/carry_interaction.gd" id="32_ldk1h"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_interactable.gd" id="33_0dy1e"]
 [ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="34_wqfu7"]
 [ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="35_lr4pm"]
 [ext_resource type="Resource" uid="uid://dji533rr6rirm" path="res://resources/items/hangdun_ammo.tres" id="38_g6a2l"]
 [ext_resource type="Script" path="res://modules/player/interactions/container_loot_interaction.gd" id="38_qdvtk"]
 [ext_resource type="PackedScene" uid="uid://dp8enkmuc747v" path="res://scenes/items/door_key.tscn" id="40_0fvna"]
-[ext_resource type="Script" path="res://modules/inventory/scripts/inventory_item_stack.gd" id="40_5vni4"]
+[ext_resource type="Script" path="res://modules/inventory/core/inventory_item_stack.gd" id="40_5vni4"]
 [ext_resource type="Resource" uid="uid://cjmotg3kn0ud8" path="res://resources/items/shotgun_ammo.tres" id="41_erq1m"]
+[ext_resource type="Script" path="res://modules/inventory/extras/item.gd" id="42_hdjm0"]
 [ext_resource type="Resource" uid="uid://dnhiojpyxl7ph" path="res://resources/items/credits.tres" id="42_nikgd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
@@ -1065,7 +1066,7 @@ value = "Static Item"
 script = ExtResource("25_d8pei")
 value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
 
-[node name="LootableItem" parent="Bench_01" instance=ExtResource("40_0fvna")]
+[node name="DoorKey" parent="Bench_01" instance=ExtResource("40_0fvna")]
 
 [node name="LootableItemStack" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41322, 1, 0)
@@ -1081,6 +1082,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 material_override = ExtResource("34_wqfu7")
 size = Vector3(0.4, 0.2, 0.25)
 
+[node name="Item" type="Node" parent="Bench_01/LootableItemStack"]
+script = ExtResource("42_hdjm0")
+model = ExtResource("38_g6a2l")
+count = 20
+
 [node name="DisplayName" type="Node" parent="Bench_01/LootableItemStack"]
 script = ExtResource("23_ieyca")
 value = "Lootable Item Stack (%s)"
@@ -1089,10 +1095,8 @@ value = "Lootable Item Stack (%s)"
 script = ExtResource("25_d8pei")
 value = "An interactable stack of items that can be added to the player's inventory."
 
-[node name="LootInteraction" type="Node3D" parent="Bench_01/LootableItemStack"]
+[node name="Lootable" type="Node3D" parent="Bench_01/LootableItemStack"]
 script = ExtResource("35_lr4pm")
-item_model = ExtResource("38_g6a2l")
-count = 20
 
 [node name="LootableItemContainer" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95419, 1, 0)
@@ -1116,7 +1120,7 @@ value = "Item Container"
 script = ExtResource("25_d8pei")
 value = "An interactable stack of items that can be added to the player's inventory."
 
-[node name="ContainerLootInteraction" type="Node3D" parent="Bench_01/LootableItemContainer"]
+[node name="ContainerLootable" type="Node3D" parent="Bench_01/LootableItemContainer"]
 script = ExtResource("38_qdvtk")
 item_stacks = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubResource("Resource_kuhlb"), SubResource("Resource_02ys3"), SubResource("Resource_6jaks")])
 
