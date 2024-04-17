@@ -19,7 +19,8 @@ config/icon="res://icon.svg"
 
 QuitOnInput="*res://modules/common/quit_on_input.gd"
 InteractionModule="*res://modules/interaction/core/interaction_module.gd"
-InventoryModule="*res://modules/inventory/core/inventory_module.tscn"
+InventoryModule="*res://modules/inventory/inventory_module.tscn"
+InventoryAtlas="*res://modules/inventory/extras/atlas/inventory_atlas.tscn"
 PlayerModule="*res://modules/player/interactions/player_module.gd"
 
 [debug]
@@ -36,7 +37,7 @@ project/assembly_name="InteractionSystem"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GoldGdt/plugin.cfg")
+enabled=PackedStringArray("res://addons/GoldGdt/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg")
 
 [file_customization]
 

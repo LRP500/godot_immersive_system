@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmfpul3o3d6to"]
+
+[ext_resource type="Script" path="res://modules/inventory/extras/atlas/inventory_atlas.gd" id="1_w3cgw"]
+[ext_resource type="Script" path="res://modules/inventory/extras/atlas/inventory_atlas_item.gd" id="2_buahe"]
+[ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://resources/items/door_key.tres" id="3_ouw67"]
+[ext_resource type="PackedScene" uid="uid://dp8enkmuc747v" path="res://scenes/items/door_key.tscn" id="4_ep6cr"]
+[ext_resource type="Resource" uid="uid://dji533rr6rirm" path="res://resources/items/hangdun_ammo.tres" id="5_65bfo"]
+[ext_resource type="PackedScene" uid="uid://mvj7yqn8j4k1" path="res://scenes/items/handgun_ammo.tscn" id="6_4u8jd"]
+
+[node name="InventoryAtlas" type="Node"]
+script = ExtResource("1_w3cgw")
+
+[node name="DoorKey" type="Node" parent="."]
+script = ExtResource("2_buahe")
+model = ExtResource("3_ouw67")
+scene = ExtResource("4_ep6cr")
+
+[node name="HandgunAmmo" type="Node" parent="."]
+script = ExtResource("2_buahe")
+model = ExtResource("5_65bfo")
+scene = ExtResource("6_4u8jd")

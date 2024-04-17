@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=83 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -40,13 +40,12 @@
 [ext_resource type="Script" path="res://modules/interaction/core/interactions/carry_interaction.gd" id="32_ldk1h"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_interactable.gd" id="33_0dy1e"]
 [ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="34_wqfu7"]
-[ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="35_lr4pm"]
 [ext_resource type="Resource" uid="uid://dji533rr6rirm" path="res://resources/items/hangdun_ammo.tres" id="38_g6a2l"]
 [ext_resource type="Script" path="res://modules/player/interactions/container_loot_interaction.gd" id="38_qdvtk"]
 [ext_resource type="PackedScene" uid="uid://dp8enkmuc747v" path="res://scenes/items/door_key.tscn" id="40_0fvna"]
 [ext_resource type="Script" path="res://modules/inventory/core/inventory_item_stack.gd" id="40_5vni4"]
 [ext_resource type="Resource" uid="uid://cjmotg3kn0ud8" path="res://resources/items/shotgun_ammo.tres" id="41_erq1m"]
-[ext_resource type="Script" path="res://modules/inventory/extras/item.gd" id="42_hdjm0"]
+[ext_resource type="PackedScene" uid="uid://mvj7yqn8j4k1" path="res://scenes/items/handgun_ammo.tscn" id="41_qnqbv"]
 [ext_resource type="Resource" uid="uid://dnhiojpyxl7ph" path="res://resources/items/credits.tres" id="42_nikgd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
@@ -346,9 +345,6 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gwndb"]
 size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ce182"]
-size = Vector3(0.4, 0.2, 0.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w32fw"]
 size = Vector3(0.5, 0.25, 0.5)
@@ -1068,35 +1064,7 @@ value = "A non-physics interactable objet that can be carried and put back only 
 
 [node name="DoorKey" parent="Bench_01" instance=ExtResource("40_0fvna")]
 
-[node name="LootableItemStack" type="StaticBody3D" parent="Bench_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41322, 1, 0)
-collision_layer = 2
-script = ExtResource("33_0dy1e")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/LootableItemStack"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-shape = SubResource("BoxShape3D_ce182")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/LootableItemStack"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-material_override = ExtResource("34_wqfu7")
-size = Vector3(0.4, 0.2, 0.25)
-
-[node name="Item" type="Node" parent="Bench_01/LootableItemStack"]
-script = ExtResource("42_hdjm0")
-model = ExtResource("38_g6a2l")
-count = 20
-
-[node name="DisplayName" type="Node" parent="Bench_01/LootableItemStack"]
-script = ExtResource("23_ieyca")
-value = "Lootable Item Stack (%s)"
-
-[node name="Description" type="Node" parent="Bench_01/LootableItemStack"]
-script = ExtResource("25_d8pei")
-value = "An interactable stack of items that can be added to the player's inventory."
-
-[node name="Lootable" type="Node3D" parent="Bench_01/LootableItemStack"]
-script = ExtResource("35_lr4pm")
+[node name="HandgunAmmo" parent="Bench_01" instance=ExtResource("41_qnqbv")]
 
 [node name="LootableItemContainer" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95419, 1, 0)

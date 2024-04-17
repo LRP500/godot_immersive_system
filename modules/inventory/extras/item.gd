@@ -8,5 +8,5 @@ class_name Item
 @export var count: int = 1
 
 func _ready() -> void:
-    if not InventoryModule.atlas.contains(model):
+    if not InventoryAtlas.contains(model):
         printerr("[Item] Item %s does not exist in item atlas" % model.id)

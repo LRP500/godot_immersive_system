@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://mvj7yqn8j4k1"]
+
+[ext_resource type="Script" path="res://modules/interaction/extras/items/static_interactable.gd" id="1_f1fk0"]
+[ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="2_0blwn"]
+[ext_resource type="Script" path="res://modules/inventory/extras/item.gd" id="3_3qwp8"]
+[ext_resource type="Resource" uid="uid://dji533rr6rirm" path="res://resources/items/hangdun_ammo.tres" id="4_qxq1s"]
+[ext_resource type="Script" path="res://modules/interaction/core/components/display_name.gd" id="5_4unxf"]
+[ext_resource type="Script" path="res://modules/interaction/core/components/description.gd" id="6_hvtvm"]
+[ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="7_2k2i4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ce182"]
+size = Vector3(0.4, 0.2, 0.25)
+
+[node name="HandgunAmmo" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41322, 1, 0)
+collision_layer = 2
+script = ExtResource("1_f1fk0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_ce182")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = ExtResource("2_0blwn")
+size = Vector3(0.4, 0.2, 0.25)
+
+[node name="Item" type="Node" parent="."]
+script = ExtResource("3_3qwp8")
+model = ExtResource("4_qxq1s")
+
+[node name="DisplayName" type="Node" parent="."]
+script = ExtResource("5_4unxf")
+value = "Lootable Item Stack (%s)"
+
+[node name="Description" type="Node" parent="."]
+script = ExtResource("6_hvtvm")
+value = "An interactable stack of items that can be added to the player's inventory."
+
+[node name="Lootable" type="Node3D" parent="."]
+script = ExtResource("7_2k2i4")

@@ -35,5 +35,5 @@ func unwield(interactor: Interactor) -> void:
     item = null
 
 func _create_item(inventory_item: InventoryItem) -> Node3D:
-    var scene: PackedScene = InventoryModule.atlas.get_packed_scene(inventory_item.model)
+    var scene: PackedScene = InventoryAtlas.get_packed_scene(inventory_item.model)
     return scene.instantiate() if scene else null
