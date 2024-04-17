@@ -19,3 +19,6 @@ func clear() -> void:
 	for view in item_views:
 		view.queue_free()
 	item_views.clear()
+
+# BUG: VBoxContainer expands from the middle instead of the bottom
+# TODO: Make VBoxContainer scrollable

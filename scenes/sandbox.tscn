@@ -1091,6 +1091,8 @@ value = "An interactable stack of items that can be added to the player's invent
 [node name="ContainerLootable" type="Node3D" parent="Bench_01/LootableItemContainer"]
 script = ExtResource("38_qdvtk")
 item_stacks = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubResource("Resource_kuhlb"), SubResource("Resource_02ys3"), SubResource("Resource_6jaks")])
+unlimited_use_count = true
+interaction_text = "Take All"
 
 [connection signal="draw" from="UI/TabMenu/InventoryView" to="UI/TabMenu/InventoryView" method="_on_draw"]
 

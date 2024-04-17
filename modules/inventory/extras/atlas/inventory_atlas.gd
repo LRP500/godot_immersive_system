@@ -13,3 +13,6 @@ func get_packed_scene(model: InventoryItemModel) -> PackedScene:
 
 func contains(model: InventoryItemModel) -> bool:
     return _items.has(model)
+
+# TODO: Stack items of same type on loot
+# TODO: Add configurable max stack size for each item model

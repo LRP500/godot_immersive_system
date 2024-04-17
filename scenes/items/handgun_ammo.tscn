@@ -39,3 +39,4 @@ value = "An interactable stack of items that can be added to the player's invent
 
 [node name="Lootable" type="Node3D" parent="."]
 script = ExtResource("7_2k2i4")
+interaction_text = "Take"
