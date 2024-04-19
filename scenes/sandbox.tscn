@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=84 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
@@ -47,6 +47,7 @@
 [ext_resource type="Resource" uid="uid://cjmotg3kn0ud8" path="res://resources/items/shotgun_ammo.tres" id="41_erq1m"]
 [ext_resource type="PackedScene" uid="uid://mvj7yqn8j4k1" path="res://scenes/items/handgun_ammo.tscn" id="41_qnqbv"]
 [ext_resource type="Resource" uid="uid://dnhiojpyxl7ph" path="res://resources/items/credits.tres" id="42_nikgd"]
+[ext_resource type="Script" path="res://modules/inventory/extras/item_container.gd" id="43_vywgi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -1069,32 +1070,34 @@ value = "A non-physics interactable objet that can be carried and put back only 
 [node name="Item" parent="Bench_01/HandgunAmmo" index="2"]
 count = 20
 
-[node name="LootableItemContainer" type="StaticBody3D" parent="Bench_01"]
+[node name="ItemContainer" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95419, 1, 0)
 collision_layer = 2
 script = ExtResource("33_0dy1e")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/LootableItemContainer"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/ItemContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("BoxShape3D_w32fw")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/LootableItemContainer"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/ItemContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 material_override = ExtResource("34_wqfu7")
 size = Vector3(0.5, 0.25, 0.5)
 
-[node name="DisplayName" type="Node" parent="Bench_01/LootableItemContainer"]
+[node name="ItemContainer" type="Node" parent="Bench_01/ItemContainer"]
+script = ExtResource("43_vywgi")
+content = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubResource("Resource_kuhlb"), SubResource("Resource_02ys3"), SubResource("Resource_6jaks")])
+
+[node name="DisplayName" type="Node" parent="Bench_01/ItemContainer"]
 script = ExtResource("23_ieyca")
 value = "Item Container"
 
-[node name="Description" type="Node" parent="Bench_01/LootableItemContainer"]
+[node name="Description" type="Node" parent="Bench_01/ItemContainer"]
 script = ExtResource("25_d8pei")
 value = "An interactable stack of items that can be added to the player's inventory."
 
-[node name="ContainerLootable" type="Node3D" parent="Bench_01/LootableItemContainer"]
+[node name="ContainerLootable" type="Node3D" parent="Bench_01/ItemContainer"]
 script = ExtResource("38_qdvtk")
-item_stacks = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubResource("Resource_kuhlb"), SubResource("Resource_02ys3"), SubResource("Resource_6jaks")])
-unlimited_use_count = true
 interaction_text = "Take All"
 
 [connection signal="draw" from="UI/TabMenu/InventoryView" to="UI/TabMenu/InventoryView" method="_on_draw"]

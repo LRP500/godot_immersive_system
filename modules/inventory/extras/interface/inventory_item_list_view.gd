@@ -14,6 +14,7 @@ func bind(items: Array[InventoryItem]) -> void:
 		var view := item_view.instantiate() as InventoryItemView
 		view.bind(item)
 		add_child(view)
+		item_views.append(view)
 
 func clear() -> void:
 	for view in item_views:
