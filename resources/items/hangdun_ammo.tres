@@ -7,4 +7,7 @@ script = ExtResource("1_sx75y")
 id = "handgun_ammo"
 display_name = "Handgun Ammo"
 description = "Ammunition for your trusted handgun."
+stackable = true
+max_stack_size = -1
+max_capacity = -1
 properties = "{ }"

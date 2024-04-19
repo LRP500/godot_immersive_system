@@ -1066,6 +1066,9 @@ value = "A non-physics interactable objet that can be carried and put back only 
 
 [node name="HandgunAmmo" parent="Bench_01" instance=ExtResource("41_qnqbv")]
 
+[node name="Item" parent="Bench_01/HandgunAmmo" index="2"]
+count = 20
+
 [node name="LootableItemContainer" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95419, 1, 0)
 collision_layer = 2
@@ -1098,3 +1101,4 @@ interaction_text = "Take All"
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
+[editable path="Bench_01/HandgunAmmo"]

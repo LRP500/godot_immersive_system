@@ -7,4 +7,7 @@ script = ExtResource("1_1j6a2")
 id = "shotgun_ammo"
 display_name = "Shotgun Ammo"
 description = "Ammunition for a shotgun that might or might not exist."
+stackable = true
+max_stack_size = -1
+max_capacity = -1
 properties = "{ }"

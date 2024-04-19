@@ -29,6 +29,8 @@ func _update_description() -> void:
 
 func interact(_interactor: Interactor) -> void:
     var inventory_item := InventoryItem.create(item.model, item.count)
+    if !PlayerModule.player.inventory.can_add(inventory_item):
+        return
     PlayerModule.player.inventory.add_item(inventory_item)
     if destroy_on_loot:
         parent.queue_free()
