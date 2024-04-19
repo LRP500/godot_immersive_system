@@ -25,6 +25,7 @@ func interact_start(_interactor: Interactor) -> void:
 func interact_stop(_interactor: Interactor) -> void:
     pass
 
+# WIP: Loot only what fits in inventory, leave the rest in the container to be looted later
 func _loot_content() -> void:
    for stack in item_stacks:
         var item := InventoryItem.create(stack.item_model, stack.count)
