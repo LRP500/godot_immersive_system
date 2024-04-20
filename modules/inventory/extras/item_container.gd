@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func loot() -> void:
     _loot_content()
-    if item_container.is_empty() && destroy_on_empty:
+    if is_empty() && destroy_on_empty:
         get_parent().queue_free()
     elif update_display_name:
         _update_display_name()
