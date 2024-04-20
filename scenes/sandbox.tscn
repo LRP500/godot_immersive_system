@@ -794,7 +794,7 @@ interact_targets = [NodePath("../CSGSphere3D")]
 
 [node name="Description" type="Node" parent="Booth_01/Button"]
 script = ExtResource("25_d8pei")
-value = "A simple interactable push button triggering a custom effect."
+initial_value = "A simple interactable push button triggering a custom effect."
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Booth_01"]
 transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 13.5, 6, -9)
@@ -851,7 +851,7 @@ autoplay = "idle"
 
 [node name="Description" type="Node" parent="Booth_02/Toggle"]
 script = ExtResource("25_d8pei")
-value = "A simple switch toggle enabling/disabling world objects and triggering custom effects."
+initial_value = "A simple switch toggle enabling/disabling world objects and triggering custom effects."
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Booth_02"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 2.55, -2)
@@ -899,7 +899,6 @@ reset_on_release = false
 
 [node name="Description" type="Node" parent="Booth_03/HoldableButton"]
 script = ExtResource("25_d8pei")
-value = "A holdable button with persistant progress blending between animation states and enabling/disabling world objects."
 
 [node name="SpotLight3D (Top)" type="SpotLight3D" parent="Booth_03"]
 transform = Transform3D(0.431932, -0.862089, -0.265024, 0.396413, -0.0824783, 0.91436, -0.810118, -0.5, 0.306118, 14.6387, 7.081, 4.5)
@@ -973,11 +972,11 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [node name="DisplayName" type="Node" parent="Bench_01/SimpleItem"]
 script = ExtResource("23_ieyca")
-value = "Simple Item"
+initial_value = "Simple Item"
 
 [node name="Description" type="Node" parent="Bench_01/SimpleItem"]
 script = ExtResource("25_d8pei")
-value = "The simplest form of interactable item with name and description."
+initial_value = "The simplest form of interactable item with name and description."
 
 [node name="MultiInteractionItem" type="RigidBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.25, 0)
@@ -1005,11 +1004,11 @@ interaction_text = "Option 3"
 
 [node name="DisplayName" type="Node" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("23_ieyca")
-value = "Multiple Interaction Item"
+initial_value = "Multiple Interaction Item"
 
 [node name="Description" type="Node" parent="Bench_01/MultiInteractionItem"]
 script = ExtResource("25_d8pei")
-value = "A interactable world object with multiple choices of actions."
+initial_value = "A interactable world object with multiple choices of actions."
 
 [node name="RigidbodyItem" type="RigidBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0)
@@ -1031,11 +1030,11 @@ interaction_text = "Carry"
 
 [node name="DisplayName" type="Node" parent="Bench_01/RigidbodyItem"]
 script = ExtResource("23_ieyca")
-value = "RigidBody Item"
+initial_value = "RigidBody Item"
 
 [node name="Description" type="Node" parent="Bench_01/RigidbodyItem"]
 script = ExtResource("25_d8pei")
-value = "A physics-based interactable objet that can be carried and dropped."
+initial_value = "A physics-based interactable objet that can be carried and dropped."
 
 [node name="StaticItem" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1, 0)
@@ -1057,11 +1056,11 @@ interaction_text = "Carry"
 
 [node name="DisplayName" type="Node" parent="Bench_01/StaticItem"]
 script = ExtResource("23_ieyca")
-value = "Static Item"
+initial_value = "Static Item"
 
 [node name="Description" type="Node" parent="Bench_01/StaticItem"]
 script = ExtResource("25_d8pei")
-value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
+initial_value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
 
 [node name="DoorKey" parent="Bench_01" instance=ExtResource("40_0fvna")]
 
@@ -1069,6 +1068,7 @@ value = "A non-physics interactable objet that can be carried and put back only 
 
 [node name="Item" parent="Bench_01/HandgunAmmo" index="2"]
 count = 20
+update_description = false
 
 [node name="ItemContainer" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95419, 1, 0)
@@ -1090,11 +1090,11 @@ content = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubReso
 
 [node name="DisplayName" type="Node" parent="Bench_01/ItemContainer"]
 script = ExtResource("23_ieyca")
-value = "Item Container"
+initial_value = "Item Container"
 
 [node name="Description" type="Node" parent="Bench_01/ItemContainer"]
 script = ExtResource("25_d8pei")
-value = "An interactable stack of items that can be added to the player's inventory."
+initial_value = "An interactable stack of items that can be added to the player's inventory."
 
 [node name="ContainerLootable" type="Node3D" parent="Bench_01/ItemContainer"]
 script = ExtResource("38_qdvtk")
