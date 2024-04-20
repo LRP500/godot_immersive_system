@@ -6,33 +6,37 @@ signal item_unbinded(slot: InventoryHotbarSlot)
 
 @export var slot_count: int = 4
 
-var inventory: Inventory
-var slots: Array[InventoryHotbarSlot] = []
+var _inventory: Inventory
+var _item_holder: WieldableItemHolder
+var _slots: Array[InventoryHotbarSlot] = []
+var _selected_slot_index: int = -1
 
 func _ready() -> void:
-    inventory = get_parent()
-    if inventory == null:
-        queue_free()
-    else:
-        _create_slots()
-        inventory.item_added.connect(_on_item_added)
-        inventory.item_removed.connect(_on_item_removed)
+    _inventory = get_parent()
+    assert(_inventory, "[InventoryHotbar] Inventory not found")
+    var interactor := InteractionModule.interactor
+    assert(interactor, "[InventoryHotbar] Interactor not found")
+    _item_holder = interactor.get_node("%WieldableItemHolder")
+    assert(_item_holder, "[InventoryHotbar] WieldableItemHolder not found")
+    _inventory.item_added.connect(_on_item_added)
+    _inventory.item_removed.connect(_on_item_removed)
+    _create_slots()
 
 func _create_slots() -> void:
     for i in slot_count:
-        slots.append(InventoryHotbarSlot.new())
+        _slots.append(InventoryHotbarSlot.new())
 
 func _on_item_added(item: InventoryItem) -> void:
     if !_is_wieldable(item):
         return
-    for slot in slots:
+    for slot in _slots:
         if slot.is_empty():
             slot.item = item
             item_binded.emit(slot)
             return
 
 func _on_item_removed(item: InventoryItem) -> void:
-    for slot in slots:
+    for slot in _slots:
         if slot.item == item:
             slot.item = null
             item_unbinded.emit(slot)
@@ -41,12 +45,32 @@ func _is_wieldable(item: InventoryItem) -> bool:
     return item.model.get_meta("wieldable", false)
 
 func is_empty() -> bool:
-    for slot in slots:
+    for slot in _slots:
         if !slot.is_empty():
             return false
     return true
 
-func get_item_at(index: int) -> InventoryItem:
+func get_slot(index: int) -> InventoryHotbarSlot:
     if index < 0 || index >= slot_count:
         return null
-    return slots[index].item
+    return _slots[index]
+
+# func get_item_at(index: int) -> InventoryItem:
+#     if index < 0 || index >= slot_count:
+#         return null
+#     return _slots[index].item
+
+func select_slot(new_slot_index: int) -> void:
+    if new_slot_index < 0 || new_slot_index >= slot_count:
+        return
+    if new_slot_index == _selected_slot_index:
+        return
+    if _selected_slot_index >= 0:
+        var previous_slot := get_slot(_selected_slot_index)
+        previous_slot.selected = false
+    var new_slot := get_slot(new_slot_index)
+    new_slot.selected = true
+    _selected_slot_index = new_slot_index
+    _item_holder.unwield(InteractionModule.interactor)
+    if new_slot.item && _is_wieldable(new_slot.item):
+        _item_holder.wield(InteractionModule.interactor, new_slot.item)

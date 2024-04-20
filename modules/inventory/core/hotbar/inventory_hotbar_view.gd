@@ -33,7 +33,7 @@ func _update() -> void:
         show()
 
 func _create_slots() -> void:
-    for slot in hotbar.slots:
+    for slot in hotbar._slots:
         var view := slot_view.instantiate() as InventoryHotbarSlotView
         view.bind(slot)
         slot_views.append(view)

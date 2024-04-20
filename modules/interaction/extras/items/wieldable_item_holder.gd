@@ -30,6 +30,8 @@ func wield(interactor: Interactor, inventory_item: InventoryItem) -> void:
         wield_method.call(interactor)
 
 func unwield(interactor: Interactor) -> void:
+    if !item:
+        return
     var unwield_method := Callable(item, "on_unwield")
     if unwield_method.is_valid():
         unwield_method.call(interactor)

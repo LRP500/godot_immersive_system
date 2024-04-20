@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://modules/inventory/core/hotbar/inventory_hotbar_slot_view.gd" id="1_sb82o"]
 
-[node name="InventoryHotbarSlotView" type="Control" node_paths=PackedStringArray("count_label")]
+[node name="InventoryHotbarSlotView" type="Control" node_paths=PackedStringArray("count_label", "selection_rect")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
@@ -10,6 +10,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_sb82o")
 count_label = NodePath("CountLabel")
+selection_rect = NodePath("SelectionRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -40,3 +41,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 text_direction = 2
+
+[node name="SelectionRect" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(1, 1, 1, 0.5)
+border_width = 2.0
+editor_only = false

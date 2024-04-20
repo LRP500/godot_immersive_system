@@ -3,15 +3,6 @@ class_name InventoryHotbarInput
 
 @onready var hotbar: InventoryHotbar = get_parent()
 
-var interactor: Interactor
-var item_holder: WieldableItemHolder
-var current_slot_index: int = -1
-
-func _ready() -> void:
-	interactor = InteractionModule.interactor
-	item_holder = interactor.get_node("%WieldableItemHolder")
-	assert(item_holder, "[InventoryHotbarInput] Unable to find WieldableItemHolder")
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory_hotbar_slot_01"):
 		_focus_slot(0)
@@ -33,10 +24,4 @@ func _input(event: InputEvent) -> void:
 		_focus_slot(8)
 
 func _focus_slot(slot_index: int) -> void:
-	if slot_index == current_slot_index:
-		return
-	var item := hotbar.get_item_at(slot_index)
-	if !item:
-		return
-	current_slot_index = slot_index
-	item_holder.wield(interactor, item)
+	hotbar.select_slot(slot_index)
