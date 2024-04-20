@@ -6,7 +6,7 @@ class_name ItemContainer
 
 @export_group("Interface")
 @export var update_display_name: bool = true
-@export var display_name_empty_format: String = "%s [Empty]"
+@export var empty_display_name_format: String = "%s [Empty]"
 
 var _items: Array[InventoryItem] = []
 
@@ -17,6 +17,8 @@ func _ready() -> void:
     for stack in content:
         var item := InventoryItem.new(stack.item_model, stack.count)
         _items.append(item)
+    if update_display_name:
+        _update_display_name()
 
 func loot() -> void:
     _loot_content()
@@ -42,7 +44,8 @@ func _update_display_name() -> void:
     var display_name := $"../DisplayName" as DisplayName
     if !display_name:
         return
+    await display_name.ready
     if is_empty():
-        display_name.value = display_name_empty_format % display_name.initial_value
+        display_name.value = empty_display_name_format % display_name.initial_value
     else:
         display_name.reset()

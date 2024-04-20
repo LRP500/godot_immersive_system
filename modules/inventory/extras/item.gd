@@ -31,6 +31,7 @@ func _update_display_name() -> void:
     var display_name := $"../DisplayName" as DisplayName
     if !display_name:
         return
+    await display_name.ready
     var inventory_item := InventoryItem.create(model, count)
     display_name.value = inventory_item.to_display_name()
 
@@ -38,4 +39,5 @@ func _update_description() -> void:
     var description := $"../Description" as Description
     if !description:
         return
+    await description.ready
     description.value = model.description
