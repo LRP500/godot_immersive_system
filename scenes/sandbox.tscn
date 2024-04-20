@@ -1098,7 +1098,9 @@ content = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubReso
 
 [node name="ContainerLootable" type="Node3D" parent="Bench_01/ItemContainer"]
 script = ExtResource("38_qdvtk")
+is_enabled = null
 interaction_text = "Take All"
+input_map_action = null
 
 [connection signal="draw" from="UI/TabMenu/InventoryView" to="UI/TabMenu/InventoryView" method="_on_draw"]
 

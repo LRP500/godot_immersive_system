@@ -9,5 +9,5 @@ display_name = "Handgun Ammo"
 description = "Ammunition for your trusted handgun."
 stackable = true
 max_stack_size = -1
-max_capacity = -1
+max_capacity = 40
 properties = "{ }"

@@ -18,7 +18,7 @@ func get_items() -> Array[InventoryItem]:
 func can_add(item: InventoryItem) -> bool:
     if item.model.max_capacity == -1:
         return true
-    elif _get_item_count(item) < item.model.max_capacity:
+    elif _get_count(item) + item.count <= item.model.max_capacity:
         return true
     return false
 
@@ -33,6 +33,19 @@ func add_item(item: InventoryItem) -> void:
     else:
         _items.append(item)
     item_added.emit(item)
+
+# Partially adds the item to the inventory depending on current capacity.
+# Returns the remaining item that couldn't be added.
+func try_add_item(item: InventoryItem) -> InventoryItem:
+    if can_add(item):
+        add_item(item)
+        return null
+    var can_be_added := item.model.max_capacity - _get_count(item)
+    if can_be_added != 0:
+        var partial_item := InventoryItem.new(item.model, can_be_added)
+        item.count -= can_be_added
+        add_item(partial_item)
+    return item
 
 func _add_to_stack(stack: InventoryItem, count: int) -> void:
     var max_size := stack.model.max_stack_size
@@ -69,7 +82,7 @@ func _get_free_stack(item: InventoryItem) -> InventoryItem:
 func _get_stacks(item: InventoryItem) -> Array[InventoryItem]:
     return _items.filter(func(x: InventoryItem) -> bool: return x.model == item.model)
 
-func _get_item_count(item: InventoryItem) -> int:
+func _get_count(item: InventoryItem) -> int:
     var stacks := _get_stacks(item)
     var count: int = 0
     for stack in stacks:
