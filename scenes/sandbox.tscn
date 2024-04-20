@@ -1066,7 +1066,7 @@ initial_value = "A non-physics interactable objet that can be carried and put ba
 
 [node name="HandgunAmmo" parent="Bench_01" instance=ExtResource("41_qnqbv")]
 
-[node name="Item" parent="Bench_01/HandgunAmmo" index="4"]
+[node name="Item" parent="Bench_01/HandgunAmmo" index="2"]
 count = 20
 update_description = false
 
