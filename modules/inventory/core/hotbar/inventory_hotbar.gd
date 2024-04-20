@@ -5,6 +5,7 @@ signal item_binded(slot: InventoryHotbarSlot)
 signal item_unbinded(slot: InventoryHotbarSlot)
 
 @export var slot_count: int = 4
+@export var allow_unselect_slot: bool = true
 
 var _inventory: Inventory
 var _item_holder: WieldableItemHolder
@@ -55,22 +56,23 @@ func get_slot(index: int) -> InventoryHotbarSlot:
         return null
     return _slots[index]
 
-# func get_item_at(index: int) -> InventoryItem:
-#     if index < 0 || index >= slot_count:
-#         return null
-#     return _slots[index].item
-
 func select_slot(new_slot_index: int) -> void:
     if new_slot_index < 0 || new_slot_index >= slot_count:
         return
-    if new_slot_index == _selected_slot_index:
+    if new_slot_index == _selected_slot_index && allow_unselect_slot:
+        unselect_slot()
         return
-    if _selected_slot_index >= 0:
-        var previous_slot := get_slot(_selected_slot_index)
-        previous_slot.selected = false
+    unselect_slot()
+    _selected_slot_index = new_slot_index
     var new_slot := get_slot(new_slot_index)
     new_slot.selected = true
-    _selected_slot_index = new_slot_index
-    _item_holder.unwield(InteractionModule.interactor)
     if new_slot.item && _is_wieldable(new_slot.item):
         _item_holder.wield(InteractionModule.interactor, new_slot.item)
+
+func unselect_slot() -> void:
+    if _selected_slot_index == -1:
+        return
+    var slot := get_slot(_selected_slot_index)
+    slot.selected = false
+    _selected_slot_index = -1
+    _item_holder.unwield(InteractionModule.interactor)
