@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-QuitOnInput="*res://modules/common/quit_on_input.gd"
-FullscreenOnInput="*res://modules/common/fullscreen_on_input.gd"
+QuitOnInput="*res://modules/common/input/quit_on_input.gd"
+FullscreenOnInput="*res://modules/common/input/fullscreen_on_input.gd"
+InputActionMapManager="*res://modules/common/input/action_map/input_action_map_manager.tscn"
 InteractionModule="*res://modules/interaction/core/interaction_module.gd"
 InventoryModule="*res://modules/inventory/inventory_module.tscn"
 InventoryAtlas="*res://modules/inventory/extras/atlas/inventory_atlas.tscn"

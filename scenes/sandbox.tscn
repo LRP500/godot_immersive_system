@@ -1,5 +1,6 @@
-[gd_scene load_steps=84 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=85 format=3 uid="uid://qhgslmcrqbo8"]
 
+[ext_resource type="Script" path="res://scenes/sandbox.gd" id="1_lvi6m"]
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="2_0ikeh"]
 [ext_resource type="Script" path="res://modules/player/player.gd" id="2_mus01"]
@@ -371,6 +372,9 @@ item_model = ExtResource("42_nikgd")
 count = 200
 
 [node name="Sandbox" type="Node3D"]
+
+[node name="SceneController" type="Node" parent="."]
+script = ExtResource("1_lvi6m")
 
 [node name="Environment" type="Node3D" parent="."]
 
