@@ -6,6 +6,10 @@ signal map_changed(map: InputActionMap)
 
 var current_map: InputActionMap
 
+func _process(_delta: float) -> void:
+	if current_map:
+		current_map.process()
+
 func enable(map_id: String) -> void:
 	var map_to_enable: InputActionMap = get_action_map(map_id)
 	if map_to_enable != current_map:
@@ -27,6 +31,8 @@ func get_action_map(map_id: String) -> InputActionMap:
 	assert(result, "[Input] InputActionMap %s not found" % map_id)
 	return result
 
-func _process(_delta: float) -> void:
-	if current_map:
-		current_map.process()
+func is_action_just_pressed(event_name: String) -> bool:
+	var event: InputActionMapKeyEvent = current_map.get_key_event(event_name)
+	if event == null:
+		return false
+	return event.is_just_pressed()

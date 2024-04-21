@@ -14,3 +14,6 @@ func get_key_event(event_name: String) -> InputActionMapKeyEvent:
 			assert(event is InputActionMapKeyEvent, "[Input] Invalid action map event type ([i]%s[/i])" % event_name)
 			return event
 	return null
+
+func has_event(event_name: String) -> bool:
+	return get_key_event(event_name) != null

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bolbty6qxhivv"]
+
+[ext_resource type="Script" path="res://scripts/interface/player_menu_view.gd" id="1_r78am"]
+[ext_resource type="PackedScene" uid="uid://buxtyevpn2qvp" path="res://modules/inventory/extras/interface/inventory_view.tscn" id="2_b4lro"]
+
+[node name="PlayerMenuView" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r78am")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="InventoryView" parent="." instance=ExtResource("2_b4lro")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 64.0
+offset_top = 52.0
+offset_right = -667.0
+offset_bottom = -222.0
+
+[connection signal="draw" from="InventoryView" to="InventoryView" method="_on_draw"]

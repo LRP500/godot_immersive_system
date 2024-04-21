@@ -30,8 +30,9 @@ func _subscribe_input_events() -> void:
     var action_map := InputActionMapManager.get_action_map("gameplay")
     action_map.get_key_event("interact").just_pressed.connect(_on_interact_pressed)
 
+# TODO: Reword interaction input handling using action maps
 func _on_interact_pressed() -> void:
-    print("Interact pressed!")
+    pass
 
 func _process_input() -> void:
     if target != null:
