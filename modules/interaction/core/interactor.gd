@@ -25,7 +25,6 @@ func _process(_delta: float) -> void:
 
 #region Input
 
-# TODO: Reword interaction input handling using action maps
 func _on_interact_pressed() -> void:
     pass
 
@@ -47,7 +46,7 @@ func _process_interactions(_interactions: Array[Interaction]) -> void:
             interaction.interact_stop(self)
             _clear_active_interaction()
 
-#endregion
+#endregion Input
 
 func _find_target() -> void:
     if !raycast.is_colliding():
