@@ -31,8 +31,24 @@ func get_action_map(map_id: String) -> InputActionMap:
 	assert(result, "[Input] InputActionMap %s not found" % map_id)
 	return result
 
+#region Input Queries
+
 func is_action_just_pressed(event_name: String) -> bool:
 	var event: InputActionMapKeyEvent = current_map.get_key_event(event_name)
 	if event == null:
 		return false
 	return event.is_just_pressed()
+
+func is_action_just_released(event_name: String) -> bool:
+	var event: InputActionMapKeyEvent = current_map.get_key_event(event_name)
+	if event == null:
+		return false
+	return event.is_just_released()
+
+func is_action_pressed(event_name: String) -> bool:
+	var event: InputActionMapKeyEvent = current_map.get_key_event(event_name)
+	if event == null:
+		return false
+	return event.is_pressed()
+
+#endregion Input Queries

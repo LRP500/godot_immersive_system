@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=87 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Script" path="res://scenes/sandbox.gd" id="1_lvi6m"]
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
@@ -22,15 +22,18 @@
 [ext_resource type="Script" path="res://modules/inventory/core/hotbar/inventory_hotbar_input.gd" id="15_0ydjg"]
 [ext_resource type="Script" path="res://modules/inventory/core/hotbar/inventory_hotbar.gd" id="15_4mlw5"]
 [ext_resource type="Script" path="res://modules/inventory/core/intenvory_logger.gd" id="15_w3qlt"]
+[ext_resource type="PackedScene" uid="uid://buxtyevpn2qvp" path="res://modules/inventory/extras/interface/inventory_view.tscn" id="16_1j64m"]
 [ext_resource type="Script" path="res://scripts/toggle_animation.gd" id="16_7fp7p"]
 [ext_resource type="PackedScene" uid="uid://ofqmae1gtstn" path="res://scripts/logger/interface/hud_log_view.tscn" id="17_7iqax"]
 [ext_resource type="PackedScene" uid="uid://c2h28oouk5qbx" path="res://modules/inventory/core/hotbar/inventory_hotbar_view.tscn" id="18_awiui"]
+[ext_resource type="Script" path="res://scripts/interface/hud_view.gd" id="18_dmiwl"]
 [ext_resource type="Material" uid="uid://74qnokvfr7x4" path="res://assets/materials/prototype_purple.material" id="19_o6653"]
 [ext_resource type="Script" path="res://modules/interaction/extras/interactables/toggle_interactable.gd" id="22_aeymx"]
-[ext_resource type="PackedScene" uid="uid://d3rdpo5gns0mu" path="res://scripts/interface/player_menu.tscn" id="22_keh7j"]
+[ext_resource type="Script" path="res://scripts/interface/player_menu.gd" id="22_yj4ku"]
 [ext_resource type="Material" uid="uid://bo0jllnoebsi8" path="res://assets/materials/mat_grey.material" id="23_02s6c"]
 [ext_resource type="Script" path="res://modules/interaction/core/components/display_name.gd" id="23_ieyca"]
 [ext_resource type="Material" uid="uid://c8g1awyfno3f8" path="res://assets/materials/interactable.material" id="24_jp6u1"]
+[ext_resource type="Script" path="res://scripts/interface/player_menu_view.gd" id="24_s4ub4"]
 [ext_resource type="Script" path="res://modules/interaction/core/interactions/interaction.gd" id="25_1uj6u"]
 [ext_resource type="Script" path="res://modules/interaction/core/components/description.gd" id="25_d8pei"]
 [ext_resource type="PackedScene" uid="uid://cxksiy8i2qrfq" path="res://modules/interaction/extras/interactables/holdable_button.tscn" id="27_alees"]
@@ -728,15 +731,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HUD" type="Control" parent="UI"]
+[node name="HUDView" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("18_dmiwl")
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/HUD"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/HUDView"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -745,24 +749,53 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="UI/HUD/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/HUDView/CenterContainer"]
 self_modulate = Color(1, 1, 1, 0.2)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("14_ok50p")
 expand_mode = 1
 
-[node name="InteractionView" parent="UI/HUD" instance=ExtResource("12_one47")]
+[node name="InteractionView" parent="UI/HUDView" instance=ExtResource("12_one47")]
 layout_mode = 1
 
-[node name="HUDLogView" parent="UI/HUD" instance=ExtResource("17_7iqax")]
+[node name="HUDLogView" parent="UI/HUDView" instance=ExtResource("17_7iqax")]
 layout_mode = 1
 fade_delay = 3.0
 
-[node name="InventoryHotbarView" parent="UI/HUD" instance=ExtResource("18_awiui")]
+[node name="InventoryHotbarView" parent="UI/HUDView" instance=ExtResource("18_awiui")]
 layout_mode = 1
 
-[node name="PlayerMenu" parent="UI" instance=ExtResource("22_keh7j")]
+[node name="PlayerMenu" type="Node" parent="UI"]
+script = ExtResource("22_yj4ku")
+
+[node name="PlayerMenuView" type="Control" parent="UI/PlayerMenu" node_paths=PackedStringArray("player_menu")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_s4ub4")
+player_menu = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="UI/PlayerMenu/PlayerMenuView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="InventoryView" parent="UI/PlayerMenu/PlayerMenuView" instance=ExtResource("16_1j64m")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 64.0
+offset_top = 52.0
+offset_right = -667.0
+offset_bottom = -222.0
 
 [node name="Booth_01" type="Node3D" parent="."]
 
@@ -1079,6 +1112,8 @@ script = ExtResource("38_qdvtk")
 is_enabled = null
 interaction_text = "Take All"
 input_map_action = null
+
+[connection signal="draw" from="UI/PlayerMenu/PlayerMenuView/InventoryView" to="UI/PlayerMenu/PlayerMenuView/InventoryView" method="_on_draw"]
 
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
