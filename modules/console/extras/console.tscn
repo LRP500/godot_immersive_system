@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdegvmbaxdu3b"]
+
+[ext_resource type="Script" path="res://modules/console/core/console.gd" id="1_u2kj2"]
+[ext_resource type="Script" path="res://modules/console/core/console_view.gd" id="2_ocivm"]
+[ext_resource type="Theme" uid="uid://b2hkhvslwhuqe" path="res://modules/console/extras/console_theme.theme" id="3_d6tlt"]
+
+[node name="Console" type="Node"]
+script = ExtResource("1_u2kj2")
+
+[node name="ConsoleView" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ocivm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConsoleView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="ConsoleView/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = ExtResource("3_d6tlt")
+
+[node name="MarginContainer" type="MarginContainer" parent="ConsoleView/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ConsoleView/VBoxContainer/Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_d6tlt")
+scroll_active = false
+scroll_following = true
+
+[node name="LineEdit" type="LineEdit" parent="ConsoleView/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_d6tlt")
+max_length = 100
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+flat = true
+select_all_on_focus = true
+caret_blink = true
