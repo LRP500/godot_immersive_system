@@ -6,4 +6,4 @@
 
 [node name="InputActionMapManager" type="Node"]
 script = ExtResource("1_fd6hj")
-action_maps = Array[Resource("res://modules/common/input/action_map/input_action_map.gd")]([ExtResource("2_3aagu"), ExtResource("3_ml4hq")])
+action_maps = Array[Resource("res://modules/input/action_map/input_action_map.gd")]([ExtResource("2_3aagu"), ExtResource("3_ml4hq")])

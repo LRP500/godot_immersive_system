@@ -1,13 +1,12 @@
 extends Control
 class_name ConsoleView
 
-@onready var console: Console = get_parent()
 @onready var console_text: RichTextLabel = %RichTextLabel
 @onready var input_field: LineEdit = %LineEdit
 
 func _ready() -> void:
-    console.opened.connect(_on_console_opened)
-    console.closed.connect(_on_console_closed)
+    Console.opened.connect(_on_console_opened)
+    Console.closed.connect(_on_console_closed)
     z_index = 1000
     hide()
 
@@ -16,7 +15,7 @@ func _process(_delta: float) -> void:
         _submit()
 
 func _submit() -> void:
-    console.submit(input_field.text)
+    Console.submit(input_field.text)
     input_field.clear()
 
 func _on_console_opened() -> void:

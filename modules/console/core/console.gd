@@ -1,5 +1,4 @@
 extends Node
-class_name Console
 
 signal opened
 signal closed

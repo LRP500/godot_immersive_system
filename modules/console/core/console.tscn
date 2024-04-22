@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://modules/console/core/console.gd" id="1_u2kj2"]
 [ext_resource type="Script" path="res://modules/console/core/console_view.gd" id="2_ocivm"]
-[ext_resource type="Theme" uid="uid://b2hkhvslwhuqe" path="res://modules/console/extras/console_theme.theme" id="3_d6tlt"]
+[ext_resource type="Theme" uid="uid://b2hkhvslwhuqe" path="res://modules/console/core/console_theme.theme" id="3_d6tlt"]
 
 [node name="Console" type="Node"]
 script = ExtResource("1_u2kj2")
@@ -26,7 +26,7 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="Panel" type="Panel" parent="ConsoleView/VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 284)
 layout_mode = 2
 theme = ExtResource("3_d6tlt")
 
@@ -51,6 +51,7 @@ scroll_following = true
 
 [node name="LineEdit" type="LineEdit" parent="ConsoleView/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 theme = ExtResource("3_d6tlt")
 max_length = 100
