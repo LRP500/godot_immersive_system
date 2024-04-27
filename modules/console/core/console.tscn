@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdegvmbaxdu3b"]
+[gd_scene load_steps=6 format=3 uid="uid://cdegvmbaxdu3b"]
 
 [ext_resource type="Script" path="res://modules/console/core/console.gd" id="1_u2kj2"]
 [ext_resource type="Script" path="res://modules/console/core/console_view.gd" id="2_ocivm"]
 [ext_resource type="Theme" uid="uid://b2hkhvslwhuqe" path="res://modules/console/core/console_theme.theme" id="3_d6tlt"]
+[ext_resource type="Script" path="res://modules/console/extra/input/console_input.gd" id="4_mg5hr"]
+[ext_resource type="Resource" uid="uid://d0hkapwk4026i" path="res://modules/console/extra/input/console.tres" id="5_flyei"]
 
 [node name="Console" type="Node"]
 script = ExtResource("1_u2kj2")
@@ -61,3 +63,7 @@ middle_mouse_paste_enabled = false
 flat = true
 select_all_on_focus = true
 caret_blink = true
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("4_mg5hr")
+action_map = ExtResource("5_flyei")

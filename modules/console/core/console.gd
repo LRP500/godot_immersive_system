@@ -3,6 +3,7 @@ extends Node
 signal opened
 signal closed
 
+# TODO: Move ConsoleCommand to its own file.
 class ConsoleCommand:
 	var method: Callable
 	var param_count: int
@@ -34,6 +35,7 @@ func _input(event: InputEvent) -> void:
 func add_command(in_name: String, method: Callable, param_count: int = 0) -> void:
 	commands[in_name] = ConsoleCommand.new(method, param_count)
 
+# TODO: Display error message if command doesn't exist.
 func execute(command: ConsoleCommand, args: PackedStringArray) -> bool:
 	if command == null:
 		return false
@@ -69,6 +71,7 @@ func toggle() -> void:
 
 #region Commands
 
+# TODO: Display one command per line with short description.
 func list() -> void:
 	var items := []
 	for command: String in commands:
