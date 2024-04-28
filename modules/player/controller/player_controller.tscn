@@ -88,7 +88,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Eyes" type="Node3D" parent="Neck/Head"]
 
-[node name="PhantomCamera3D" type="Node3D" parent="Neck/Head/Eyes"]
+[node name="PlayerCamera" type="Node3D" parent="Neck/Head/Eyes"]
+unique_name_in_owner = true
 script = ExtResource("4_sh3ti")
 tween_resource = SubResource("Resource_pboxl")
 tween_on_load = false

@@ -11,7 +11,7 @@ signal stop_moving
 @onready var standing_collision_shape: CollisionShape3D = $StandingCollisionShape
 @onready var crouching_collision_shape: CollisionShape3D = $CrouchingCollisionShape
 @onready var crouching_raycast: RayCast3D = $CrouchingRayCast
-@onready var pcamera: PhantomCamera3D = %PlayerPCamera
+@onready var pcamera: PhantomCamera3D = %PlayerCamera
 
 @export var data: PlayerControllerData
 @export var enable_jumping: bool = false;
@@ -42,15 +42,30 @@ var head_bobbing_current_intensity: float = 0.0
 var head_bobbing_dir : = Vector2.ZERO
 var head_bobbing_index: float = 0.0
 
+func _init() -> void:
+	set_cursor_mode();
+
 func _input(event: InputEvent) -> void:
-	handle_cursor_mode(event);
 	handle_mouse_motion(event);
 
-func handle_cursor_mode(event: InputEvent) -> void:
-	if event.is_action_pressed("menu"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif event.is_action_pressed("fire"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+func _physics_process(delta: float) -> void:
+	handle_input()
+	if Input.is_action_pressed("crouch"): # || sliding:
+		handle_crouching(delta)
+	elif !crouching_raycast.is_colliding():
+		handle_standing(delta)
+	handle_free_looking(delta)
+	handle_sliding(delta)
+	handle_head_bobbing(delta)
+	handle_gravity(delta)
+	if enable_jumping:
+		handle_jump()
+	handle_movement(delta)
+	move_and_slide()
+
+func set_cursor_mode() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func handle_mouse_motion(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -195,18 +210,3 @@ func handle_input() -> void:
 		emit_signal("start_moving")
 	elif previous_input != Vector2.ZERO and input_dir == Vector2.ZERO:
 		emit_signal("stop_moving")
-
-func _physics_process(delta: float) -> void:
-	handle_input()
-	if Input.is_action_pressed("crouch"): # || sliding:
-		handle_crouching(delta)
-	elif !crouching_raycast.is_colliding():
-		handle_standing(delta)
-	handle_free_looking(delta)
-	handle_sliding(delta)
-	handle_head_bobbing(delta)
-	handle_gravity(delta)
-	if enable_jumping:
-		handle_jump()
-	handle_movement(delta)
-	move_and_slide()
