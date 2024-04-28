@@ -69,15 +69,16 @@ func set_cursor_mode() -> void:
 
 func handle_mouse_motion(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		var motion := event as InputEventMouseMotion
 		if free_looking:
-			neck.rotate_y(deg_to_rad(-event.relative.x) * data.mouse_sensitivity)
+			neck.rotate_y(deg_to_rad(-motion.relative.x) * data.mouse_sensitivity)
 			neck.rotation.y = clamp(
 				neck.rotation.y,
 				deg_to_rad(-data.free_look_angle),
 				deg_to_rad(data.free_look_angle))
 		else:
-			rotate_y(deg_to_rad(-event.relative.x) * data.mouse_sensitivity)
-			head.rotate_x(deg_to_rad(-event.relative.y) * data.mouse_sensitivity)
+			rotate_y(deg_to_rad(-motion.relative.x) * data.mouse_sensitivity)
+			head.rotate_x(deg_to_rad(-motion.relative.y) * data.mouse_sensitivity)
 			head.rotation.x = clamp(
 				head.rotation.x, 
 				deg_to_rad(data.vertical_look_min_angle), 
