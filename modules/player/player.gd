@@ -1,7 +1,7 @@
 extends Node
 class_name Player
 
-@onready var pawn: GoldGdt_Pawn = %Pawn
+@onready var pawn: PlayerPawn = %Pawn
 @onready var inventory: Inventory = %Inventory
 @onready var interactor: Interactor = %Interactor
 

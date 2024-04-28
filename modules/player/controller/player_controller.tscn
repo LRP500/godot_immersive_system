@@ -1,18 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bmcyfo1d81r4k"]
+[gd_scene load_steps=12 format=3 uid="uid://bmcyfo1d81r4k"]
 
-[ext_resource type="Script" path="res://common/scripts/player_controller.gd" id="1_ivoyg"]
-[ext_resource type="Script" path="res://common/scripts/player_controller_data.gd" id="2_bw7r8"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="3_1fove"]
-[ext_resource type="PackedScene" uid="uid://d3e6bv3t1236a" path="res://common/scenes/player/interactor.tscn" id="3_o2yfl"]
-[ext_resource type="Script" path="res://common/scripts/weapon_camera.gd" id="4_3yg4v"]
+[ext_resource type="Script" path="res://modules/player/controller/player_controller.gd" id="1_ivoyg"]
+[ext_resource type="Script" path="res://modules/player/controller/player_controller_data.gd" id="2_bw7r8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_oftq1"]
-[ext_resource type="Script" path="res://common/scripts/aim_distance.gd" id="4_rtb61"]
-[ext_resource type="Resource" uid="uid://31nbhohvcjsm" path="res://common/resources/aim_distance.tres" id="5_xqtsi"]
-[ext_resource type="Script" path="res://common/scripts/interaction/item_holder.gd" id="6_i4jw8"]
-[ext_resource type="Script" path="res://common/scripts/interaction/interactable.gd" id="7_leumf"]
-[ext_resource type="PackedScene" uid="uid://cnfe6ec0vsn0q" path="res://common/scenes/components/damageable.tscn" id="7_wmwaf"]
-[ext_resource type="Script" path="res://common/scripts/interaction/interactions/drop_interaction.gd" id="8_xj8od"]
-[ext_resource type="PackedScene" uid="uid://dy1ghr0eoll2b" path="res://common/scenes/components/health.tscn" id="8_yprn2"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="4_sh3ti"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="6_n3bqn"]
 
 [sub_resource type="Resource" id="Resource_pbgjx"]
 script = ExtResource("2_bw7r8")
@@ -52,18 +44,18 @@ height = 1.8
 radius = 0.2
 height = 0.95
 
-[sub_resource type="Resource" id="Resource_6upid"]
+[sub_resource type="Resource" id="Resource_pboxl"]
 script = ExtResource("4_oftq1")
 duration = 1.0
-transition = 3
+transition = 0
 ease = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p64s5"]
-
-[sub_resource type="Resource" id="Resource_iroef"]
-script = ExtResource("8_xj8od")
-display_name = "Drop"
-action_name = "back"
+[sub_resource type="Resource" id="Resource_b04mn"]
+script = ExtResource("6_n3bqn")
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+fov = 75.0
 
 [node name="PlayerController" type="CharacterBody3D"]
 collision_layer = 3
@@ -96,72 +88,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Eyes" type="Node3D" parent="Neck/Head"]
 
-[node name="PlayerPCamera" type="Node3D" parent="Neck/Head/Eyes"]
-unique_name_in_owner = true
-script = ExtResource("3_1fove")
-priority_override = false
-priority = 100
-follow_mode = 0
-look_at_mode = 0
-tween_parameters = SubResource("Resource_6upid")
+[node name="PhantomCamera3D" type="Node3D" parent="Neck/Head/Eyes"]
+script = ExtResource("4_sh3ti")
+tween_resource = SubResource("Resource_pboxl")
 tween_on_load = false
-inactive_update_mode = 0
-camera_3D_resource = null
-
-[node name="AimDistance" type="RayCast3D" parent="Neck/Head/Eyes"]
-visible = false
-target_position = Vector3(0, 0, -1000)
-collision_mask = 7
-script = ExtResource("4_rtb61")
-variable = ExtResource("5_xqtsi")
-
-[node name="Interactor" parent="Neck/Head/Eyes" instance=ExtResource("3_o2yfl")]
-unique_name_in_owner = true
-
-[node name="WeaponContainer" type="Node3D" parent="Neck/Head/Eyes"]
-unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.495, -0.39, -1.29806)
-
-[node name="ItemHolder" type="Node3D" parent="Neck/Head/Eyes" node_paths=PackedStringArray("drop_interaction")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.335783, -0.308386, -0.480499)
-script = ExtResource("6_i4jw8")
-drop_interaction = NodePath("DropInteractable")
-
-[node name="DropInteractable" type="Area3D" parent="Neck/Head/Eyes/ItemHolder"]
-collision_layer = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Head/Eyes/ItemHolder/DropInteractable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.339, 0.303, -1.36107)
-shape = SubResource("BoxShape3D_p64s5")
-
-[node name="Interactable" type="Node" parent="Neck/Head/Eyes/ItemHolder/DropInteractable"]
-script = ExtResource("7_leumf")
-interactions = Array[Resource("res://common/scripts/interaction/interaction.gd")]([SubResource("Resource_iroef")])
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1280, 720)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="WeaponCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-visible = false
-cull_mask = 2
-fov = 35.0
-script = ExtResource("4_3yg4v")
-
-[node name="Damageable" parent="." node_paths=PackedStringArray("health") instance=ExtResource("7_wmwaf")]
-health = NodePath("../Health")
-
-[node name="Health" parent="." instance=ExtResource("8_yprn2")]
+camera_3d_resource = SubResource("Resource_b04mn")
