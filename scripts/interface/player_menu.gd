@@ -16,5 +16,7 @@ func _set_is_open(_is_open: bool) -> void:
     _update_action_map()
 
 func _update_action_map() -> void:
-    var action_map_name := "menu" if is_open else "gameplay"
-    InputActionMapManager.enable(action_map_name)
+    if is_open:
+        InputActionMapManager.push("menu")
+    else:
+        InputActionMapManager.pop("menu")
