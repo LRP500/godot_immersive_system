@@ -6,7 +6,7 @@ signal open_state_changed(is_open: bool)
 var is_open: bool = false : set = _set_is_open 
 
 func _process(_delta: float) -> void:
-    if InputActionMapManager.is_action_just_pressed("player_menu"):
+    if InputManager.is_action_just_pressed("player_menu"):
         is_open = !is_open
 
 func _set_is_open(_is_open: bool) -> void:
@@ -17,6 +17,6 @@ func _set_is_open(_is_open: bool) -> void:
 
 func _update_action_map() -> void:
     if is_open:
-        InputActionMapManager.push("menu")
+        InputManager.push("menu")
     else:
-        InputActionMapManager.pop("menu")
+        InputManager.pop("menu")

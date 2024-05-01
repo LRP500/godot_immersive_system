@@ -44,11 +44,11 @@ var head_bobbing_index: float = 0.0
 
 func _init() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	InputActionMapManager.mouse_motion_event.connect(_handle_mouse_motion)
+	InputManager.mouse_motion_event.connect(_handle_mouse_motion)
 
 func _physics_process(delta: float) -> void:
 	handle_input()
-	if InputActionMapManager.is_action_pressed("crouch"): # || sliding:
+	if InputManager.is_action_pressed("crouch"): # || sliding:
 		handle_crouching(delta)
 	elif !crouching_raycast.is_colliding():
 		handle_standing(delta)
@@ -110,7 +110,7 @@ func handle_standing(delta: float) -> void:
 		sprinting = true
 	elif input_dir == Vector2.ZERO: # cancel sprinting if player stops
 		sprinting = false
-	elif InputActionMapManager.is_action_just_pressed("sprint"):
+	elif InputManager.is_action_just_pressed("sprint"):
 		sprinting = !sprinting;
 	if sprinting:
 		current_speed = data.sprinting_speed
@@ -128,7 +128,7 @@ func handle_gravity(delta: float) -> void:
 		velocity.y -= gravity * data.weight_scale * delta
 
 func handle_jump() -> void:
-	if InputActionMapManager.is_action_just_pressed("jump") and is_on_floor():
+	if InputManager.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = data.jump_velocity
 		sliding = false
 		jumped.emit()
@@ -154,7 +154,7 @@ func handle_movement(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed * speed_multiplier)
 
 func handle_free_looking(delta: float) -> void:
-	if (InputActionMapManager.is_action_pressed("free_look") || sliding) && enable_free_look:
+	if (InputManager.is_action_pressed("free_look") || sliding) && enable_free_look:
 		free_looking = true
 		pcamera.rotation.z = -deg_to_rad(neck.rotation.y * data.free_look_tilt_amount)
 	else:
@@ -195,8 +195,8 @@ func handle_head_bobbing(delta: float) -> void:
 
 func handle_input() -> void:
 	var previous_input := input_dir
-	var horizontal_input := InputActionMapManager.get_axis("left", "right")
-	var vertical_input := InputActionMapManager.get_axis("forward", "backward")
+	var horizontal_input: float = InputManager.get_axis("left", "right")
+	var vertical_input: float = InputManager.get_axis("forward", "backward")
 	input_dir = Vector2(horizontal_input, vertical_input)
 	if previous_input == Vector2.ZERO and input_dir != Vector2.ZERO:
 		start_moving.emit()

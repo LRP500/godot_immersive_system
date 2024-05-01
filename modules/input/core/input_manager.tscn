@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://cw8vv1aqf6034"]
 
-[ext_resource type="Script" path="res://modules/input/action_map/input_action_map_manager.gd" id="1_fd6hj"]
+[ext_resource type="Script" path="res://modules/input/core/input_manager.gd" id="1_fd6hj"]
 [ext_resource type="Resource" uid="uid://bjygef3d6pn8e" path="res://resources/input/action_maps/gameplay.tres" id="2_3aagu"]
 [ext_resource type="Resource" uid="uid://d3ofog0dx2q3q" path="res://resources/input/action_maps/menu.tres" id="3_ml4hq"]
 
-[node name="InputActionMapManager" type="Node"]
+[node name="InputManager" type="Node"]
 script = ExtResource("1_fd6hj")
-action_maps = Array[Resource("res://modules/input/action_map/input_action_map.gd")]([ExtResource("2_3aagu"), ExtResource("3_ml4hq")])
+action_maps = Array[Resource("res://modules/input/core/input_action_map.gd")]([ExtResource("2_3aagu"), ExtResource("3_ml4hq")])

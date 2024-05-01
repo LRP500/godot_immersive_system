@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://modules/console/core/console.gd" id="1_u2kj2"]
 [ext_resource type="Script" path="res://modules/console/core/console_view.gd" id="2_ocivm"]
 [ext_resource type="Theme" uid="uid://b2hkhvslwhuqe" path="res://modules/console/core/console_theme.theme" id="3_d6tlt"]
-[ext_resource type="Script" path="res://modules/console/extra/input/console_input.gd" id="4_mg5hr"]
-[ext_resource type="Resource" uid="uid://d0hkapwk4026i" path="res://modules/console/extra/input/console.tres" id="5_flyei"]
+[ext_resource type="Script" path="res://modules/console/extras/input/console_input.gd" id="4_mg5hr"]
+[ext_resource type="Resource" uid="uid://d0hkapwk4026i" path="res://modules/console/extras/input/console.tres" id="5_flyei"]
 
 [node name="Console" type="Node"]
 script = ExtResource("1_u2kj2")

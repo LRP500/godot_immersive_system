@@ -1,4 +1,4 @@
 extends Node
 
 func _ready() -> void:
-	InputActionMapManager.push("gameplay")
+	InputManager.push("gameplay")

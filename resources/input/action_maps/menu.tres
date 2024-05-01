@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InputActionMap" load_steps=4 format=3 uid="uid://d3ofog0dx2q3q"]
 
-[ext_resource type="Script" path="res://modules/input/action_map/input_action_map_key_event.gd" id="1_eq3wu"]
-[ext_resource type="Script" path="res://modules/input/action_map/input_action_map.gd" id="2_74ju8"]
+[ext_resource type="Script" path="res://modules/input/core/events/input_action_map_key_event.gd" id="1_eq3wu"]
+[ext_resource type="Script" path="res://modules/input/core/input_action_map.gd" id="2_74ju8"]
 
 [sub_resource type="Resource" id="Resource_lp02u"]
 script = ExtResource("1_eq3wu")
@@ -11,5 +11,5 @@ action_name = "player_menu"
 [resource]
 script = ExtResource("2_74ju8")
 id = "menu"
-events = Array[Resource("res://modules/input/action_map/input_action_map_event.gd")]([SubResource("Resource_lp02u")])
+events = Array[Resource("res://modules/input/core/events/input_action_map_event.gd")]([SubResource("Resource_lp02u")])
 enable_mouse_motion = false

@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-QuitOnInput="*res://modules/input/quit_on_input.gd"
-FullscreenOnInput="*res://modules/input/fullscreen_on_input.gd"
+InputManager="*res://modules/input/core/input_manager.tscn"
+FullscreenOnInput="*res://modules/input/extras/fullscreen_on_input.gd"
+QuitOnInput="*res://modules/input/extras/quit_on_input.gd"
 Console="*res://modules/console/core/console.tscn"
-InputActionMapManager="*res://modules/input/action_map/input_action_map_manager.tscn"
 InteractionModule="*res://modules/interaction/core/interaction_module.gd"
 InventoryModule="*res://modules/inventory/inventory_module.tscn"
 InventoryAtlas="*res://modules/inventory/extras/atlas/inventory_atlas.tscn"

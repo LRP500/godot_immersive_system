@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InputActionMap" load_steps=4 format=3 uid="uid://d0hkapwk4026i"]
 
-[ext_resource type="Script" path="res://modules/input/action_map/input_action_map_event.gd" id="1_sllfe"]
-[ext_resource type="Script" path="res://modules/input/action_map/input_action_map.gd" id="1_vjbkk"]
+[ext_resource type="Script" path="res://modules/input/core/events/input_action_map_event.gd" id="1_sllfe"]
+[ext_resource type="Script" path="res://modules/input/core/input_action_map.gd" id="1_vjbkk"]
 
 [sub_resource type="Resource" id="Resource_mb38n"]
 script = ExtResource("1_sllfe")
@@ -11,5 +11,5 @@ action_name = "toggle_console"
 [resource]
 script = ExtResource("1_vjbkk")
 id = "console"
-enable_mouse_motion = true
 events = Array[ExtResource("1_sllfe")]([SubResource("Resource_mb38n")])
+enable_mouse_motion = true
