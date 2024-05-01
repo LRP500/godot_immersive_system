@@ -365,7 +365,7 @@ count = 200
 script = ExtResource("1_lvi6m")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -8.75)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
 script = ExtResource("2_tpu1p")
@@ -493,10 +493,10 @@ script = ExtResource("2_mus01")
 
 [node name="Pawn" parent="Player" instance=ExtResource("4_5axcj")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8.75)
 
 [node name="CameraProxy" type="Node3D" parent="Player" node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -8.75)
 script = ExtResource("10_152eq")
 target = NodePath("../../MainCamera")
 
