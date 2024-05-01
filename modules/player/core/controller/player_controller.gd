@@ -11,7 +11,7 @@ signal stop_moving
 @onready var standing_collision_shape: CollisionShape3D = $StandingCollisionShape
 @onready var crouching_collision_shape: CollisionShape3D = $CrouchingCollisionShape
 @onready var crouching_raycast: RayCast3D = $CrouchingRayCast
-@onready var pcamera: PhantomCamera3D = %PlayerCamera
+@onready var camera_mount: Node3D = %CameraMount
 
 @export var data: PlayerControllerData
 @export var enable_jumping: bool = false;
@@ -156,11 +156,11 @@ func handle_movement(delta: float) -> void:
 func handle_free_looking(delta: float) -> void:
 	if (InputManager.is_action_pressed("free_look") || sliding) && enable_free_look:
 		free_looking = true
-		pcamera.rotation.z = -deg_to_rad(neck.rotation.y * data.free_look_tilt_amount)
+		camera_mount.rotation.z = -deg_to_rad(neck.rotation.y * data.free_look_tilt_amount)
 	else:
 		free_looking = false
 		neck.rotation.y = lerp(neck.rotation.y, 0.0, delta * data.free_look_snap_lerp_speed)
-		pcamera.rotation.z = lerp(pcamera.rotation.y, 0.0, delta * data.free_look_snap_lerp_speed)
+		camera_mount.rotation.z = lerp(camera_mount.rotation.y, 0.0, delta * data.free_look_snap_lerp_speed)
 
 func handle_sliding(delta: float) -> void:
 	slide_timer -= delta;

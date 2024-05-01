@@ -1,10 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmcyfo1d81r4k"]
+[gd_scene load_steps=6 format=3 uid="uid://bmcyfo1d81r4k"]
 
-[ext_resource type="Script" path="res://modules/player/controller/player_controller.gd" id="1_ivoyg"]
-[ext_resource type="Resource" uid="uid://c0x87h8k2f874" path="res://modules/player/controller/player_controller_data.tres" id="2_7qsd1"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_oftq1"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="4_sh3ti"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="6_n3bqn"]
+[ext_resource type="Script" path="res://modules/player/core/controller/player_controller.gd" id="1_ivoyg"]
+[ext_resource type="Resource" uid="uid://c0x87h8k2f874" path="res://modules/player/core/controller/player_controller_data.tres" id="2_7qsd1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fs8x6"]
 radius = 0.2
@@ -17,19 +14,6 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1f6ku"]
 radius = 0.2
 height = 0.95
-
-[sub_resource type="Resource" id="Resource_ib080"]
-script = ExtResource("4_oftq1")
-duration = 1.0
-transition = 0
-ease = 2
-
-[sub_resource type="Resource" id="Resource_jadbr"]
-script = ExtResource("6_n3bqn")
-cull_mask = 1048575
-h_offset = 0.0
-v_offset = 0.0
-fov = 75.0
 
 [node name="PlayerController" type="CharacterBody3D"]
 collision_layer = 3
@@ -63,9 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Eyes" type="Node3D" parent="Neck/Head"]
 
-[node name="PlayerCamera" type="Node3D" parent="Neck/Head/Eyes"]
+[node name="CameraMount" type="Marker3D" parent="Neck/Head/Eyes"]
 unique_name_in_owner = true
-script = ExtResource("4_sh3ti")
-tween_resource = SubResource("Resource_ib080")
-tween_on_load = false
-camera_3d_resource = SubResource("Resource_jadbr")
+gizmo_extents = 1.0

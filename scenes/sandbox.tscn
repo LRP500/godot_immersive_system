@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
 [ext_resource type="Script" path="res://modules/player/player.gd" id="2_mus01"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_tpu1p"]
-[ext_resource type="PackedScene" uid="uid://befd0s0d0cdah" path="res://modules/player/controller/player_pawn.tscn" id="4_5axcj"]
+[ext_resource type="PackedScene" uid="uid://befd0s0d0cdah" path="res://modules/player/core/controller/player_pawn.tscn" id="4_5axcj"]
 [ext_resource type="Script" path="res://modules/common/camera_proxy.gd" id="10_152eq"]
 [ext_resource type="PackedScene" uid="uid://45av3t6tvv3n" path="res://modules/interaction/extras/interactables/button.tscn" id="12_3i20f"]
 [ext_resource type="PackedScene" uid="uid://gjnc46e66ldo" path="res://modules/interaction/extras/interactor.tscn" id="12_g1f5j"]
@@ -365,7 +365,7 @@ count = 200
 script = ExtResource("1_lvi6m")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -8.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8.75)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
 script = ExtResource("2_tpu1p")
@@ -496,7 +496,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8.75)
 
 [node name="CameraProxy" type="Node3D" parent="Player" node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -8.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8.75)
 script = ExtResource("10_152eq")
 target = NodePath("../../MainCamera")
 
