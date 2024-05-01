@@ -495,9 +495,6 @@ script = ExtResource("2_mus01")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="PlayerCamera" parent="Player/Pawn/PlayerController/Neck/Head/Eyes" index="0"]
-camera_3d_resource = null
-
 [node name="CameraProxy" type="Node3D" parent="Player" node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 script = ExtResource("10_152eq")
