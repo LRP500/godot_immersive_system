@@ -3,6 +3,7 @@ class_name InputActionMap
 
 @export var id: String
 @export var events: Array[InputActionMapEvent]
+@export var enable_mouse_motion: bool
 
 func process() -> void:
 	for event in events:

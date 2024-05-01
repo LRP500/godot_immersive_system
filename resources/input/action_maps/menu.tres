@@ -12,3 +12,4 @@ action_name = "player_menu"
 script = ExtResource("2_74ju8")
 id = "menu"
 events = Array[Resource("res://modules/input/action_map/input_action_map_event.gd")]([SubResource("Resource_lp02u")])
+enable_mouse_motion = false

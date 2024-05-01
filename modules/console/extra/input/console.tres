@@ -11,4 +11,5 @@ action_name = "toggle_console"
 [resource]
 script = ExtResource("1_vjbkk")
 id = "console"
+enable_mouse_motion = true
 events = Array[ExtResource("1_sllfe")]([SubResource("Resource_mb38n")])

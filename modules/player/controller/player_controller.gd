@@ -43,14 +43,12 @@ var head_bobbing_dir : = Vector2.ZERO
 var head_bobbing_index: float = 0.0
 
 func _init() -> void:
-	set_cursor_mode();
-
-func _input(event: InputEvent) -> void:
-	handle_mouse_motion(event);
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	InputActionMapManager.mouse_motion_event.connect(_handle_mouse_motion)
 
 func _physics_process(delta: float) -> void:
 	handle_input()
-	if Input.is_action_pressed("crouch"): # || sliding:
+	if InputActionMapManager.is_action_pressed("crouch"): # || sliding:
 		handle_crouching(delta)
 	elif !crouching_raycast.is_colliding():
 		handle_standing(delta)
@@ -63,11 +61,7 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	move_and_slide()
 
-func set_cursor_mode() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-
-func handle_mouse_motion(event: InputEvent) -> void:
+func _handle_mouse_motion(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var motion := event as InputEventMouseMotion
 		if free_looking:
@@ -110,17 +104,14 @@ func handle_standing(delta: float) -> void:
 	head.position.y = lerp(head.position.y, 0.0, delta * data.height_lerp_speed)
 	crouching_collision_shape.disabled = true;
 	standing_collision_shape.disabled = false;
-
 	if sliding:
 		on_slide_end()
-
 	if always_sprinting:
 		sprinting = true
 	elif input_dir == Vector2.ZERO: # cancel sprinting if player stops
 		sprinting = false
-	elif Input.is_action_just_pressed("sprint"):
+	elif InputActionMapManager.is_action_just_pressed("sprint"):
 		sprinting = !sprinting;
-
 	if sprinting:
 		current_speed = data.sprinting_speed
 		sprinting = true;
@@ -137,19 +128,17 @@ func handle_gravity(delta: float) -> void:
 		velocity.y -= gravity * data.weight_scale * delta
 
 func handle_jump() -> void:
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if InputActionMapManager.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = data.jump_velocity
 		sliding = false
-		emit_signal("jumped")
+		jumped.emit()
 
 func handle_movement(delta: float) -> void:
 	var move_dir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized();
-	
 	if sliding:
 		current_move_dir = slide_dir
 	else:
 		current_move_dir = lerp(current_move_dir, move_dir, delta * data.decceleration)
-	
 	if current_move_dir:
 		velocity.x = current_move_dir.x * current_speed * speed_multiplier
 		velocity.z = current_move_dir.z * current_speed * speed_multiplier
@@ -165,7 +154,7 @@ func handle_movement(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed * speed_multiplier)
 
 func handle_free_looking(delta: float) -> void:
-	if (Input.is_action_pressed("free_look") || sliding) && enable_free_look:
+	if (InputActionMapManager.is_action_pressed("free_look") || sliding) && enable_free_look:
 		free_looking = true
 		pcamera.rotation.z = -deg_to_rad(neck.rotation.y * data.free_look_tilt_amount)
 	else:
@@ -206,8 +195,12 @@ func handle_head_bobbing(delta: float) -> void:
 
 func handle_input() -> void:
 	var previous_input := input_dir
-	input_dir = Input.get_vector("left", "right", "forward", "backward")
+	var horizontal_input := InputActionMapManager.get_axis("left", "right")
+	var vertical_input := InputActionMapManager.get_axis("forward", "backward")
+	input_dir = Vector2(horizontal_input, vertical_input)
 	if previous_input == Vector2.ZERO and input_dir != Vector2.ZERO:
-		emit_signal("start_moving")
+		start_moving.emit()
 	elif previous_input != Vector2.ZERO and input_dir == Vector2.ZERO:
-		emit_signal("stop_moving")
+		stop_moving.emit()
+
+# TODO: Move all input reloated code to its own script

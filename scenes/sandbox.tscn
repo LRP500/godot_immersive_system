@@ -543,8 +543,9 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="UI/HUDView/CenterContainer"]
-self_modulate = Color(1, 1, 1, 0.2)
+[node name="Cursor" type="TextureRect" parent="UI/HUDView/CenterContainer"]
+self_modulate = Color(1, 1, 1, 0.33)
+texture_filter = 2
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("14_ok50p")
