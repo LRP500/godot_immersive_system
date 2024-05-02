@@ -3,14 +3,6 @@ extends Node
 signal opened
 signal closed
 
-# TODO: Move ConsoleCommand to its own file.
-class ConsoleCommand:
-	var method: Callable
-	var param_count: int
-	func _init(_method: Callable, _param_count: int) -> void:
-		method = _method
-		param_count = _param_count
-
 @export var toggle_action_name: String = "toggle_console"
 
 @onready var view: ConsoleView = $ConsoleView
