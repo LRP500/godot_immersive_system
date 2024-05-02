@@ -20,6 +20,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.75, -0.5)
 script = ExtResource("2_ftbiq")
 drop_interaction = NodePath("DropInteraction")
 drop_delay = 0.01
+animate_position = false
+animate_rotation = false
+position_lerp_speed = 2.0
+rotation_lerp_speed = 2.0
 
 [node name="DropInteraction" type="Node3D" parent="CarryableItemHolder"]
 script = ExtResource("3_yj6q1")
@@ -40,5 +44,7 @@ collision_mask = 4
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198641, -0.27051, -0.25)
 script = ExtResource("6_n8a7x")
-rotate_speed = 5.0
-move_speed = 5.0
+animate_position = false
+animate_rotation = false
+position_lerp_speed = 2.0
+rotation_lerp_speed = 2.0

@@ -1,10 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://befd0s0d0cdah"]
+[gd_scene load_steps=14 format=3 uid="uid://befd0s0d0cdah"]
 
 [ext_resource type="Script" path="res://modules/player/core/controller/player_pawn.gd" id="1_whm08"]
-[ext_resource type="PackedScene" uid="uid://bmcyfo1d81r4k" path="res://modules/player/core/controller/player_controller.tscn" id="2_vidno"]
+[ext_resource type="Script" path="res://modules/player/core/controller/player_controller.gd" id="2_xeve4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_5qodq"]
+[ext_resource type="Script" path="res://modules/player/core/camera/player_camera_rig.gd" id="3_esyg0"]
+[ext_resource type="Resource" uid="uid://c0x87h8k2f874" path="res://modules/player/core/controller/player_controller_data.tres" id="3_f10ta"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_gi52k"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="5_p2007"]
+[ext_resource type="PackedScene" uid="uid://gjnc46e66ldo" path="res://modules/interaction/extras/interactor.tscn" id="8_37ms7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fs8x6"]
+radius = 0.2
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8xkx0"]
+radius = 0.2
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1f6ku"]
+radius = 0.2
+height = 0.95
 
 [sub_resource type="Resource" id="Resource_cxuiq"]
 script = ExtResource("4_gi52k")
@@ -22,12 +37,53 @@ fov = 75.0
 [node name="Pawn" type="Node3D"]
 script = ExtResource("1_whm08")
 
-[node name="PlayerController" parent="." instance=ExtResource("2_vidno")]
+[node name="PlayerController" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
+collision_layer = 3
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("2_xeve4")
+data = ExtResource("3_f10ta")
+enable_jumping = true
+always_sprinting = true
 
-[node name="CameraRig" type="Node3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_fs8x6")
 
-[node name="PhantomCamera3D" type="Node3D" parent="CameraRig"]
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_8xkx0")
+
+[node name="CrouchingCollisionShape" type="CollisionShape3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+shape = SubResource("CapsuleShape3D_1f6ku")
+disabled = true
+
+[node name="CrouchingRayCast" type="RayCast3D" parent="PlayerController"]
+target_position = Vector3(0, 1.8, 0)
+
+[node name="Neck" type="Node3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Head" type="Node3D" parent="PlayerController/Neck"]
+
+[node name="Eyes" type="Node3D" parent="PlayerController/Neck/Head"]
+
+[node name="CameraMount" type="Marker3D" parent="PlayerController/Neck/Head/Eyes"]
+unique_name_in_owner = true
+gizmo_extents = 1.0
+
+[node name="PlayerCameraRig" type="Node3D" parent="." node_paths=PackedStringArray("target", "camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+script = ExtResource("3_esyg0")
+target = NodePath("../PlayerController/Neck/Head/Eyes/CameraMount")
+camera = NodePath("PhantomCamera3D")
+
+[node name="PhantomCamera3D" type="Node3D" parent="PlayerCameraRig"]
 script = ExtResource("3_5qodq")
 tween_resource = SubResource("Resource_cxuiq")
+tween_on_load = false
 camera_3d_resource = SubResource("Resource_hjkfg")
+
+[node name="Interactor" parent="PlayerCameraRig" instance=ExtResource("8_37ms7")]
