@@ -35,9 +35,9 @@ func execute(command: ConsoleCommand, args: PackedStringArray) -> bool:
 	return true
 
 func submit(input: String) -> void:
+	input = sanitize(input)
 	if input.is_empty():
 		return
-	input = sanitize(input)
 	var command_name := input.split(' ')[0]
 	var args := input.split(' ').slice(1)
 	var command: ConsoleCommand = commands.get(command_name)
