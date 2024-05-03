@@ -48,8 +48,8 @@ theme_override_constants/margin_bottom = 4
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_d6tlt")
+bbcode_enabled = true
 scroll_active = false
-scroll_following = true
 
 [node name="LineEdit" type="LineEdit" parent="ConsoleView/VBoxContainer"]
 unique_name_in_owner = true
