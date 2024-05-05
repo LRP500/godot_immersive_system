@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="InputActionMap" load_steps=13 format=3 uid="uid://bjygef3d6pn8e"]
+[gd_resource type="Resource" script_class="InputActionMap" load_steps=15 format=3 uid="uid://bjygef3d6pn8e"]
 
 [ext_resource type="Script" path="res://modules/input/core/events/input_action_map_key_event.gd" id="1_tr7xg"]
+[ext_resource type="Script" path="res://modules/input/core/events/input_action_map_mouse_event.gd" id="2_kh0ul"]
 [ext_resource type="Script" path="res://modules/input/core/input_action_map.gd" id="2_p2uac"]
 
 [sub_resource type="Resource" id="Resource_5on3f"]
@@ -53,8 +54,13 @@ script = ExtResource("1_tr7xg")
 event_name = "free_look"
 action_name = "free_look"
 
+[sub_resource type="Resource" id="Resource_vhwu3"]
+script = ExtResource("2_kh0ul")
+event_name = "fire"
+action_name = "fire"
+
 [resource]
 script = ExtResource("2_p2uac")
 id = "gameplay"
-events = Array[Resource("res://modules/input/core/events/input_action_map_event.gd")]([SubResource("Resource_5on3f"), SubResource("Resource_5fidh"), SubResource("Resource_bnrni"), SubResource("Resource_otk8v"), SubResource("Resource_f1xqn"), SubResource("Resource_cvcfg"), SubResource("Resource_7nlf5"), SubResource("Resource_t1hiq"), SubResource("Resource_dm0lh"), SubResource("Resource_d2o0j")])
+events = Array[Resource("res://modules/input/core/events/input_action_map_event.gd")]([SubResource("Resource_5on3f"), SubResource("Resource_5fidh"), SubResource("Resource_bnrni"), SubResource("Resource_otk8v"), SubResource("Resource_f1xqn"), SubResource("Resource_cvcfg"), SubResource("Resource_7nlf5"), SubResource("Resource_t1hiq"), SubResource("Resource_dm0lh"), SubResource("Resource_d2o0j"), SubResource("Resource_vhwu3")])
 enable_mouse_motion = true

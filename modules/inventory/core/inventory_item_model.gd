@@ -27,4 +27,7 @@ func get_property_dict() -> Dictionary:
     return {}
 
 func has_tag(tag: String) -> bool:
-    return get_meta("tags").has(tag)
+    var tags: PackedStringArray = get_meta("tags", PackedStringArray())
+    if tags == null:
+        return false
+    return tags.has(tag)

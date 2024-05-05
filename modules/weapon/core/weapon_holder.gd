@@ -10,6 +10,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
     await get_tree().process_frame
     _update_transform()
+    _handle_input()
 
 func _update_transform() -> void:
     if weapon:

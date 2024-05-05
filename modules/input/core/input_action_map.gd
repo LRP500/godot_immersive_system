@@ -9,13 +9,11 @@ func process() -> void:
 	for event in events:
 		event.process()
 
-func get_key_event(event_name: String) -> InputActionMapKeyEvent:
+func get_event(event_name: String) -> InputActionMapEvent:
 	for event in events:
 		if event.event_name == event_name:
-			assert(event is InputActionMapKeyEvent, 
-				"[Input] Invalid action map event type ([i]%s[/i])" % event_name)
 			return event
 	return null
 
 func has_event(event_name: String) -> bool:
-	return get_key_event(event_name) != null
+	return get_event(event_name) != null

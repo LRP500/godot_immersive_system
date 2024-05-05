@@ -53,21 +53,21 @@ func pop(map_id: String) -> void:
 
 func is_action_just_pressed(event_name: String) -> bool:
 	var map: InputActionMap = _get_current()
-	var event: InputActionMapKeyEvent = map.get_key_event(event_name)
+	var event := map.get_event(event_name)
 	if event == null:
 		return false
 	return event.is_just_pressed()
 
 func is_action_just_released(event_name: String) -> bool:
 	var map: InputActionMap = _get_current()
-	var event: InputActionMapKeyEvent = map.get_key_event(event_name)
+	var event := map.get_event(event_name)
 	if event == null:
 		return false
 	return event.is_just_released()
 
 func is_action_pressed(event_name: String) -> bool:
 	var map: InputActionMap = _get_current()
-	var event: InputActionMapKeyEvent = map.get_key_event(event_name)
+	var event := map.get_event(event_name)
 	if event == null:
 		return false
 	return event.is_pressed()
@@ -76,10 +76,5 @@ func get_axis(negative: String, positive: String) -> float:
 	var negative_value := -1 if is_action_pressed(negative) else 0 
 	var positive_value := 1 if is_action_pressed(positive) else 0 
 	return negative_value + positive_value
-
-# func get_mouse_motion_relative() -> Vector2:
-# 	if _get_current().enable_mouse_motion:
-# 		return mouse_motion
-# 	return Vector2.ZERO
 
 #endregion Input Queries
