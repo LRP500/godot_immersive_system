@@ -15,6 +15,10 @@ func _update_transform() -> void:
     if weapon:
         weapon.global_transform = global_transform
 
+func _handle_input() -> void:
+    if weapon && InputManager.is_action_pressed("fire"):
+        weapon.fire()
+
 func _create_item(model: WeaponModel) -> Node3D:
     assert(model.scene, "[WeaponHolder] Missing scene for weapon '%s'" % model.id)
     return model.scene.instantiate()

@@ -44,7 +44,7 @@
 [ext_resource type="Resource" uid="uid://cjmotg3kn0ud8" path="res://resources/items/shotgun_ammo.tres" id="41_erq1m"]
 [ext_resource type="Resource" uid="uid://dnhiojpyxl7ph" path="res://resources/items/credits.tres" id="42_nikgd"]
 [ext_resource type="Script" path="res://modules/inventory/extras/item_container.gd" id="43_vywgi"]
-[ext_resource type="PackedScene" uid="uid://c5k5mxu2r4046" path="res://scenes/weapons/handgun.tscn" id="44_c027h"]
+[ext_resource type="PackedScene" uid="uid://c5k5mxu2r4046" path="res://scenes/items/handgun_item.tscn" id="44_c027h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

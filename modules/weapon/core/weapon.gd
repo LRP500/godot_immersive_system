@@ -1,4 +1,2 @@
 extends Node
-class_name WeaponComponent
-
-@export var model: WeaponModel
+class_name Weapon
