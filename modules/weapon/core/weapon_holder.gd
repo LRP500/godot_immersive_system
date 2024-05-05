@@ -10,19 +10,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
     await get_tree().process_frame
     _update_transform()
-    _handle_input()
 
 func _update_transform() -> void:
     if weapon:
         weapon.global_transform = global_transform
 
-func _handle_input() -> void:
-    if weapon && InputManager.is_action_pressed("fire"):
-        weapon.fire()
-
 func _create_item(model: WeaponModel) -> Node3D:
     assert(model.scene, "[WeaponHolder] Missing scene for weapon '%s'" % model.id)
-    return model.scene.instantiate()
+    var instance := model.scene.instantiate()
+    instance.init(model)
+    return instance
 
 func equip(model: WeaponModel) -> void:
     if weapon:

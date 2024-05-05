@@ -1,0 +1,2 @@
+extends WeaponFiringBehaviour
+class_name SpreadShotFiringBehaviour

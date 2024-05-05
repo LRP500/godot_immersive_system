@@ -49,6 +49,10 @@ func pop(map_id: String) -> void:
 		map_changed.emit(null)
 		print_rich("[Input] Input action map [b]%s[/b] disabled" % map_id)
 
+func get_event(event_name: String) -> InputActionMapEvent:
+	var map: InputActionMap = _get_current()
+	return map.get_event(event_name) if map != null else null
+
 #region Input Queries
 
 func is_action_just_pressed(event_name: String) -> bool:
