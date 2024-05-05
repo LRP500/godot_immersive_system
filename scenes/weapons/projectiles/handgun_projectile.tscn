@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8yueobgt3ubu"]
+
+[ext_resource type="PackedScene" uid="uid://dnd0iwfmqlab4" path="res://scenes/weapons/projectiles/projectile.tscn" id="1_woyvi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ka2me"]
+
+[node name="Projectile" instance=ExtResource("1_woyvi")]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." index="0"]
+radius = 0.1
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_ka2me")
