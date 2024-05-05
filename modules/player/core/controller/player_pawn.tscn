@@ -87,3 +87,4 @@ tween_on_load = false
 camera_3d_resource = SubResource("Resource_hjkfg")
 
 [node name="Interactor" parent="PlayerCameraRig" instance=ExtResource("8_37ms7")]
+unique_name_in_owner = true

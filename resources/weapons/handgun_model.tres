@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponModel" load_steps=5 format=3 uid="uid://ck43hkqr7pv0a"]
+
+[ext_resource type="Resource" uid="uid://dt337bth1tdr6" path="res://resources/items/handgun_item.tres" id="1_2moby"]
+[ext_resource type="PackedScene" uid="uid://c543lyor6ouk0" path="res://scenes/weapons/projectiles/default_projectile.tscn" id="1_rugx6"]
+[ext_resource type="Script" path="res://modules/weapon/core/weapon_model.gd" id="2_q67h7"]
+[ext_resource type="PackedScene" uid="uid://c5k5mxu2r4046" path="res://scenes/weapons/handgun.tscn" id="3_5rhrw"]
+
+[resource]
+script = ExtResource("2_q67h7")
+id = "handgun"
+display_name = "Handgun"
+description = ""
+scene = ExtResource("3_5rhrw")
+item = ExtResource("1_2moby")
+projectile = ExtResource("1_rugx6")

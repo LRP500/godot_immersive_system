@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c543lyor6ouk0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxwe4"]
+
+[node name="DefaultProjectile" type="Node3D"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+use_collision = true
+radius = 0.1
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_qxwe4")

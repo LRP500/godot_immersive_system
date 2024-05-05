@@ -1,6 +1,8 @@
 extends Interaction
 class_name Lootable
 
+signal looted(item: Item)
+
 var item: Item
 
 func _ready() -> void:

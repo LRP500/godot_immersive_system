@@ -1,0 +1,2 @@
+extends WeaponBehaviour
+class_name ProjectileWeaponBehaviour

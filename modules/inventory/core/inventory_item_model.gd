@@ -25,3 +25,6 @@ func get_property_dict() -> Dictionary:
         printerr("[InventoryItemModel] JSON Parse Error: %s in %s at line %s" 
             % [json.get_error_message(), properties, json.get_error_line()])
     return {}
+
+func has_tag(tag: String) -> bool:
+    return get_meta("tags").has(tag)

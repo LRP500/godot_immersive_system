@@ -8,17 +8,16 @@
 [ext_resource type="Resource" uid="uid://bqajr2dm3gwwy" path="res://resources/items/door_key.tres" id="6_65bdr"]
 [ext_resource type="Script" path="res://modules/inventory/extras/item.gd" id="6_g0ycs"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1i621"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_bfqeo"]
 size = Vector3(0.2, 0.2, 0.2)
 
 [node name="DoorKey" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
 collision_layer = 2
 script = ExtResource("1_4fcxy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-shape = SubResource("BoxShape3D_1i621")
+shape = SubResource("BoxShape3D_bfqeo")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

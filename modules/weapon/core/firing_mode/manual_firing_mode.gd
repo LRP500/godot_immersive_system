@@ -1,0 +1,2 @@
+extends WeaponFiringMode
+class_name ManualFiringMode

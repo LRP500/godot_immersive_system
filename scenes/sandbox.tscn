@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://qhgslmcrqbo8"]
+[gd_scene load_steps=80 format=3 uid="uid://qhgslmcrqbo8"]
 
 [ext_resource type="Script" path="res://scenes/sandbox.gd" id="1_lvi6m"]
 [ext_resource type="Material" uid="uid://cbuvdv4so3m40" path="res://assets/materials/prototype_grey.material" id="1_pw4l6"]
@@ -35,14 +35,16 @@
 [ext_resource type="Script" path="res://modules/interaction/core/interactions/carry_interaction.gd" id="32_ldk1h"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_interactable.gd" id="33_0dy1e"]
 [ext_resource type="Material" uid="uid://yptkjeyxntw5" path="res://assets/materials/prototype_green_light.material" id="34_wqfu7"]
+[ext_resource type="Script" path="res://modules/inventory/extras/item.gd" id="38_537gl"]
 [ext_resource type="Resource" uid="uid://dji533rr6rirm" path="res://resources/items/hangdun_ammo.tres" id="38_g6a2l"]
 [ext_resource type="Script" path="res://modules/player/interactions/container_loot_interaction.gd" id="38_qdvtk"]
 [ext_resource type="PackedScene" uid="uid://dp8enkmuc747v" path="res://scenes/items/door_key.tscn" id="40_0fvna"]
+[ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="40_2ni2u"]
 [ext_resource type="Script" path="res://modules/inventory/core/inventory_item_stack.gd" id="40_5vni4"]
 [ext_resource type="Resource" uid="uid://cjmotg3kn0ud8" path="res://resources/items/shotgun_ammo.tres" id="41_erq1m"]
-[ext_resource type="PackedScene" uid="uid://mvj7yqn8j4k1" path="res://scenes/items/handgun_ammo.tscn" id="41_qnqbv"]
 [ext_resource type="Resource" uid="uid://dnhiojpyxl7ph" path="res://resources/items/credits.tres" id="42_nikgd"]
 [ext_resource type="Script" path="res://modules/inventory/extras/item_container.gd" id="43_vywgi"]
+[ext_resource type="PackedScene" uid="uid://c5k5mxu2r4046" path="res://scenes/weapons/handgun.tscn" id="44_c027h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t5va"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -334,6 +336,9 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_gwndb"]
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ce182"]
+size = Vector3(0.2, 0.2, 0.2)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_w32fw"]
 size = Vector3(0.5, 0.25, 0.5)
 
@@ -363,7 +368,7 @@ count = 200
 script = ExtResource("1_lvi6m")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -8.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.1, -8.75)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
 script = ExtResource("2_tpu1p")
@@ -491,7 +496,7 @@ script = ExtResource("2_mus01")
 
 [node name="Pawn" parent="Player" instance=ExtResource("4_5axcj")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -8.75)
 
 [node name="Inventory" type="Node" parent="Player"]
 unique_name_in_owner = true
@@ -859,12 +864,63 @@ script = ExtResource("25_d8pei")
 initial_value = "A non-physics interactable objet that can be carried and put back only on flat surfaces with a specific tag."
 
 [node name="DoorKey" parent="Bench_01" instance=ExtResource("40_0fvna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1, 0)
 
-[node name="HandgunAmmo" parent="Bench_01" instance=ExtResource("41_qnqbv")]
+[node name="HandgunAmmo" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, -0.15)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
 
-[node name="Item" parent="Bench_01/HandgunAmmo" index="2"]
-count = 20
-update_description = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/HandgunAmmo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_ce182")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/HandgunAmmo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = ExtResource("34_wqfu7")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Item" type="Node" parent="Bench_01/HandgunAmmo"]
+script = ExtResource("38_537gl")
+model = ExtResource("38_g6a2l")
+
+[node name="DisplayName" type="Node" parent="Bench_01/HandgunAmmo"]
+script = ExtResource("23_ieyca")
+
+[node name="Description" type="Node" parent="Bench_01/HandgunAmmo"]
+script = ExtResource("25_d8pei")
+
+[node name="Lootable" type="Node3D" parent="Bench_01/HandgunAmmo"]
+script = ExtResource("40_2ni2u")
+interaction_text = "Take"
+
+[node name="ShotgunAmmo" type="StaticBody3D" parent="Bench_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0.150001)
+collision_layer = 2
+script = ExtResource("33_0dy1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench_01/ShotgunAmmo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_ce182")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bench_01/ShotgunAmmo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = ExtResource("34_wqfu7")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Item" type="Node" parent="Bench_01/ShotgunAmmo"]
+script = ExtResource("38_537gl")
+model = ExtResource("41_erq1m")
+
+[node name="DisplayName" type="Node" parent="Bench_01/ShotgunAmmo"]
+script = ExtResource("23_ieyca")
+
+[node name="Description" type="Node" parent="Bench_01/ShotgunAmmo"]
+script = ExtResource("25_d8pei")
+
+[node name="Lootable" type="Node3D" parent="Bench_01/ShotgunAmmo"]
+script = ExtResource("40_2ni2u")
+interaction_text = "Take"
 
 [node name="ItemContainer" type="StaticBody3D" parent="Bench_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95419, 1, 0)
@@ -894,13 +950,13 @@ content = Array[ExtResource("40_5vni4")]([SubResource("Resource_fungs"), SubReso
 
 [node name="ContainerLootable" type="Node3D" parent="Bench_01/ItemContainer"]
 script = ExtResource("38_qdvtk")
-is_enabled = null
 interaction_text = "Take All"
-input_map_action = null
+
+[node name="Handgun" parent="Bench_01" instance=ExtResource("44_c027h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
 
 [connection signal="draw" from="UI/PlayerMenu/PlayerMenuView/InventoryView" to="UI/PlayerMenu/PlayerMenuView/InventoryView" method="_on_draw"]
 
 [editable path="Player/Pawn"]
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]
-[editable path="Bench_01/HandgunAmmo"]

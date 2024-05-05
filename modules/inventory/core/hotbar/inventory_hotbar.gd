@@ -1,24 +1,21 @@
 extends Node
 class_name InventoryHotbar
 
-signal item_binded(slot: InventoryHotbarSlot)
-signal item_unbinded(slot: InventoryHotbarSlot)
+signal slot_binded(slot: InventoryHotbarSlot)
+signal slot_unbinded(slot: InventoryHotbarSlot)
+signal slot_selected(slot: InventoryHotbarSlot)
+signal slot_unselected(slot: InventoryHotbarSlot)
 
 @export var slot_count: int = 4
 @export var allow_unselect_slot: bool = true
 
 var _inventory: Inventory
-var _item_holder: WieldableItemHolder
 var _slots: Array[InventoryHotbarSlot] = []
 var _selected_slot_index: int = -1
 
 func _ready() -> void:
     _inventory = get_parent()
     assert(_inventory, "[InventoryHotbar] Inventory not found")
-    var interactor := InteractionModule.interactor
-    assert(interactor, "[InventoryHotbar] Interactor not found")
-    _item_holder = interactor.get_node("%WieldableItemHolder")
-    assert(_item_holder, "[InventoryHotbar] WieldableItemHolder not found")
     _inventory.item_added.connect(_on_item_added)
     _inventory.item_removed.connect(_on_item_removed)
     _create_slots()
@@ -28,22 +25,19 @@ func _create_slots() -> void:
         _slots.append(InventoryHotbarSlot.new())
 
 func _on_item_added(item: InventoryItem) -> void:
-    if !_is_wieldable(item):
+    if !InventoryHelpers.is_wieldable(item):
         return
     for slot in _slots:
         if slot.is_empty():
             slot.item = item
-            item_binded.emit(slot)
+            slot_binded.emit(slot)
             return
 
 func _on_item_removed(item: InventoryItem) -> void:
     for slot in _slots:
         if slot.item == item:
             slot.item = null
-            item_unbinded.emit(slot)
-
-func _is_wieldable(item: InventoryItem) -> bool:
-    return item.model.get_meta("wieldable", false)
+            slot_unbinded.emit(slot)
 
 func is_empty() -> bool:
     for slot in _slots:
@@ -66,8 +60,9 @@ func select_slot(new_slot_index: int) -> void:
     _selected_slot_index = new_slot_index
     var new_slot := get_slot(new_slot_index)
     new_slot.selected = true
-    if new_slot.item && _is_wieldable(new_slot.item):
-        _item_holder.wield(InteractionModule.interactor, new_slot.item)
+    if !new_slot.item:
+        return
+    slot_selected.emit(new_slot)
 
 func unselect_slot() -> void:
     if _selected_slot_index == -1:
@@ -75,4 +70,4 @@ func unselect_slot() -> void:
     var slot := get_slot(_selected_slot_index)
     slot.selected = false
     _selected_slot_index = -1
-    _item_holder.unwield(InteractionModule.interactor)
+    slot_unselected.emit(slot)

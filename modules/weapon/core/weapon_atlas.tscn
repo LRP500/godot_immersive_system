@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dusg6xwxopivm"]
+
+[ext_resource type="Script" path="res://modules/weapon/core/weapon_atlas.gd" id="1_rkr1h"]
+[ext_resource type="Resource" uid="uid://ck43hkqr7pv0a" path="res://resources/weapons/handgun_model.tres" id="2_vuaw8"]
+
+[node name="WeaponAtlas" type="Node"]
+script = ExtResource("1_rkr1h")
+weapons = Array[Resource("res://modules/weapon/core/weapon_model.gd")]([ExtResource("2_vuaw8")])

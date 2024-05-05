@@ -17,13 +17,13 @@ func _ready() -> void:
     else:
         _create_slots()
         _update()
-        hotbar.item_binded.connect(_on_item_binded)
-        hotbar.item_unbinded.connect(_on_item_unbinded)
+        hotbar.slot_binded.connect(_on_slot_binded)
+        hotbar.slot_unbinded.connect(_on_slot_unbinded)
 
-func _on_item_binded(_slot: InventoryHotbarSlot) -> void:
+func _on_slot_binded(_slot: InventoryHotbarSlot) -> void:
     _update()
 
-func _on_item_unbinded(_slot: InventoryHotbarSlot) -> void:
+func _on_slot_unbinded(_slot: InventoryHotbarSlot) -> void:
     _update()
 
 func _update() -> void:

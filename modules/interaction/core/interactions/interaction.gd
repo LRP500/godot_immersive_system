@@ -13,8 +13,8 @@ signal enabled_state_changed(enabled: bool)
 
 @onready var parent: Node3D = get_parent()
 
-var timer: InteractionHoldTimer
 var interactor: Interactor
+var timer: InteractionHoldTimer
 
 var interact_method: Callable
 var interact_start_method: Callable

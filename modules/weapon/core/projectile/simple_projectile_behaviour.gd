@@ -1,0 +1,2 @@
+extends ProjectileBehaviour
+class_name SimpleProjectileBehaviour

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InventoryItemModel" load_steps=2 format=3 uid="uid://dt337bth1tdr6"]
+
+[ext_resource type="Script" path="res://modules/inventory/core/inventory_item_model.gd" id="1_he2ou"]
+
+[resource]
+script = ExtResource("1_he2ou")
+id = "handgun"
+display_name = "Handgun"
+description = "	"
+stackable = false
+max_stack_size = -1
+max_capacity = 1
+properties = "{ }"
+metadata/wieldable = true
+metadata/tags = PackedStringArray("weapon")

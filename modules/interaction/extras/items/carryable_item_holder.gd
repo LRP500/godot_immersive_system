@@ -25,6 +25,10 @@ var rotation_lerp_speed: float = 2.0
 var position_lerp_speed: float = 2.0
 var item: Node3D
 
+func _ready() -> void:
+    Global.player.item_carry.connect(carry)
+    Global.player.item_drop.connect(drop)
+
 func _process(delta: float) -> void:
     await get_tree().process_frame
     _update_transform(delta)
@@ -43,8 +47,9 @@ func _update_transform(delta: float) -> void:
     else:
         item.global_rotation = global_rotation
 
-func carry(interactor: Interactor, _item: Node3D) -> void:
-    item = _item
+func carry(carryable: Node3D) -> void:
+    var interactor := Global.player.get_interactor()
+    item = carryable
     item.top_level = true
     interactor.is_raycasting = false
     item_carried.emit(item)
@@ -55,7 +60,8 @@ func carry(interactor: Interactor, _item: Node3D) -> void:
         await get_tree().create_timer(drop_delay).timeout
         interactor.push(drop_interaction)
 
-func drop(interactor: Interactor) -> void:
+func drop() -> void:
+    var interactor := Global.player.get_interactor()
     interactor.pop(drop_interaction)
     var drop_method := Callable(item, "on_drop")
     if drop_method.is_valid():

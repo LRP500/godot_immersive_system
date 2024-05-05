@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gjnc46e66ldo"]
+[gd_scene load_steps=8 format=3 uid="uid://gjnc46e66ldo"]
 
 [ext_resource type="Script" path="res://modules/interaction/core/interactor.gd" id="1_pkawo"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/carryable_item_holder.gd" id="2_ftbiq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://modules/interaction/extras/items/carryable_item_placer.gd" id="4_fm03r"]
 [ext_resource type="Material" uid="uid://cd0jtf44u8hk6" path="res://modules/interaction/extras/items/item_ghost.tres" id="5_ldgy2"]
 [ext_resource type="Script" path="res://modules/interaction/extras/items/wieldable_item_holder.gd" id="6_n8a7x"]
+[ext_resource type="Script" path="res://modules/weapon/core/weapon_holder.gd" id="7_en7o2"]
 
 [node name="Interactor" type="Node3D"]
 script = ExtResource("1_pkawo")
@@ -22,8 +23,6 @@ drop_interaction = NodePath("DropInteraction")
 drop_delay = 0.01
 animate_position = false
 animate_rotation = false
-position_lerp_speed = 2.0
-rotation_lerp_speed = 2.0
 
 [node name="DropInteraction" type="Node3D" parent="CarryableItemHolder"]
 script = ExtResource("3_yj6q1")
@@ -48,3 +47,8 @@ animate_position = false
 animate_rotation = false
 position_lerp_speed = 2.0
 rotation_lerp_speed = 2.0
+
+[node name="WeaponHolder" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198641, -0.27051, -0.25)
+script = ExtResource("7_en7o2")
