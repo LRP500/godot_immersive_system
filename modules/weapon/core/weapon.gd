@@ -1,6 +1,8 @@
 extends Node
 class_name Weapon
 
+@export var draw_debug: bool = false
+
 @onready var muzzle_origin: Node3D = %MuzzleOrigin
 @onready var fire_rate_timer: Timer = %FireRateTimer
 
@@ -26,6 +28,9 @@ func fire() -> void:
         container.add_child(projectile)
         projectile.global_position = shot.origin
         projectile.direction = shot.direction
+        projectile.look_at(shot.origin + shot.direction, Vector3.UP)
+        if draw_debug:
+            DebugDraw3D.draw_line(shot.origin, shot.origin + shot.direction * camera.far, Color.GREEN, 1)
 
 func _create_projectile() -> Projectile:
     var instance := model.projectile.instantiate()

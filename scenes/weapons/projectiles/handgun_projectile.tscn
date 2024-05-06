@@ -15,6 +15,7 @@ rings = 3
 
 [node name="RayCast3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0900152)
+target_position = Vector3(0, 0, -0.19)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 mesh = SubResource("SphereMesh_mar7f")

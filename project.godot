@@ -34,6 +34,10 @@ gdscript/warnings/untyped_declaration=2
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=1
 
+[debug_draw_3d]
+
+settings/3d/volumetric_defaults/thickness=0.01
+
 [dotnet]
 
 project/assembly_name="InteractionSystem"
