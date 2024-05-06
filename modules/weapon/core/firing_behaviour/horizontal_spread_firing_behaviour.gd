@@ -1,5 +1,5 @@
 extends WeaponFiringBehaviour
-class_name SpreadShotFiringBehaviour
+class_name HorizontalSpreadFiringBehaviour
 
 @export var spread_angle: float = 30.0
 @export var projectile_count: int = 3
@@ -16,3 +16,5 @@ func get_shots(_weapon: Weapon, origin: Vector3, direction: Vector3) -> Array[We
         shots.append(WeaponShotInfo.new(projectile_origin, projectile_dir))
         angle += increment
     return shots
+
+# TODO: Fix angle miscalculation when shooting at a vertical angle.

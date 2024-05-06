@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponModel" load_steps=13 format=3 uid="uid://ck43hkqr7pv0a"]
 
 [ext_resource type="Resource" uid="uid://dt337bth1tdr6" path="res://resources/items/handgun_item.tres" id="1_2moby"]
-[ext_resource type="Script" path="res://modules/weapon/core/firing_behaviour/spread_shot_firing_behaviour.gd" id="1_kmhsf"]
+[ext_resource type="Script" path="res://modules/weapon/core/firing_behaviour/horizontal_spread_firing_behaviour.gd" id="1_pev6o"]
 [ext_resource type="Script" path="res://modules/weapon/core/firing_mode/manual_firing_mode.gd" id="1_rqj4m"]
 [ext_resource type="Script" path="res://modules/weapon/core/weapon_model.gd" id="2_q67h7"]
 [ext_resource type="PackedScene" uid="uid://b8wiyyeswdell" path="res://scenes/weapons/handgun.tscn" id="3_5rhrw"]
@@ -9,9 +9,9 @@
 [ext_resource type="Script" path="res://modules/weapon/core/projectile/projectile_model.gd" id="5_jn0k1"]
 [ext_resource type="Script" path="res://modules/weapon/core/projectile/behaviour/simple_projectile_behaviour.gd" id="5_mmuf5"]
 
-[sub_resource type="Resource" id="Resource_8r5b8"]
-script = ExtResource("1_kmhsf")
-spread_angle = 45.0
+[sub_resource type="Resource" id="Resource_otgxk"]
+script = ExtResource("1_pev6o")
+spread_angle = 30.0
 projectile_count = 3
 forward_compensation = 0.5
 
@@ -36,6 +36,6 @@ scene = ExtResource("3_5rhrw")
 item = ExtResource("1_2moby")
 fire_rate = 1.0
 firing_mode = SubResource("Resource_a36bd")
-firing_behaviour = SubResource("Resource_8r5b8")
+firing_behaviour = SubResource("Resource_otgxk")
 hitscan = false
 projectile = SubResource("Resource_54htr")
