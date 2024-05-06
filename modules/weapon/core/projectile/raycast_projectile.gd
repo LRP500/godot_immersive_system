@@ -7,13 +7,10 @@ class_name RaycastProjectile
 
 func _process(delta: float) -> void:
     super(delta)
-    if draw_debug:
-        _draw_debug_ray()
-
-func _physics_process(_delta: float) -> void:
     if raycast.is_colliding():
-        print(raycast.get_collider())
         queue_free()
+    elif draw_debug:
+        _draw_debug_ray()
 
 func _draw_debug_ray() -> void:
     var start := raycast.global_position
