@@ -1,22 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8yueobgt3ubu"]
+[gd_scene load_steps=4 format=3 uid="uid://c6gxwrd452dqu"]
 
-[ext_resource type="PackedScene" uid="uid://dnd0iwfmqlab4" path="res://scenes/weapons/projectiles/projectile.tscn" id="1_woyvi"]
+[ext_resource type="PackedScene" uid="uid://dptx8eb2tqicu" path="res://scenes/weapons/projectiles/raycast_projectile.tscn" id="1_d7vue"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ka2me"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdrlm"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_3aadq"]
+[sub_resource type="SphereMesh" id="SphereMesh_mar7f"]
+material = SubResource("StandardMaterial3D_hdrlm")
 radius = 0.1
-
-[node name="Projectile" instance=ExtResource("1_woyvi")]
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="." index="0"]
-radius = 0.1
+height = 0.2
 radial_segments = 4
 rings = 3
-material = SubResource("StandardMaterial3D_ka2me")
 
-[node name="Hitbox" parent="." index="1"]
-input_ray_pickable = false
+[node name="Projectile" instance=ExtResource("1_d7vue")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
-shape = SubResource("SphereShape3D_3aadq")
+[node name="RayCast3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0900152)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("SphereMesh_mar7f")

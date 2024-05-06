@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnd0iwfmqlab4"]
+[gd_scene load_steps=2 format=3 uid="uid://dnd0iwfmqlab4"]
 
 [ext_resource type="Script" path="res://modules/weapon/core/projectile/projectile.gd" id="1_06tvi"]
-[ext_resource type="PackedScene" uid="uid://boy46i4l3a8pt" path="res://scenes/components/hitbox.tscn" id="2_ani5p"]
 
 [node name="Projectile" type="Node3D"]
 script = ExtResource("1_06tvi")
-
-[node name="Hitbox" parent="." instance=ExtResource("2_ani5p")]
-
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
