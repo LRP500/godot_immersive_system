@@ -7,10 +7,12 @@ class_name Weapon
 var camera: Camera3D
 var model: WeaponModel
 var firing_mode: WeaponFiringMode
+var container: Node
 
 func init(_model: WeaponModel) -> void:
     await self.ready
     model = _model
+    container = get_tree().current_scene.get_node("%Projectiles")
     camera = get_viewport().get_camera_3d()
     fire_rate_timer.wait_time = model.fire_rate
     firing_mode = _model.firing_mode.duplicate()
@@ -20,13 +22,12 @@ func init(_model: WeaponModel) -> void:
 func fire() -> void:
     var shots := model.firing_behaviour.get_shots(self, camera)
     for shot in shots:
-        var projectile := _create_projectile(shot.origin, shot.direction)
-        add_child(projectile)
-        projectile.top_level = true
+        var projectile := _create_projectile()
+        container.add_child(projectile)
         projectile.global_position = shot.origin
         projectile.direction = shot.direction
 
-func _create_projectile(position: Vector3, direction: Vector3) -> Projectile:
+func _create_projectile() -> Projectile:
     var instance := model.projectile.instantiate()
     assert(instance, "[Weapon] Missing projectile for weapon '%s'." % model.id)
     instance.init(model.projectile_behaviour)

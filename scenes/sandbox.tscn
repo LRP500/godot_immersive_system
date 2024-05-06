@@ -512,6 +512,9 @@ script = ExtResource("15_0ydjg")
 [node name="InventoryLogger" type="Node" parent="Player/Inventory"]
 script = ExtResource("15_w3qlt")
 
+[node name="Projectiles" type="Node" parent="."]
+unique_name_in_owner = true
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
