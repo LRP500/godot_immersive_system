@@ -14,6 +14,8 @@ class_name WeaponModel
 
 @export_group("Stats")
 @export var fire_rate: float = 1.0
+@export var reload_speed: float = 1.0
+@export var clip_size: int = 1
 
 @export_group("Firing")
 @export var firing_mode: WeaponFiringMode

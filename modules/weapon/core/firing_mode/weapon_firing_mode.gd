@@ -4,6 +4,7 @@ extends Resource
 class_name WeaponFiringMode
 
 signal fire
+signal dry_fire
 
 var weapon: Weapon
 

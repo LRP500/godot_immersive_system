@@ -13,7 +13,14 @@ func _on_init() -> void:
     pulse_timer.timeout.connect(_on_pulse_timer_timeout)
 
 func _on_fire_just_pressed() -> void:
-    pulse_timer.start()
+    if weapon.is_reloading:
+        return
+    if weapon.fire_rate_timer.time_left > 0:
+        return
+    if weapon.clip.is_empty():
+        dry_fire.emit()
+    else:
+        pulse_timer.start()
 
 func _on_fire_just_released() -> void:
     pulse_timer.stop()

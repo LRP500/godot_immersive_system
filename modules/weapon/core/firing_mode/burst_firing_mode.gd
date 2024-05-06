@@ -15,12 +15,23 @@ func _on_init() -> void:
     burst_timer.timeout.connect(_on_burst_timer_timeout)
 
 func _on_fire_just_pressed() -> void:
-    if weapon.fire_rate_timer.time_left <= 0:
-        current_burst_size = 0
+    if weapon.is_reloading:
+        return
+    if weapon.fire_rate_timer.time_left > 0:
+        return
+    if weapon.clip.is_empty():
+        dry_fire.emit()
+    else:
+        fire.emit()
+        current_burst_size = 1
         burst_timer.start()
 
 func _on_burst_timer_timeout() -> void:
-    current_burst_size += 1
-    if current_burst_size >= burst_size:
+    if weapon.clip.is_empty():
         burst_timer.stop()
-    fire.emit()
+        dry_fire.emit()
+    else:
+        fire.emit()
+        current_burst_size += 1
+        if current_burst_size >= burst_size:
+            burst_timer.stop()

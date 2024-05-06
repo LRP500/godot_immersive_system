@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" path="res://modules/weapon/core/weapon.gd" id="1_egq4i"]
 
-[node name="Handgun" type="Node3D"]
+[node name="Weapon" type="Node3D"]
 script = ExtResource("1_egq4i")
 draw_debug = true
 
 [node name="FireRateTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="MuzzleOrigin" type="Marker3D" parent="."]
