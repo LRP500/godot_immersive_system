@@ -40,7 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://dp8enkmuc747v" path="res://scenes/items/door_key.tscn" id="40_0fvna"]
 [ext_resource type="Script" path="res://modules/inventory/core/inventory_item_stack.gd" id="40_5vni4"]
 [ext_resource type="Resource" uid="uid://cjmotg3kn0ud8" path="res://resources/items/shotgun_ammo.tres" id="41_erq1m"]
-[ext_resource type="PackedScene" uid="uid://mvj7yqn8j4k1" path="res://scenes/items/handgun_ammo.tscn" id="41_qnqbv"]
+[ext_resource type="PackedScene" path="res://scenes/items/handgun_ammo.tscn" id="41_qnqbv"]
 [ext_resource type="Resource" uid="uid://dnhiojpyxl7ph" path="res://resources/items/credits.tres" id="42_nikgd"]
 [ext_resource type="Script" path="res://modules/inventory/extras/item_container.gd" id="43_vywgi"]
 
