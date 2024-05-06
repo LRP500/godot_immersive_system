@@ -7,6 +7,7 @@ script = ExtResource("1_egq4i")
 draw_debug = true
 
 [node name="FireRateTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="MuzzleOrigin" type="Marker3D" parent="."]
 unique_name_in_owner = true

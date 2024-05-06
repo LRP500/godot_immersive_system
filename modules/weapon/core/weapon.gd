@@ -34,6 +34,7 @@ func fire() -> void:
         projectile.fire()
         if draw_debug:
             _draw_shot_debug(shot.origin, shot.direction)
+    fire_rate_timer.start()
 
 func _get_direction() -> Vector3:
     var screen_position: Vector2 = camera.get_viewport().size / 2.0
