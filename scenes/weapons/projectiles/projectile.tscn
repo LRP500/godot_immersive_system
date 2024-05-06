@@ -8,4 +8,5 @@ script = ExtResource("1_06tvi")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_ani5p")]
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

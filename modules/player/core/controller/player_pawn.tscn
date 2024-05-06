@@ -39,7 +39,7 @@ script = ExtResource("1_whm08")
 
 [node name="PlayerController" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
-collision_layer = 3
+collision_layer = 32
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("2_xeve4")
