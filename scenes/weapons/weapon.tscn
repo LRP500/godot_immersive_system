@@ -4,6 +4,7 @@
 
 [node name="Handgun" type="Node3D"]
 script = ExtResource("1_egq4i")
+draw_debug = true
 
 [node name="FireRateTimer" type="Timer" parent="."]
 

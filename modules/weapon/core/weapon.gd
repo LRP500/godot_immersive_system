@@ -12,28 +12,42 @@ var firing_mode: WeaponFiringMode
 var container: Node
 
 func init(_model: WeaponModel) -> void:
-    await self.ready
     model = _model
-    container = get_tree().current_scene.get_node("%Projectiles")
+    await self.ready
+    assert(model.firing_mode, "[Weapon] Missing firing mode for weapon '%s'." % model.id)
+    assert(model.firing_behaviour, "[Weapon] Missing firing behaviour for weapon '%s'." % model.id)
+    assert(model.projectile, "[Weapon] Missing projectile for weapon '%s'." % model.id)
+    assert(model.projectile.scene, "[Weapon] Missing projectile scene for weapon '%s'." % model.id)
     camera = get_viewport().get_camera_3d()
+    container = get_tree().current_scene.get_node("%Projectiles")
     fire_rate_timer.wait_time = model.fire_rate
     firing_mode = _model.firing_mode.duplicate()
     firing_mode.init(self)
     firing_mode.fire.connect(fire)
 
 func fire() -> void:
-    var shots := model.firing_behaviour.get_shots(self, camera)
+    var direction := _get_direction()
+    var origin := muzzle_origin.global_position
+    var shots := model.firing_behaviour.get_shots(self, origin, direction)
     for shot in shots:
-        var projectile := _create_projectile()
-        container.add_child(projectile)
-        projectile.global_position = shot.origin
-        projectile.direction = shot.direction
-        projectile.look_at(shot.origin + shot.direction, Vector3.UP)
+        var projectile := _create_projectile(shot.origin, shot.direction)
+        projectile.fire()
         if draw_debug:
-            DebugDraw3D.draw_line(shot.origin, shot.origin + shot.direction * camera.far, Color.GREEN, 1)
+            _draw_shot_debug(shot.origin, shot.direction)
 
-func _create_projectile() -> Projectile:
-    var instance := model.projectile.instantiate()
-    assert(instance, "[Weapon] Missing projectile for weapon '%s'." % model.id)
-    instance.init(model.projectile_behaviour)
-    return instance
+func _get_direction() -> Vector3:
+    var screen_position: Vector2 = camera.get_viewport().size / 2.0
+    var from: Vector3 = camera.project_ray_origin(screen_position)
+    var to: Vector3 = from + camera.project_ray_normal(screen_position)
+    return from.direction_to(to)
+
+func _create_projectile(origin: Vector3, direction: Vector3) -> Projectile:
+    var projectile := model.projectile.create()
+    container.add_child(projectile)
+    projectile.global_position = origin
+    projectile.direction = direction
+    projectile.look_at(origin + direction, Vector3.UP)
+    return projectile
+
+func _draw_shot_debug(origin: Vector3, direction: Vector3) -> void:
+    DebugDraw3D.draw_line(origin, origin + direction * camera.far, Color.GREEN, 0.1)

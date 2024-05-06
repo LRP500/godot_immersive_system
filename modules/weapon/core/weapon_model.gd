@@ -21,5 +21,4 @@ class_name WeaponModel
 
 @export_group("Projectile")
 @export var hitscan: bool = false
-@export var projectile: PackedScene
-@export var projectile_behaviour: ProjectileBehaviour
+@export var projectile: ProjectileModel
