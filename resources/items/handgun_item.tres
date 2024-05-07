@@ -6,7 +6,8 @@
 script = ExtResource("1_he2ou")
 id = "handgun"
 display_name = "Handgun"
-description = "	"
+description = "Your trusty handun.
+Never failed you, never will."
 stackable = false
 max_stack_size = -1
 max_capacity = 1

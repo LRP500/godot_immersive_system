@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://dt337bth1tdr6" path="res://resources/items/handgun_item.tres" id="1_2moby"]
 [ext_resource type="Script" path="res://modules/weapon/core/firing_behaviour/single_shot_firing_behaviour.gd" id="1_hlotf"]
-[ext_resource type="Script" path="res://modules/weapon/core/firing_mode/pulse_firing_mode.gd" id="2_q5q1a"]
+[ext_resource type="Script" path="res://modules/weapon/core/firing_mode/manual_firing_mode.gd" id="2_oyo11"]
 [ext_resource type="Script" path="res://modules/weapon/core/weapon_model.gd" id="2_q67h7"]
 [ext_resource type="PackedScene" uid="uid://b8wiyyeswdell" path="res://scenes/weapons/handgun.tscn" id="3_5rhrw"]
 [ext_resource type="PackedScene" uid="uid://c6gxwrd452dqu" path="res://scenes/weapons/projectiles/handgun_projectile.tscn" id="4_dr780"]
@@ -12,9 +12,8 @@
 [sub_resource type="Resource" id="Resource_kq37q"]
 script = ExtResource("1_hlotf")
 
-[sub_resource type="Resource" id="Resource_2rs1r"]
-script = ExtResource("2_q5q1a")
-charge_time = 1.0
+[sub_resource type="Resource" id="Resource_whtu1"]
+script = ExtResource("2_oyo11")
 
 [sub_resource type="Resource" id="Resource_pighu"]
 script = ExtResource("5_mmuf5")
@@ -32,10 +31,10 @@ display_name = "Handgun"
 description = ""
 scene = ExtResource("3_5rhrw")
 item = ExtResource("1_2moby")
-fire_rate = 1.0
-reload_speed = 1.0
-clip_size = 5
-firing_mode = SubResource("Resource_2rs1r")
+fire_rate = 0.15
+reload_speed = 2.0
+clip_size = 11
+firing_mode = SubResource("Resource_whtu1")
 firing_behaviour = SubResource("Resource_kq37q")
 hitscan = false
 projectile = SubResource("Resource_54htr")

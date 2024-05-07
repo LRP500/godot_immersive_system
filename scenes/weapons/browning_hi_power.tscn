@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl6guxydq88rw"]
+
+[ext_resource type="PackedScene" uid="uid://k71yfr4klnb7" path="res://assets/weapons/low-poly_browning_hi-power/scene.gltf" id="1_ne8d8"]
+
+[node name="BrowningHiPower" instance=ExtResource("1_ne8d8")]

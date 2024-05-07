@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low-Poly Browning Hi-Power
+* source:	https://sketchfab.com/3d-models/low-poly-browning-hi-power-e9701eeba3904caa81bed0a4a0fe9eeb
+* author:	TastyTony (https://sketchfab.com/TastyTony)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low-Poly Browning Hi-Power" (https://sketchfab.com/3d-models/low-poly-browning-hi-power-e9701eeba3904caa81bed0a4a0fe9eeb) by TastyTony (https://sketchfab.com/TastyTony) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

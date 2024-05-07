@@ -956,7 +956,7 @@ script = ExtResource("38_qdvtk")
 interaction_text = "Take All"
 
 [node name="Handgun" parent="Bench_01" instance=ExtResource("44_c027h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50144, 1, 0.00111485)
 
 [connection signal="draw" from="UI/PlayerMenu/PlayerMenuView/InventoryView" to="UI/PlayerMenu/PlayerMenuView/InventoryView" method="_on_draw"]
 

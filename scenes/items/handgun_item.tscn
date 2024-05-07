@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5k5mxu2r4046"]
+[gd_scene load_steps=9 format=3 uid="uid://c5k5mxu2r4046"]
 
 [ext_resource type="Script" path="res://modules/interaction/extras/items/static_interactable.gd" id="1_ku7yt"]
-[ext_resource type="Texture2D" uid="uid://c3046ag0efcwi" path="res://assets/textures/prototype/red/texture_09.png" id="2_77mfq"]
+[ext_resource type="PackedScene" uid="uid://bl6guxydq88rw" path="res://scenes/weapons/browning_hi_power.tscn" id="3_cjuvg"]
 [ext_resource type="Script" path="res://modules/player/interactions/loot_interaction.gd" id="3_llvss"]
 [ext_resource type="Script" path="res://modules/interaction/core/components/display_name.gd" id="4_bp7wb"]
 [ext_resource type="Script" path="res://modules/interaction/core/components/description.gd" id="5_v1b1h"]
@@ -9,27 +9,18 @@
 [ext_resource type="Resource" uid="uid://dt337bth1tdr6" path="res://resources/items/handgun_item.tres" id="7_pt8sc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2eoh0"]
-size = Vector3(0.2, 0.2, 0.2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ywpr"]
-albedo_color = Color(0.964706, 0.964706, 0.964706, 1)
-albedo_texture = ExtResource("2_77mfq")
-metallic_specular = 0.0
-backlight = Color(1, 1, 1, 1)
-uv1_triplanar = true
+size = Vector3(0.514, 0.068, 0.314)
 
 [node name="Handgun" type="StaticBody3D"]
 collision_layer = 2
 script = ExtResource("1_ku7yt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0052208, 0.0321852, 0.00424805)
 shape = SubResource("BoxShape3D_2eoh0")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-material_override = SubResource("StandardMaterial3D_7ywpr")
-size = Vector3(0.2, 0.2, 0.2)
+[node name="BrowningHiPower" parent="." instance=ExtResource("3_cjuvg")]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0.0300344, 0)
 
 [node name="Lootable" type="Node3D" parent="."]
 script = ExtResource("3_llvss")
