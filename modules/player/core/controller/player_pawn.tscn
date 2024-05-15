@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://befd0s0d0cdah"]
+[gd_scene load_steps=15 format=3 uid="uid://befd0s0d0cdah"]
 
 [ext_resource type="Script" path="res://modules/player/core/controller/player_pawn.gd" id="1_whm08"]
 [ext_resource type="Script" path="res://modules/player/core/controller/player_controller.gd" id="2_xeve4"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://modules/player/core/camera/player_camera_rig.gd" id="3_esyg0"]
 [ext_resource type="Resource" uid="uid://c0x87h8k2f874" path="res://modules/player/core/controller/player_controller_data.tres" id="3_f10ta"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_gi52k"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="5_p2007"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="7_vdlsq"]
 [ext_resource type="PackedScene" uid="uid://gjnc46e66ldo" path="res://modules/interaction/extras/interactor.tscn" id="8_37ms7"]
+[ext_resource type="Script" path="res://modules/weapon/core/weapon_camera.gd" id="8_hcuj0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fs8x6"]
 radius = 0.2
@@ -27,9 +28,9 @@ duration = 1.0
 transition = 0
 ease = 2
 
-[sub_resource type="Resource" id="Resource_hjkfg"]
-script = ExtResource("5_p2007")
-cull_mask = 1048575
+[sub_resource type="Resource" id="Resource_67fsr"]
+script = ExtResource("7_vdlsq")
+cull_mask = 1048573
 h_offset = 0.0
 v_offset = 0.0
 fov = 75.0
@@ -84,7 +85,29 @@ unique_name_in_owner = true
 script = ExtResource("3_5qodq")
 tween_resource = SubResource("Resource_cxuiq")
 tween_on_load = false
-camera_3d_resource = SubResource("Resource_hjkfg")
+camera_3d_resource = SubResource("Resource_67fsr")
 
 [node name="Interactor" parent="PlayerCameraRig" instance=ExtResource("8_37ms7")]
 unique_name_in_owner = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PlayerCameraRig"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PlayerCameraRig/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="WeaponCamera" type="Camera3D" parent="PlayerCameraRig/SubViewportContainer/SubViewport" node_paths=PackedStringArray("player_camera")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+cull_mask = 2
+script = ExtResource("8_hcuj0")
+player_camera = NodePath("../../../PlayerCamera")

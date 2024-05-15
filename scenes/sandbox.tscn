@@ -369,7 +369,7 @@ script = ExtResource("1_lvi6m")
 
 [node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.1, -8.75)
-current = true
+cull_mask = 1048573
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
 script = ExtResource("2_tpu1p")
@@ -961,6 +961,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50144, 1, 0.00111485)
 
 [connection signal="draw" from="UI/PlayerMenu/PlayerMenuView/InventoryView" to="UI/PlayerMenu/PlayerMenuView/InventoryView" method="_on_draw"]
 
-[editable path="Player/Pawn"]
 [editable path="Booth_01/Button"]
 [editable path="Booth_03/HoldableButton"]

@@ -2,7 +2,8 @@ extends Node3D
 
 @export var target: Node3D
 
-@onready var camera: PhantomCamera3D = %PlayerCamera
+@onready var player_camera: PhantomCamera3D = %PlayerCamera
+@onready var weapon_camera: Camera3D = %WeaponCamera
 
 func _ready() -> void:
 	top_level = true	

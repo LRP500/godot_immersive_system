@@ -25,6 +25,15 @@ layers = 2
 [node name="Cylinder_004_0" parent="Sketchfab_model/Root/Cylinder_004" index="0"]
 layers = 2
 
+[node name="Cube_008_0" parent="Sketchfab_model/Root/Cube_008" index="0"]
+layers = 2
+
+[node name="Cube_008_1" parent="Sketchfab_model/Root/Cube_008" index="1"]
+layers = 2
+
+[node name="Cube_008_2" parent="Sketchfab_model/Root/Cube_008" index="2"]
+layers = 2
+
 [node name="Cube_009_0" parent="Sketchfab_model/Root/Cube_009" index="0"]
 layers = 2
 

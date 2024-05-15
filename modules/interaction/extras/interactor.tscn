@@ -48,5 +48,5 @@ animate_rotation = false
 
 [node name="WeaponHolder" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149803, -0.152993, -0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149803, -0.152993, -0.441879)
 script = ExtResource("7_en7o2")
