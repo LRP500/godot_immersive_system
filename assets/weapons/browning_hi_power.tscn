@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl6guxydq88rw"]
+
+[ext_resource type="PackedScene" uid="uid://k71yfr4klnb7" path="res://assets/weapons/low-poly_browning_hi-power/scene.gltf" id="1_fhxux"]
+
+[node name="BrowningHiPower" instance=ExtResource("1_fhxux")]
+
+[node name="Cube_0" parent="Sketchfab_model/Root/Cube" index="0"]
+layers = 2
+
+[node name="Cube_001_0" parent="Sketchfab_model/Root/Cube_001" index="0"]
+layers = 2
+
+[node name="Cube_006_0" parent="Sketchfab_model/Root/Cube_006" index="0"]
+layers = 2
+
+[node name="Cylinder_001_0" parent="Sketchfab_model/Root/Cylinder_001" index="0"]
+layers = 2
+
+[node name="Cylinder_002_0" parent="Sketchfab_model/Root/Cylinder_002" index="0"]
+layers = 2
+
+[node name="Cylinder_003_0" parent="Sketchfab_model/Root/Cylinder_003" index="0"]
+layers = 2
+
+[node name="Cylinder_004_0" parent="Sketchfab_model/Root/Cylinder_004" index="0"]
+layers = 2
+
+[node name="Cube_009_0" parent="Sketchfab_model/Root/Cube_009" index="0"]
+layers = 2
+
+[node name="Cube_010_0" parent="Sketchfab_model/Root/Cube_010" index="0"]
+layers = 2
+
+[node name="Cylinder_005_0" parent="Sketchfab_model/Root/Cylinder_005" index="0"]
+layers = 2
+
+[node name="Cube_012_0" parent="Sketchfab_model/Root/Cube_012" index="0"]
+layers = 2
+
+[node name="Cylinder_008_0" parent="Sketchfab_model/Root/Cylinder_008" index="0"]
+layers = 2
+
+[node name="Cube_013_0" parent="Sketchfab_model/Root/Cube_013" index="0"]
+layers = 2
+
+[node name="Cube_014_0" parent="Sketchfab_model/Root/Cube_014" index="0"]
+layers = 2
+
+[node name="Cube_014_1" parent="Sketchfab_model/Root/Cube_014" index="1"]
+layers = 2
+
+[node name="Cylinder_009_0" parent="Sketchfab_model/Root/Cylinder_009" index="0"]
+layers = 2
+
+[node name="Cube_015_0" parent="Sketchfab_model/Root/Cube_015" index="0"]
+layers = 2
+
+[node name="Cube_016_0" parent="Sketchfab_model/Root/Cube_016" index="0"]
+layers = 2

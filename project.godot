@@ -187,8 +187,9 @@ reload={
 
 [layer_names]
 
+3d_render/layer_2="Weapon"
 3d_physics/layer_1="Environment"
-3d_physics/layer_2="Interactable"
+3d_physics/layer_2="Weapon"
 3d_physics/layer_6="Player"
 3d_physics/layer_10="Placeable Surface"
 

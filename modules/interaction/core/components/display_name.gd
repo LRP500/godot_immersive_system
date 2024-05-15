@@ -13,3 +13,5 @@ func _set_value(_value: String) -> void:
 
 func reset() -> void:
     _set_value(initial_value)
+
+# BUG: Display name sometimes not displayed on lootable items

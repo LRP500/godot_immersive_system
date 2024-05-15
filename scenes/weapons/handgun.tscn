@@ -1,23 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8wiyyeswdell"]
+[gd_scene load_steps=3 format=3 uid="uid://b8wiyyeswdell"]
 
 [ext_resource type="PackedScene" uid="uid://cwmmnj04a0nl7" path="res://scenes/weapons/weapon.tscn" id="1_jotb1"]
-[ext_resource type="Texture2D" uid="uid://c3046ag0efcwi" path="res://assets/textures/prototype/red/texture_09.png" id="2_d6yeh"]
-[ext_resource type="PackedScene" uid="uid://bl6guxydq88rw" path="res://scenes/weapons/browning_hi_power.tscn" id="3_j012r"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30pn2"]
-albedo_texture = ExtResource("2_d6yeh")
-uv1_scale = Vector3(2, 2, 2)
-uv1_triplanar = true
+[ext_resource type="PackedScene" uid="uid://bl6guxydq88rw" path="res://assets/weapons/browning_hi_power.tscn" id="2_d0bk1"]
 
 [node name="Handgun" instance=ExtResource("1_jotb1")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." index="2"]
-visible = false
-material_override = SubResource("StandardMaterial3D_30pn2")
-size = Vector3(0.2, 0.2, 0.2)
-
-[node name="BrowningHiPower" parent="." index="3" instance=ExtResource("3_j012r")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="MuzzleOrigin" parent="." index="4"]
+[node name="MuzzleOrigin" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.059, -0.175)
+
+[node name="BrowningHiPower" parent="." index="3" instance=ExtResource("2_d0bk1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

@@ -74,13 +74,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 unique_name_in_owner = true
 gizmo_extents = 1.0
 
-[node name="PlayerCameraRig" type="Node3D" parent="." node_paths=PackedStringArray("target", "camera")]
+[node name="PlayerCameraRig" type="Node3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 script = ExtResource("3_esyg0")
 target = NodePath("../PlayerController/Neck/Head/Eyes/CameraMount")
-camera = NodePath("PhantomCamera3D")
 
-[node name="PhantomCamera3D" type="Node3D" parent="PlayerCameraRig"]
+[node name="PlayerCamera" type="Node3D" parent="PlayerCameraRig"]
+unique_name_in_owner = true
 script = ExtResource("3_5qodq")
 tween_resource = SubResource("Resource_cxuiq")
 tween_on_load = false
